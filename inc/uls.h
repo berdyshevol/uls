@@ -20,18 +20,32 @@
 
 #include "libmx.h"
 
-typedef enum e_attr {
-    attr_blocks,
-    attr_chmod,
-    attr_links,
-    attr_user,
-    attr_group,
-    attr_file_size,
-    attr_a_time,
-    attr_m_time,
-    attr_c_time,
-    attr_file_name,
-    MAX_ATTR
+// typedef enum e_attr {
+//     attr_blocks,
+//     attr_chmod,
+//     attr_links,
+//     attr_user,
+//     attr_group,
+//     attr_file_size,
+//     attr_a_time,
+//     attr_m_time,
+//     attr_c_time,
+//     attr_file_name,
+//     MAX_ATTR
+// } t_attr;
+
+// см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
+typedef struct s_attr {
+    blkcnt_t blocks;   /* blocks allocated for file */
+    char *chmod;       
+    nlink_t links;     /* number or hard links to the file */
+    char *user;
+    char *group;
+    off_t file_size;    /* file size, in bytes */
+    long a_time;
+    long m_time;
+    long c_time;
+    char *file_name;
 } t_attr;
 
 //typedef void *t_attr_array[MAX_ATTR];
@@ -44,7 +58,6 @@ typedef struct {
 
 typedef enum {
     filter_nofilter,
-    filter_removedir,
     filter_removehidden,
     filter_all_exept_current,
 
@@ -93,7 +106,7 @@ typedef struct {
 
 void read_dir(t_App *app);
 void produce_list_attr(t_App *app);
-void mx_apply_filters(t_App *app);
+void apply_sort(t_App *app);
 
 #endif
 
