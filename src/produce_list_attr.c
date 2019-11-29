@@ -75,21 +75,21 @@ char *get_name(struct stat sb,  char *file) {
 	return res;
 }
 
-static void *make_attr_array(char *name) {
+static t_attr *make_attr_array(char *name) {
 	struct stat sb;
 	stat(name, &sb);
-    void **attr_array = malloc(sizeof(void *) * MAX_ATTR);
-    attr_array[attr_blocks] = &sb.st_blocks;
-    attr_array[attr_chmod] = eleven_chars_code(sb, name); // -rw-r--r--@ 
-    attr_array[attr_links] = &sb.st_nlink; // 1
-	attr_array[attr_user] = get_user(sb.st_uid); // psymonov
-	attr_array[attr_group] = get_group(sb.st_gid); // 4242
-    attr_array[attr_file_size] = &sb.st_size; // 623
+    void **attr_array = malloc(sizeof(t_attr));
+    attr_array->blocks= sb.st_blocks;
+    attr_array->chmod = eleven_chars_code(sb, name); // -rw-r--r--@ 
+    attr_array->links = sb.st_nlink; // 1
+	attr_array->user = get_user(sb.st_uid); // psymonov
+	attr_array->group = get_group(sb.st_gid); // 4242
+    attr_array->file_size = sb.st_size; // 623
     //time_for_lflag(sb, arr); // Nov 18 17:33
-    attr_array[attr_a_time] = &sb.st_atimespec;
-    attr_array[attr_m_time] = &sb.st_mtimespec;
-    attr_array[attr_c_time] = &sb.st_ctimespec;
-	attr_array[attr_file_name] = get_name(sb, name); // Makefile
+    attr_array->a_time = sb.st_atimespec;
+    attr_array->m_time = sb.st_mtimespec;
+    attr_array->c_time = sb.st_ctimespec;
+	attr_array->file_name = get_name(sb, name); // Makefile
 	return attr_array;
 }
 
@@ -97,9 +97,7 @@ void produce_list_attr(t_App *app) {
     struct dirent *entry;
 	DIR *d = app->cur_dir->current_DIR;
 	while ((entry = readdir(d)) != NULL){
-			mx_push_back(&(app->cur_dir->list_attr), make_attr_array(entry->d_name));
+		mx_push_back(&(app->cur_dir->list_attr), (void *)make_attr_array(entry->d_name));
 	}
-    //mx_del_strarr(&listAttr->data);
-	//printf("%lld", sb.st_blocks); // - печатает  Total blocks size
 }
 
