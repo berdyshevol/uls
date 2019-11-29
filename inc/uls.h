@@ -44,6 +44,7 @@ typedef struct {
 
 typedef enum {
     filter_nofilter,
+    filter_removedir,
     filter_removehidden,
     filter_all_exept_current,
 
@@ -86,12 +87,13 @@ typedef enum {
 typedef struct {
     int *al; // attributs for aligning
     int *flags;
-    int *command[MAX_COMMANDS];
+    int command[MAX_COMMANDS];
     t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
 void read_dir(t_App *app);
 void produce_list_attr(t_App *app);
+void mx_apply_filters(t_App *app);
 
 #endif
 
