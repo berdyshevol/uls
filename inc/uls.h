@@ -67,6 +67,7 @@ typedef enum {
     sort_ctime,
     sort_atime,
     sort_mtime,
+    sort_name,
 
     format_comma,
     format_nocomma,
@@ -105,10 +106,17 @@ typedef struct {
     t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
-void read_dir(t_App *app);
-void produce_list_attr(t_App *app);
-// void apply_sort(t_App *app);
+void mx_read_dir(t_App *app);
+void mx_produce_list_attr(t_App *app);
+void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
+
+/* comparators for sorting commamd*/
+bool cmp_size(void *data1, void *data2);
+bool cmp_c_time(void *data1, void *data2);
+bool cmp_a_time(void *data1, void *data2);
+bool cmp_name(void *data1, void *data2);
+bool cmp_m_time(void *data1, void *data2);
 
 #endif
 

@@ -17,7 +17,7 @@ int main() {
     // free_app(&app);
 
     t_App *app = new_App();
-    read_dir(app);
+    mx_read_dir(app);
     return 0;
 }
 
