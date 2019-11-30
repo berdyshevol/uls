@@ -15,8 +15,9 @@ void mx_read_dir(t_App *app) {
     mx_produce_list_attr(app);
     mx_apply_filters(app);
     mx_apply_sort(app);
-    // apply_format(app);
+    mx_apply_format(app);
     // apply_printmode(app);
     // make_header(app);
+    print_attr_list(app->cur_dir->list_attr);      //helping function   - to be deleted
     closedir(cd->current_DIR);
 }
