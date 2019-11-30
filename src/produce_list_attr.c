@@ -90,6 +90,7 @@ static t_attr *make_attr_array(char *name) {
     attr_array->m_time = sb.st_mtime;
     attr_array->c_time = sb.st_ctime;
 	attr_array->file_name = get_name(sb, name); // Makefile
+	
 	return attr_array;
 }
 
