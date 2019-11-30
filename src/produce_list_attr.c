@@ -94,7 +94,7 @@ static t_attr *make_attr_array(char *name) {
 	return attr_array;
 }
 
-void produce_list_attr(t_App *app) {
+void mx_produce_list_attr(t_App *app) {
     struct dirent *entry;
 	DIR *d = app->cur_dir->current_DIR;
 	while ((entry = readdir(d)) != NULL){

@@ -105,8 +105,8 @@ typedef struct {
     t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
-void read_dir(t_App *app);
-void produce_list_attr(t_App *app);
+void mx_read_dir(t_App *app);
+void mx_produce_list_attr(t_App *app);
 void mx_apply_sort(t_App *app);
 //void mx_apply_filters(t_App *app);
 
