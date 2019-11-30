@@ -36,15 +36,15 @@
 
 // см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
 typedef struct s_attr {
-    blkcnt_t blocks;   /* blocks allocated for file */
+    blkcnt_t blocks;      /* blocks allocated for file */
     char *chmod;       
-    nlink_t links;     /* number or hard links to the file */
+    nlink_t links;        /* number or hard links to the file */
     char *user;
     char *group;
-    off_t file_size;    /* file size, in bytes */
-    long a_time;
-    long m_time;
-    long c_time;
+    off_t file_size;      /* file size, in bytes */
+    time_t a_time;        /* [XSI] Time of last access */
+    time_t m_time;
+    time_t c_time;
     char *file_name;
 } t_attr;
 

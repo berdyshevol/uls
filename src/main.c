@@ -8,7 +8,7 @@ static t_App *new_App(void){
     return app;
 }
 
-int main_app() {
+int main() {
     
     // app = new_app(argc, argv);
     // readargs_parse_fill(app);
