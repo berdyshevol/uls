@@ -15,8 +15,9 @@ int main() {
     // make_aligned_lines(app);
     // print_aligned_lines(app);
     // free_app(&app);
-
+    
     t_App *app = new_App();
+    app->command[cformat_size] = format_size_noth;
     mx_read_dir(app);
     return 0;
 }

@@ -46,6 +46,9 @@ typedef struct s_attr {
     time_t m_time;
     time_t c_time;
     char *file_name;
+
+    char *time; // in heap
+    char *size;
 } t_attr;
 
 //typedef void *t_attr_array[MAX_ATTR];
@@ -110,6 +113,9 @@ void mx_read_dir(t_App *app);
 void mx_produce_list_attr(t_App *app);
 void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
+void mx_apply_format(t_App *app);
+void mx_apply_format_time(t_App *app);
+
 
 /* comparators for sorting commamd*/
 bool cmp_size(void *data1, void *data2);
@@ -117,6 +123,9 @@ bool cmp_c_time(void *data1, void *data2);
 bool cmp_a_time(void *data1, void *data2);
 bool cmp_name(void *data1, void *data2);
 bool cmp_m_time(void *data1, void *data2);
+
+//helping function   - to be deleted
+void print_attr_list(t_list *head);
 
 #endif
 
