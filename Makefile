@@ -5,9 +5,12 @@ NLIB = libmx/libmx.a
 HDR = uls.h
 
 SRC = main.c \
-	read_dir.c \
-	produce_list_attr.c \
+	mx_produce_list_attr.c \
 	mx_apply_filters.c \
+	mx_apply_sort.c \
+	mx_read_dir.c \
+	mx_comparators.c \
+
 
 OBJ = $(SRC:.c=.o)
 
