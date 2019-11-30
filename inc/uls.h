@@ -59,7 +59,8 @@ typedef struct {
 typedef enum {
     filter_nofilter,
     filter_removehidden,
-    filter_all_exept_current,
+    filter_removedir,
+    filter_all_exept_current,   //Узнать какой это флаг!!!
 
     sort_nosort,
     sort_size,
@@ -108,7 +109,7 @@ typedef struct {
 void mx_read_dir(t_App *app);
 void mx_produce_list_attr(t_App *app);
 void mx_apply_sort(t_App *app);
-//void mx_apply_filters(t_App *app);
+void mx_apply_filters(t_App *app);
 
 /* comparators for sorting commamd*/
 bool cmp_size(void *data1, void *data2);
