@@ -106,7 +106,8 @@ typedef struct {
 
 void read_dir(t_App *app);
 void produce_list_attr(t_App *app);
-void apply_sort(t_App *app);
+//void apply_sort(t_App *app);
+//void mx_apply_filters(t_App *app);
 
 #endif
 

@@ -14,7 +14,7 @@ void read_dir(t_App *app) {
     cd->current_DIR = opendir("./");     // TODO: Это заглушка. убрать позже и сделать для любой директории
     produce_list_attr(app);
     // apply_filters(app);
-    apply_sort(app);
+    //apply_sort(app);
     // apply_format(app);
     // apply_printmode(app);
     // make_header(app);
