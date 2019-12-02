@@ -58,7 +58,7 @@ typedef struct {
 } t_CD;
 
 typedef enum {
-    off,
+    off,  // this is for colunms col_blocks, col_owner, col_author, col_group, col_user,
     on,
 
     filter_nofilter,
@@ -87,12 +87,15 @@ typedef enum {
 
     header_no,
     header_total,
-    header_dir,
+    header_dir
+
 } e_Command_State;
 
 typedef enum {
     cfilter,
     csort,
+    ccolumns,
+    comma,
     cformat_size,
     cformat_time,
     cview,
@@ -176,6 +179,7 @@ bool cmp_m_time(void *data1, void *data2);
 
 //helping function   - to be deleted
 void print_raw_lines(t_list *head);
+void print_attr_list(t_list *head);
 
 #endif
 
