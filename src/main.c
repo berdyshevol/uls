@@ -27,7 +27,7 @@ static t_App *new_App(void) {
 
 int main(int argc, char **argv) {
     t_App *app = new_App();
-    mx_read_flags(argv[1], app->flags);
+    mx_read_flags(argv, argc, app->flags, &(app->dir_path));
     mx_make_command(app);
     
     // --------------
