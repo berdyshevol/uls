@@ -4,24 +4,28 @@ static void del_file(t_list **list, char *name);
 
 void mx_apply_filters(t_App *app) {
     t_list *curr = app->cur_dir->list_attr;
+    char *name = NULL;
 
-    if ((app->command[cfilter]) == filter_removehidden) {
+    if ((app->command[cfilter]) == filter_delhidden) {
         while (curr) {
-            char *name = ((t_attr *)(curr->data))->file_name;
+            name = ((t_attr *)(curr->data))->file_name;
 
             if (*name == '.')
                 del_file(&app->cur_dir->list_attr, name);
             curr = curr->next;
         }
     }
-    else if ((int)(app->command[cfilter]) == filter_removedir) {
+    else if ((app->command[cfilter]) == filter_deldir) {
         del_file(&app->cur_dir->list_attr, ".");
         del_file(&app->cur_dir->list_attr, "..");
     }
-    // while (list) {
-    //     printf("%s\n", ((t_attr *)(list->data))->file_name);
-    //     list = list->next;
-    // }
+    // else if ((app->command[cfilter]) == filter_onlydir)
+    //     while (app->cur_dir->list_attr->next != NULL) {
+    //         name = ((t_attr *)(curr->data))->file_name;
+    //         if (mx_strcmp(name, app->dir_path) != 0)
+    //             del_file(&app->cur_dir->list_attr, name);
+    //         curr = curr->next;
+    //     }
 }
 
 static void del_file(t_list **list, char *removed) {

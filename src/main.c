@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     if (argc < 1) exit (1); //заглушка
     t_App *app = new_App();
 
-    mx_read_flags(argv[1], app->flags);
+    mx_read_flags(argv, argc, app->flags, &(app->dir_path));
     // app = new_app(argc, argv);
     // readargs_parse_fill(app);
     // make_aligned_lines(app);
@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
 
     app->command[cformat_size] = format_size_noth;
     app->command[cformat_time] = format_time_full;
-    app->command[cfilter] = filter_removehidden;
+    app->command[cfilter] = filter_deldir;
     app->command[csort] = sort_name;
 
     mx_read_dir(app);
