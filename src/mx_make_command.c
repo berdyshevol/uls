@@ -11,7 +11,7 @@ void mx_make_command(t_App *app) {
     app->command[col_author] = on;
     app->command[col_group] = on;
     app->command[col_user] = on;
-    app->command[cheader] = header_no;
+    app->command[cheader] = header_no; 
     // check flags
     if (app->flags[l]) {
         app->command[col_blocks] = off;
