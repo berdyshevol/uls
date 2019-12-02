@@ -5,16 +5,26 @@ static void hiden_files_and_R(char *s, int *fl);
 static void sort_flags(char *s, int *fl);
 static void sort_flags_2(char *s, int *fl);
 
-void mx_read_flags(char *s, int *fl) {
-	if ( s[0] == '-') {
-		output_flags(s, fl);
+void mx_read_flags(char **s, int argc, int *fl, char **dir_path) {
+	int flag = 0;
+
+    if (s[1][0] == '-') {
+		output_flags(s[1], fl);
 		if (fl[m] == 1 && fl[C] == 1)
 			fl[C] = 0;
-		hiden_files_and_R(s, fl);
-		sort_flags(s, fl);
-		sort_flags_2(s, fl);
-		mx_filter_flags(s, fl);
-	} //  TODO: добавить считывание файлов и директорий в аргументах
+		hiden_files_and_R(s[1], fl);
+		sort_flags(s[1], fl);
+		sort_flags_2(s[1], fl);
+		mx_filter_flags(s[1], fl);
+        if (argc == 3)
+            flag = 2;
+	}
+    else if (argc == 2)
+        flag = 1;
+    if (flag)
+        *dir_path = mx_strdup(s[flag]);
+    else
+        *dir_path = mx_strdup("./");
 }
 
 static void output_flags(char *s, int *fl) { // must be fist

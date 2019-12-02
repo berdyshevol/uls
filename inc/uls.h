@@ -59,9 +59,9 @@ typedef struct {
 
 typedef enum {
     filter_nofilter,
-    filter_removehidden,
-    filter_removedir,
-    filter_all_exept_current,   //Узнать какой это флаг!!!
+    filter_delhidden,
+    filter_deldir,
+    filter_onlydir,
 
     sort_nosort,
     sort_size,
@@ -142,6 +142,7 @@ typedef struct {
     int *al; // attributs for aligning
     int *flags;
     int command[MAX_COMMANDS];
+    char *dir_path;
     t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
@@ -154,7 +155,8 @@ void mx_apply_format_time(t_list *row, t_list *cur, t_App *app);
 
 void mx_clear_flags(int *flags);
 void mx_filter_flags(char *argv, int *fl);
-void mx_read_flags(char *s, int *fl);
+void mx_read_flags(char **s, int argc, int *fl, char **dir_path);
+char *get_dir_path();
 void mx_print_lines(t_App *app);
 t_list *mx_printable_lines(t_list *head, int *a);
 
