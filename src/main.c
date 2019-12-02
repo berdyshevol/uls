@@ -20,15 +20,12 @@ int main(int argc, char **argv) {
     // make_aligned_lines(app);
     // print_aligned_lines(app);
     // free_app(&app);
-    
-    
-    
+
     app->command[cformat_size] = format_size_noth;
     app->command[cformat_time] = format_time_full;
     app->command[cfilter] = filter_removehidden;
     app->command[csort] = sort_name;
 
-    
     mx_read_dir(app);
     return 0;
 }
