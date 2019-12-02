@@ -66,15 +66,12 @@ typedef enum {
     filter_deldir,
     filter_onlydir,
 
-    sort_nosort,
-    sort_size,
+    sort_nosort, /* -U */
+    sort_size,  /* -S */
     sort_ctime,
     sort_atime,
     sort_mtime,
-    sort_name,
-
-    format_comma,
-    format_nocomma,
+    sort_name,  /* default */
 
     format_size_noth,
     format_size_h,
@@ -82,10 +79,11 @@ typedef enum {
     format_time_full,
     format_time_short,
 
-    view_l,
-    view_std,
-    view_1,
-    view_comma,
+    view_long_format,		/* -l and other options that imply -l */
+    view_one_per_line,		/* -1 */
+    view_many_per_line,		/* -C */
+    view_horizontal,		/* -x */
+    view_with_commas,		/* -m */
 
     header_no,
     header_total,
@@ -100,7 +98,10 @@ typedef enum {
     cview,
     cheader,
     col_blocks,
-    col_,
+    col_owner,
+    col_author,
+    col_group,
+    col_user,
     MAX_COMMANDS
 } e_Command;
 
@@ -150,6 +151,7 @@ typedef struct {
     t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
+void mx_make_command(t_App *app);
 void mx_read_dir(t_App *app);
 void mx_produce_list_attr(t_App *app);
 void mx_apply_sort(t_App *app);

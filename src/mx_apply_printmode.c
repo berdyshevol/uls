@@ -37,16 +37,19 @@ void mx_apply_printmode_l(t_App *app) {
 
 void mx_apply_printmode(t_App *app) {
     switch (app->command[cview]) {
-        case view_l:
+        case view_long_format:
             mx_apply_printmode_l(app);
             break;
-        case view_std:
+        case view_one_per_line:
             // TODO: сделать стандартный вывод
             break;
-        case view_comma: 
+        case view_many_per_line: 
             // TODO: сделать стандартный вывод
             break;
-        case view_1:
+        case view_horizontal:
+            // TODO: сделать вывод в колонку
+            break;
+        case view_with_commas:
             // TODO: сделать вывод в колонку
             break;
     }
