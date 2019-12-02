@@ -43,6 +43,9 @@ void mx_apply_printmode(t_App *app) {
         case view_std:
             // TODO: сделать стандартный вывод
             break;
+        case view_comma: 
+            // TODO: сделать стандартный вывод
+            break;
         case view_1:
             // TODO: сделать вывод в колонку
             break;

@@ -14,23 +14,14 @@ t_CD *new_CD(t_App *app) {
 void mx_read_dir(t_App *app) {
     t_CD *cd = new_CD(app);
     cd->current_DIR = opendir("./");     // TODO: Это заглушка. убрать позже и сделать для любой директории
-    app->command[cfilter] = filter_removedir;
-    app->command[csort] = sort_size;
-
+    
     mx_produce_list_attr(app);
-    //print_file(app);
-
-    //mx_apply_filters(app);
+    mx_apply_filters(app);
     mx_apply_sort(app);
-    //print_file(app);
-
     //make_header(app);
     mx_apply_printmode(app);    
     //mx_apply_format(app);
     mx_print_lines(app);
-    //print_raw_lines(app->cur_dir->raw_lines);
-    //mx_read_dir(app);
-    //print_file(app);
     closedir(cd->current_DIR);
 }
 
