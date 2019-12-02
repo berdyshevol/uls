@@ -7,7 +7,7 @@ char *mx_format_size(off_t size, t_App *app) {
     return mx_strdup("no size");
 }
 
-void mx_apply_printmode(t_App *app) {
+void mx_apply_printmode_l(t_App *app) {
     for (t_list *cur = app->cur_dir->list_attr;
         cur != NULL;
         cur = cur->next) {
@@ -34,3 +34,24 @@ void mx_apply_printmode(t_App *app) {
         mx_push_back(&(app->cur_dir->raw_lines), (void *)row);
     }
 }
+
+void mx_apply_printmode(t_App *app) {
+    switch (app->command[cview]) {
+        case view_long_format:
+            mx_apply_printmode_l(app);
+            break;
+        case view_one_per_line:
+            // TODO: сделать стандартный вывод
+            break;
+        case view_many_per_line: 
+            // TODO: сделать стандартный вывод
+            break;
+        case view_horizontal:
+            // TODO: сделать вывод в колонку
+            break;
+        case view_with_commas:
+            // TODO: сделать вывод в колонку
+            break;
+    }
+}
+
