@@ -17,7 +17,13 @@ int main() {
     // free_app(&app);
     
     t_App *app = new_App();
-    app->command[cformat_size] = format_size_noth; 
+    
+    app->command[cformat_size] = format_size_noth;
+    app->command[cformat_time] = format_time_full;
+    app->command[cfilter] = filter_removehidden;
+    app->command[csort] = sort_name;
+    
+
     mx_read_dir(app);
     return 0;
 }
