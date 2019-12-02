@@ -58,6 +58,9 @@ typedef struct {
 } t_CD;
 
 typedef enum {
+    off,
+    on,
+
     filter_nofilter,
     filter_delhidden,
     filter_deldir,
@@ -82,21 +85,22 @@ typedef enum {
     view_l,
     view_std,
     view_1,
+    view_comma,
 
+    header_no,
     header_total,
-    header_dir
-
+    header_dir,
 } e_Command_State;
 
 typedef enum {
     cfilter,
     csort,
-    ccolumns,
-    comma,
     cformat_size,
     cformat_time,
     cview,
     cheader,
+    col_blocks,
+    col_,
     MAX_COMMANDS
 } e_Command;
 
