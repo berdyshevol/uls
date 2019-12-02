@@ -50,6 +50,7 @@ typedef struct s_attr {
 
 //typedef void *t_attr_array[MAX_ATTR];
 
+
 typedef struct {
     t_list *list_attr;
     t_list *raw_lines;
@@ -99,6 +100,44 @@ typedef enum {
     MAX_COMMANDS
 } e_Command;
 
+typedef enum e_flag { // 33 flags:
+minus,
+dog, //  -@  -- display extended attribute keys and sizes in long (-l) output 
+one, //  -1  -- single column output
+l, //  -l  -- bacik case..
+A, //  -A  -- list all except . and ..
+B, //  -B  -- print octal escapes for control characters
+C, //  -C  -- list entries in columns sorted vertically
+F, //  -F  -- append file type indicators
+H, //  -H  -- follow symlinks on the command line
+L, //  -L  -- list referenced file for sym link
+P, //  -P  -- do not follow symlinks
+R, //  -R  -- list subdirectories recursively
+S, //  -S  -- sort by size
+T, //  -T  -- show complete time information
+a, //  -a  -- list entries starting with .
+b, //  -b  -- as -B, but use C escape codes whenever possible
+c, //  -c  -- status change time
+d, //  -d  -- list directory entries instead of contents
+f, //  -f  -- output is not sorted
+g, //  -g  -- long listing but without owner information
+h, //  -h  -- print sizes in human readable form
+i, //  -i  -- print file inode numbers
+k, //  -k  -- print sizes of 1k
+m, //  -m  -- comma separated
+n, //  -n  -- numeric uid, gid
+o, //  -o  -- display file flags
+p, //  -p  -- append file type indicators for directory
+q, //  -q  -- hide control chars
+r, //  -r  -- reverse sort order
+s, //  -s  -- display size of each file in blocks
+t, //  -t  -- sort by modification time
+u, //  -u  -- access time
+w, //  -w  -- print raw characters
+x, //  -x  -- sort horizontally
+size, // number of flags
+} t_flag;
+
 typedef struct {
     int *al; // attributs for aligning
     int *flags;
@@ -112,6 +151,12 @@ void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
 void mx_apply_printmode(t_App *app);
 void mx_apply_format_time(t_list *row, t_list *cur, t_App *app);
+
+void mx_clear_flags(int *flags);
+void mx_filter_flags(char *argv, int *fl);
+void mx_read_flags(char *s, int *fl);
+void mx_print_lines(t_App *app);
+t_list *mx_printable_lines(t_list *head, int *a);
 
 
 /* comparators for sorting commamd*/

@@ -27,8 +27,8 @@ void mx_read_dir(t_App *app) {
     //make_header(app);
     mx_apply_printmode(app);    
     //mx_apply_format(app);
-    
-    print_raw_lines(app->cur_dir->raw_lines);
+    mx_print_lines(app);
+    //print_raw_lines(app->cur_dir->raw_lines);
     //mx_read_dir(app);
     //print_file(app);
     closedir(cd->current_DIR);
