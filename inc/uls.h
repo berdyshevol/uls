@@ -110,7 +110,7 @@ void mx_read_dir(t_App *app);
 void mx_produce_list_attr(t_App *app);
 void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
-void apply_printmode(t_App *app);
+void mx_apply_printmode(t_App *app);
 void mx_apply_format_time(t_list *row, t_list *cur, t_App *app);
 
 
@@ -122,7 +122,7 @@ bool cmp_name(void *data1, void *data2);
 bool cmp_m_time(void *data1, void *data2);
 
 //helping function   - to be deleted
-void print_attr_list(t_list *head);
+void print_raw_lines(t_list *head);
 
 #endif
 

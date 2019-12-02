@@ -7,7 +7,7 @@ char *mx_format_size(off_t size, t_App *app) {
     return mx_strdup("no size");
 }
 
-void apply_printmode(t_App *app) {
+void mx_apply_printmode(t_App *app) {
     for (t_list *cur = app->cur_dir->list_attr;
         cur != NULL;
         cur = cur->next) {
