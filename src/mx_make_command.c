@@ -13,11 +13,8 @@ void mx_make_command(t_App *app) {
     app->command[col_user] = on;
     app->command[cheader] = header_no; 
     // check flags
-    if (app->flags[l]) {
-        app->command[col_blocks] = off;
-        app->command[csort] = sort_mtime;
+    if (app->flags[l])
         app->command[cview] = view_long_format;
-    }
 
     // TODO: добавить isatty и изменить app->command[cview]
 

@@ -6,16 +6,16 @@ static void sort_flags(char *s, int *fl);
 static void sort_flags_2(char *s, int *fl);
 
 void mx_read_flags(char **s, int argc, int *fl, char **dir_path) {
-    int flag = 0;
-    
+	int flag = 0;
+
     if (argc > 1 && s[1][0] == '-') {
-        output_flags(s[1], fl);
-        if (fl[m] == 1 && fl[C] == 1)
-            fl[C] = 0;
-        hiden_files_and_R(s[1], fl);
-        sort_flags(s[1], fl);
-        sort_flags_2(s[1], fl);
-        mx_filter_flags(s[1], fl);
+		output_flags(s[1], fl);
+		if (fl[m] == 1 && fl[C] == 1)
+			fl[C] = 0;
+		hiden_files_and_R(s[1], fl);
+		sort_flags(s[1], fl);
+		sort_flags_2(s[1], fl);
+		mx_filter_flags(s[1], fl);
         if (argc == 3)
             flag = 2;
     }
