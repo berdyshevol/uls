@@ -95,6 +95,7 @@ static t_attr *make_attr_array(char *fileName, t_App *app) {
 
     lstat(stat_path(fileName, app->dir_path), &sb);
     t_attr *attr_array = malloc(sizeof(t_attr));
+    attr_array->inode = mx_itoa(sb.st_ino);
     attr_array->blocks = sb.st_blocks;
     attr_array->chmod = eleven_chars_code(sb, fileName); // -rw-r--r--@ 
     attr_array->links = sb.st_nlink; // 1
