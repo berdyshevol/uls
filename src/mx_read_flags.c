@@ -8,7 +8,7 @@ static void sort_flags_2(char *s, int *fl);
 void mx_read_flags(char **s, int argc, int *fl, char **dir_path) {
 	int flag = 0;
 
-    if (s[1][0] == '-') {
+    if (argc > 1 && s[1][0] == '-') {
 		output_flags(s[1], fl);
 		if (fl[m] == 1 && fl[C] == 1)
 			fl[C] = 0;

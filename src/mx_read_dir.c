@@ -20,8 +20,6 @@ void mx_read_dir(t_App *app) {
     //make_header(app);
     mx_apply_printmode(app);
     // mx_apply_format(app);
-
-    mx_print_lines(app);
     
     closedir(cd->current_DIR);
 }
