@@ -21,6 +21,7 @@ void mx_read_dir(t_App *app) {
     mx_apply_printmode(app);
     // mx_apply_format(app);
 
+    
     closedir(cd->current_DIR);
 }
 

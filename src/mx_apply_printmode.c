@@ -13,6 +13,8 @@ void mx_apply_printmode_l(t_App *app) {
         cur = cur->next) {
         t_list *row = NULL;
         //какие колонки выводить какие нет
+        // inod
+        mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->inode));
         // Блоки
         mx_push_back(&row, mx_strdup(mx_itoa(((t_attr *)(cur->data))->blocks)));
         // // Chmod
