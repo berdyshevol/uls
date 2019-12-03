@@ -30,7 +30,7 @@ void mx_make_command(t_App *app) {
     if (app->flags[l]) {
         app->command[cview] = view_long_format;
     }
-    
+
 
     // TODO: добавить isatty и изменить app->command[cview]
 
