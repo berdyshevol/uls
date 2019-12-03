@@ -13,6 +13,8 @@ void mx_apply_printmode_l(t_App *app) {
         cur = cur->next) {
         t_list *row = NULL;
         //какие колонки выводить какие нет
+        // inod
+        mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->inode));
         // Блоки
         mx_push_back(&row, mx_strdup(mx_itoa(((t_attr *)(cur->data))->blocks)));
         // // Chmod
@@ -39,6 +41,7 @@ void mx_apply_printmode(t_App *app) {
     switch (app->command[cview]) {
         case view_long_format:
             mx_apply_printmode_l(app);
+            mx_print_lines(app);
             break;
         case view_one_per_line:
             // TODO: сделать стандартный вывод

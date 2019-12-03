@@ -1,14 +1,15 @@
 #include "uls.h"
 
 static void inicialization_app_al(t_App *app) {
-    app->al[0] = 1;  //blocks
-    app->al[1] = -1; //cmod_code
-    app->al[2] = 1;  //number
-    app->al[3] = -2; //user_name
-    app->al[4] = -2; //group
-    app->al[5] = 1;  //size
-    app->al[6] = -1; //data
-    app->al[7] = 0;  //file_name
+    app->al[at_inode] = 1;  // inod
+    app->al[at_blocks] = 1;  //blocks
+    app->al[at_chmod] = -1; //cmod_code
+    app->al[at_links] = 1;  //number
+    app->al[at_user] = -2; //user_name
+    app->al[at_group] = -2; //group
+    app->al[at_file_size] = 1;  //size
+    app->al[at_time] = -1; //data
+    app->al[at_file_name] = 0;  //file_name
 }
 
 t_App *new_App(void) {

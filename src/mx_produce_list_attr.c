@@ -75,15 +75,22 @@ char *get_name(struct stat sb,  char *file) {
 	return res;
 }
 
-static t_attr *make_attr_array(char *name) {
+static t_attr *make_attr_array(char *name, t_App *app) {
 	struct stat sb;
 	stat(name, &sb);
     t_attr *attr_array = malloc(sizeof(t_attr));
-    attr_array->blocks= sb.st_blocks;
+	attr_array->inode = mx_itoa(sb.st_ino);
+    attr_array->blocks = sb.st_blocks;
     attr_array->chmod = eleven_chars_code(sb, name); // -rw-r--r--@ 
     attr_array->links = sb.st_nlink; // 1
-	attr_array->user = get_user(sb.st_uid); // psymonov
-	attr_array->group = get_group(sb.st_gid); // 4242
+	if (app->command[numerically] == off) {
+		attr_array->user = get_user(sb.st_uid); // psymonov
+		attr_array->group = get_group(sb.st_gid); // 4242
+	}
+	else if (app->command[numerically] == on){
+		attr_array->user = mx_itoa(sb.st_uid);
+		attr_array->group = mx_itoa(sb.st_gid);
+	}
     attr_array->file_size = sb.st_size; // 623
     //time_for_lflag(sb, arr); // Nov 18 17:33
     attr_array->a_time = sb.st_atime; //sb.st_atimespec;
@@ -98,7 +105,7 @@ void mx_produce_list_attr(t_App *app) {
     struct dirent *entry;
 	DIR *d = app->cur_dir->current_DIR;
 	while ((entry = readdir(d)) != NULL){
-		mx_push_back(&(app->cur_dir->list_attr), (void *)make_attr_array(entry->d_name));
+		mx_push_back(&(app->cur_dir->list_attr), (void *)make_attr_array((entry->d_name), app));
 	}
 }
 
