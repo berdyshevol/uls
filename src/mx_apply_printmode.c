@@ -22,7 +22,7 @@ void mx_apply_printmode_l(t_App *app) {
         // // user
         mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->user));
         // // group
-        // mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->group));
+        mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->group));
         // // file_size
         mx_push_back(&row, mx_format_size(((t_attr *)(cur->data))->file_size, app));
         // // time
