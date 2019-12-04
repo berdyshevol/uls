@@ -37,7 +37,7 @@ static char *eleven_chars_code(struct stat sb, char *file) {
 char *get_user(uid_t uid) {
     struct passwd *pws;
     pws = getpwuid(uid);
-        return pws->pw_name;
+        return mx_strdup(pws->pw_name);
 }
 
 char *get_group(gid_t gid) {
