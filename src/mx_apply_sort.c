@@ -7,9 +7,7 @@ bool cmp_name(void *data1, void *data2);
 bool cmp_m_time(void *data1, void *data2);
 
 void mx_apply_sort(t_App *app) {
-    int state = app->command[csort];
-
-    switch (state) {
+    switch (app->command[csort]) {
         case sort_size:
             mx_sort_list(app->cur_dir->list_attr, cmp_size);
             break;

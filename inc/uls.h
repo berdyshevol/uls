@@ -36,6 +36,7 @@
 
 // см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
 typedef struct s_attr {
+    char *inode; // inode For each file, print the file's file serial number (inode number). -i flag
     blkcnt_t blocks;      /* blocks allocated for file */
     char *chmod;       
     nlink_t links;        /* number or hard links to the file */
@@ -47,6 +48,18 @@ typedef struct s_attr {
     time_t c_time;
     char *file_name;
 } t_attr;
+
+enum e_attr {
+    at_inode,
+    at_blocks,
+    at_chmod,       
+    at_links,
+    at_user,
+    at_group,
+    at_file_size,
+    at_time,
+    at_file_name
+};
 
 //typedef void *t_attr_array[MAX_ATTR];
 
@@ -100,11 +113,10 @@ typedef enum {
     cformat_time,
     cview,
     cheader,
-    col_blocks,
-    col_owner,
-    col_author,
-    col_group,
-    col_user,
+    numerically,    // -n
+    col_inode,      // -i
+    col_blocks,     // -s
+    col_group,      // -o
     MAX_COMMANDS
 } e_Command;
 
@@ -151,13 +163,17 @@ typedef struct {
     int *flags;
     int command[MAX_COMMANDS];
     char *dir_path;
+    bool is_dir;
     t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
 t_App *new_App(void);
 void mx_make_command(t_App *app);
 void mx_read_dir(t_App *app);
+void mx_read_file(t_App *app);
+void mx_read_some(t_App *app);
 void mx_produce_list_attr(t_App *app);
+void mx_produce_attr(t_App *app);
 void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
 void mx_apply_printmode(t_App *app);
@@ -168,7 +184,7 @@ void mx_filter_flags(char *argv, int *fl);
 void mx_read_flags(char **s, int argc, int *fl, char **dir_path);
 char *get_dir_path();
 void mx_print_lines(t_App *app);
-t_list *mx_printable_lines(t_list *head, int *a);
+t_list *mx_printable_lines(t_list *head, int *a, t_App *app);
 
 
 /* comparators for sorting commamd*/

@@ -4,7 +4,7 @@ static t_list *all_max_len(t_list *head);
 static int *max_len_col(t_list *head, int num);
 static char *aline(char *s, int max_len, int aline);
 
-t_list *mx_printable_lines(t_list *head, int *a) {
+t_list *mx_printable_lines(t_list *head, int *a, t_App *app) {
     t_list *max_len = all_max_len(head);
     t_list *ptr = NULL;
     t_list *res = NULL;
@@ -16,7 +16,11 @@ t_list *mx_printable_lines(t_list *head, int *a) {
     for(; head != NULL; head = head->next, str = NULL) { 
         ptr = head->data;
         max = max_len;
-        for (int i = 0; ptr != NULL; i++, ptr = ptr->next, max = max->next) {
+        for (int i = 0; ptr != NULL; i++, ptr = ptr->next, max = max->next) {  // здесь добавить проверку для -s -o -i
+            if ( (i == at_inode && app->command[col_inode] == off)
+               || (i == at_blocks && app->command[col_blocks] == off) 
+               || (i == at_group && app->command[col_group] == off))
+                continue;
             tmp = str;
             word = aline(ptr->data, *((int *)(max->data)), a[i]);
             str = mx_strjoin(str, word);

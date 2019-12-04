@@ -6,18 +6,31 @@ void mx_make_command(t_App *app) {
     app->command[csort] = sort_name;
     app->command[cformat_size] = format_size_noth;
     app->command[cview] = view_many_per_line;
+    app->command[numerically] = off;
+    app->command[col_inode] = off;
     app->command[col_blocks] = off;
-    app->command[col_owner] = on;
-    app->command[col_author] = on;
     app->command[col_group] = on;
-    app->command[col_user] = on;
+    // 
     app->command[cheader] = header_no; 
     // check flags
+    if (app->flags[i]) {
+        app->command[col_inode] = on;
+    }
+    if (app->flags[s]) {
+        app->command[col_blocks] = on;
+    }
+    if (app->flags[o]) {
+        app->command[col_group] = off;
+        app->flags[l] = on;
+    }
+    if (app->flags[n]) {
+        app->command[numerically] = on;
+        app->flags[l] = on;
+    }
     if (app->flags[l]) {
-        app->command[col_blocks] = off;
-        app->command[csort] = sort_mtime;
         app->command[cview] = view_long_format;
     }
+
 
     // TODO: добавить isatty и изменить app->command[cview]
 
