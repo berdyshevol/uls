@@ -26,6 +26,7 @@ install:
 	@clang $(CFLGS) -c $(SRC) -I $(HDR)
 	@ar -rc $(NLIB) $(OBJ)
 	@mv $(OBJ) ./obj
+	@rm -rf libmx.h $(SRC) $(HDR)
 
 uninstall:
 	@rm -rf $(NLIB)
@@ -34,4 +35,4 @@ clean:
 	@rm -rf $(SRC) $(HDR)
 	@rm -rf ./obj
 
-reinstall: uninstall all
+reinstall: uninstall install
