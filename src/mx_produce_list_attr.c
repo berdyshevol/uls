@@ -11,7 +11,7 @@ static char at_plus_space(char *file) {
         chr = '+';
     else
         chr = ' ';
-
+		
     return chr;
 }
 

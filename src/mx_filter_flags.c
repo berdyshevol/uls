@@ -10,9 +10,14 @@ void mx_filter_flags(char *argv, int *fl) {
     filter_two(argv, fl);
     filter_three(argv, fl);
     filter_four(argv, fl);
-    for (; *argv; argv++)
+    for (; *argv; argv++) {
         if (*argv == 's')
             fl[s] = 1;
+        if (*argv == 'U') {
+            fl[U] = 1;
+            fl[u] = 0;
+        }
+    }
 }
 
 static void filter_one(char *s, int *fl) {
