@@ -18,6 +18,12 @@ void mx_make_command(t_App *app) {
     // TODO: добавить isatty и изменить app->command[cview]
     // check flags
     // time
+    if (app->flags[a]) {
+        app->command[cfilter] = filter_nofilter;
+    }
+    if (app->flags[A]) {
+        app->command[cfilter] = filter_deldir;
+    }
     if (app->flags[t]) {
         app->command[csort] = sort_mtime;
         if (app->flags[c])
