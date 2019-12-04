@@ -79,13 +79,10 @@ static void sort_flags(char *s, int *fl) {
             fl[S] = 1;
             fl[t] = 0;
             fl[c] = 0;
-            fl[u] = 0;
             break;
         case 'c':
             if (fl[S] != 1) {
                 fl[c] = 1;
-                fl[u] = 0;
-                fl[t] = 0;
                 break;
             }
         }
@@ -95,12 +92,11 @@ static void sort_flags_2(char *s, int *fl) {
     for (; *s; s++)
         switch (*s) {
         case 'u':
-            if (fl[S] != 1 && fl[c] != 1) {
                 fl[u] = 1;
+                fl[U] = 0;
                 break;
-            }
         case 't':
-            if (fl[S] != 1 && fl[c] != 1) {
+            if (fl[S] != 1) {
                 fl[t] = 1;
                 break;
             }
