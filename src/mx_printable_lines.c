@@ -17,9 +17,7 @@ t_list *mx_printable_lines(t_list *head, int *a, t_App *app) {
         ptr = head->data;
         max = max_len;
         for (int i = 0; ptr != NULL; i++, ptr = ptr->next, max = max->next) {  // здесь добавить проверку для -s -o -i
-            if ( (i == at_inode && app->command[col_inode] == off)
-               || (i == at_blocks && app->command[col_blocks] == off) 
-               || (i == at_group && app->command[col_group] == off))
+            if (mx_is_swithed_off(i, app))
                 continue;
             tmp = str;
             word = aline(ptr->data, *((int *)(max->data)), a[i]);

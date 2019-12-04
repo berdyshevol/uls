@@ -11,6 +11,7 @@ void mx_make_command(t_App *app) {
     app->command[time_type] = time_type_m;
     app->command[col_inode] = off;
     app->command[col_blocks] = off;
+    app->command[col_user] = on;
     app->command[col_group] = on;
     //
     app->command[cheader] = header_no; 
@@ -46,6 +47,11 @@ void mx_make_command(t_App *app) {
         app->command[numerically] = on;
         app->flags[l] = on;
     }
+    if (app->flags[g]) {
+        app->command[col_user] = off;
+        app->flags[l] = on;
+    }
+    // print mode
     if (app->flags[l]) {
         app->command[cview] = view_long_format;
     }

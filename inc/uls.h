@@ -120,6 +120,7 @@ typedef enum {
     numerically,    // -n
     col_inode,      // -i
     col_blocks,     // -s
+    col_user,      // -g
     col_group,      // -o
     MAX_COMMANDS
 } e_Command;
@@ -183,6 +184,7 @@ void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
 void mx_apply_printmode(t_App *app);
 void mx_apply_format_time(t_list *row, t_list *cur, t_App *app);
+bool mx_is_swithed_off(int i, t_App *app);
 
 void mx_clear_flags(int *flags);
 void mx_filter_flags(char *argv, int *fl);
