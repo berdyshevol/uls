@@ -44,6 +44,5 @@ clean:
 	@cd libmx && make -f Makefile clean
 	@rm -rf $(SRC) $(HDR) $(OBJ)
 	@rm -rf ./obj
-	@rm libmx.h
 
 reinstall: uninstall all
