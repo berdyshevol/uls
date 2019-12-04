@@ -168,13 +168,17 @@ typedef struct {
     int *flags;
     int command[MAX_COMMANDS];
     char *dir_path;
+    bool is_dir;
     t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
 t_App *new_App(void);
 void mx_make_command(t_App *app);
-void mx_read_dir(t_App *app);
+void mx_reading(t_App *app);
+void mx_standart_view(t_list *list);
+void mx_non_standart(t_list *list);
 void mx_produce_list_attr(t_App *app);
+void mx_produce_attr(t_App *app);
 void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
 void mx_apply_printmode(t_App *app);

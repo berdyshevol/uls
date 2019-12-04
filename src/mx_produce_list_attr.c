@@ -3,15 +3,12 @@
 static char at_plus_space(char *file) {
 	acl_t acl = acl_get_file(file, ACL_TYPE_EXTENDED);
     ssize_t xattr = listxattr(file, NULL, 0, XATTR_NOFOLLOW);
-    char chr;
+    char chr = ' ';
 
     if (xattr > 0)
         chr = '@';
     else if (acl != NULL)
         chr = '+';
-    else
-        chr = ' ';
-		
     return chr;
 }
 
@@ -37,15 +34,13 @@ static char *eleven_chars_code(struct stat sb, char *file) {
 	return res;
 }
 
-char *get_user(uid_t uid)
-{
+char *get_user(uid_t uid) {
     struct passwd *pws;
     pws = getpwuid(uid);
         return pws->pw_name;
 }
 
-char *get_group(gid_t gid)
-{
+char *get_group(gid_t gid) {
     struct group *g;
 	if ((g = getgrgid(gid)) != NULL)
     	return g->gr_name;
@@ -92,12 +87,15 @@ static char *stat_path(char *fileName, char *dirName) {
 
 static t_attr *make_attr_array(char *fileName, t_App *app) {
     struct stat sb;
-
-    lstat(stat_path(fileName, app->dir_path), &sb);
+	char *path = stat_path(fileName, app->dir_path);
+	if (app->is_dir)
+		lstat(path, &sb);
+	else
+		lstat(app->dir_path, &sb);
     t_attr *attr_array = malloc(sizeof(t_attr));
     attr_array->inode = mx_itoa(sb.st_ino);
     attr_array->blocks = sb.st_blocks;
-    attr_array->chmod = eleven_chars_code(sb, fileName); // -rw-r--r--@ 
+    attr_array->chmod = eleven_chars_code(sb, path); // -rw-r--r--@ 
     attr_array->links = sb.st_nlink; // 1
 	if (app->command[numerically] == off) {
 		attr_array->user = get_user(sb.st_uid); // psymonov
@@ -113,14 +111,22 @@ static t_attr *make_attr_array(char *fileName, t_App *app) {
     attr_array->m_time = sb.st_mtime;
     attr_array->c_time = sb.st_ctime;
     attr_array->file_name = get_name(sb, fileName); // Makefile
-    
+	mx_strdel(&path);
     return attr_array;
 }
 void mx_produce_list_attr(t_App *app) {
     struct dirent *entry;
 	DIR *d = app->cur_dir->current_DIR;
-	while ((entry = readdir(d)) != NULL) {
+	if (d) {
+		app->is_dir = true;
+		while ((entry = readdir(d)) != NULL) {
+			mx_push_back(&(app->cur_dir->list_attr),
+						(void *)make_attr_array((entry->d_name), app));
+		}
+	}
+	else {
+		app->is_dir = false;
 		mx_push_back(&(app->cur_dir->list_attr),
-			         (void *)make_attr_array((entry->d_name), app));
+            (void *)make_attr_array(app->dir_path, app));	
 	}
 }

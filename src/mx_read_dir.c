@@ -2,7 +2,7 @@
 
 // static void print_file(t_App *app);
 
-t_CD *new_CD(t_App *app) {
+static t_CD *new_CD(t_App *app) {
     t_CD *cd = malloc(sizeof(t_CD ));
     app->cur_dir = cd;
     // TODO: fill all NULL
@@ -11,18 +11,17 @@ t_CD *new_CD(t_App *app) {
     return cd;
 }
 
-void mx_read_dir(t_App *app) {
+void mx_reading(t_App *app) {
     t_CD *cd = new_CD(app);
     cd->current_DIR = opendir(app->dir_path);
     mx_produce_list_attr(app);
-    mx_apply_filters(app);
+    mx_apply_filters(app); // TODO: Почистить лики
     mx_apply_sort(app);
     //make_header(app);
     mx_apply_printmode(app);
     // mx_apply_format(app);
-
-    
-    closedir(cd->current_DIR);
+    if (cd->current_DIR)
+        closedir(cd->current_DIR);
 }
 
 // static void print_file(t_App *app) {

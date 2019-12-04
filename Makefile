@@ -19,7 +19,8 @@ SRC = main.c \
 	mx_filter_flags.c \
 	mx_printable_lines.c \
 	mx_read_flags.c \
-	mx_make_command.c
+	mx_make_command.c \
+	mx_standart_view.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -34,15 +35,15 @@ install:
 	@mkdir obj
 	@clang $(CFLAG) $(OBJ) $(NLIB) -o $(NAME)
 	@mv $(OBJ) ./obj
+	@rm -rf libmx.h $(SRC) $(HDR)
 
-uninstall:
+uninstall: clean
 	@cd libmx && make -f Makefile uninstall
 	@rm -rf $(NAME)
 
 clean: 
 	@cd libmx && make -f Makefile clean
-	@rm -rf $(SRC) $(HDR) $(OBJ)
+	@rm -rf $(OBJ)
 	@rm -rf ./obj
-	@rm libmx.h
 
-reinstall: uninstall all
+reinstall: uninstall install
