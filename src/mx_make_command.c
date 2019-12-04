@@ -7,12 +7,31 @@ void mx_make_command(t_App *app) {
     app->command[cformat_size] = format_size_noth;
     app->command[cview] = view_many_per_line;
     app->command[numerically] = off;
+    app->command[time_format] = format_time_short;
+    app->command[time_type] = time_type_m;
     app->command[col_inode] = off;
     app->command[col_blocks] = off;
     app->command[col_group] = on;
-    // 
+    //
     app->command[cheader] = header_no; 
+    // TODO: добавить isatty и изменить app->command[cview]
     // check flags
+    // time
+    if (app->flags[t]) {
+        app->command[csort] = sort_mtime;
+        if (app->flags[c])
+            app->command[csort] = sort_ctime;
+    }
+    if (app->flags[u]) {
+        app->command[time_type] = time_type_a;
+    }
+    if (app->flags[U]) {
+        app->command[time_type] = time_type_c;
+    }
+    if (app->flags[T]) {
+        app->command[time_format] = format_time_full;
+    }
+    //
     if (app->flags[i]) {
         app->command[col_inode] = on;
     }
@@ -31,14 +50,5 @@ void mx_make_command(t_App *app) {
         app->command[cview] = view_long_format;
     }
 
-
-    // TODO: добавить isatty и изменить app->command[cview]
-
-    // app->command[cfilter] = filter_removedir;
-    // app->command[csort] = sort_size;
-    // app->command[cformat_size] = format_size_noth;
-    // app->command[cformat_time] = format_time_full;
-    // app->command[cfilter] = filter_removehidden;
-    // app->command[csort] = sort_name;
 }
 

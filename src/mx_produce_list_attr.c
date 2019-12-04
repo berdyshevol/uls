@@ -9,7 +9,6 @@ static char at_plus_space(char *file) {
         chr = '@';
     else if (acl != NULL)
         chr = '+';
-
     return chr;
 }
 
@@ -115,7 +114,6 @@ static t_attr *make_attr_array(char *fileName, t_App *app) {
 	mx_strdel(&path);
     return attr_array;
 }
-
 void mx_produce_list_attr(t_App *app) {
     struct dirent *entry;
 	DIR *d = app->cur_dir->current_DIR;

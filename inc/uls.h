@@ -79,18 +79,21 @@ typedef enum {
     filter_deldir,
     filter_onlydir,
 
-    sort_nosort, /* -U */
+    sort_nosort, /* -f */
     sort_size,  /* -S */
-    sort_ctime,
-    sort_atime,
-    sort_mtime,
+    sort_ctime, // -tc
+    sort_mtime, // -t
     sort_name,  /* default */
 
     format_size_noth,
     format_size_h,
 
-    format_time_full,
+    format_time_full,   // -T
     format_time_short,
+
+    time_type_c,
+    time_type_a,    // 
+    time_type_m, // default
 
     view_long_format,		/* -l and other options that imply -l */
     view_one_per_line,		/* -1 */
@@ -107,10 +110,11 @@ typedef enum {
 typedef enum {
     cfilter,
     csort,
-    ccolumns,
-    comma,
+    //ccolumns,
+    //comma,
     cformat_size,
-    cformat_time,
+    time_format,
+    time_type,  // for output
     cview,
     cheader,
     numerically,    // -n
@@ -135,6 +139,7 @@ P, //  -P  -- do not follow symlinks
 R, //  -R  -- list subdirectories recursively
 S, //  -S  -- sort by size
 T, //  -T  -- show complete time information
+U,
 a, //  -a  -- list entries starting with .
 b, //  -b  -- as -B, but use C escape codes whenever possible
 c, //  -c  -- status change time
@@ -188,11 +193,10 @@ t_list *mx_printable_lines(t_list *head, int *a, t_App *app);
 
 
 /* comparators for sorting commamd*/
-bool cmp_size(void *data1, void *data2);
-bool cmp_c_time(void *data1, void *data2);
-bool cmp_a_time(void *data1, void *data2);
-bool cmp_name(void *data1, void *data2);
-bool cmp_m_time(void *data1, void *data2);
+bool mx_cmp_size(void *data1, void *data2);
+bool mx_cmp_c_time(void *data1, void *data2);
+bool mx_cmp_name(void *data1, void *data2);
+bool mx_cmp_m_time(void *data1, void *data2);
 
 //helping function   - to be deleted
 void print_raw_lines(t_list *head);
