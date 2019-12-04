@@ -169,9 +169,7 @@ typedef struct {
 
 t_App *new_App(void);
 void mx_make_command(t_App *app);
-void mx_read_dir(t_App *app);
-void mx_read_file(t_App *app);
-void mx_read_some(t_App *app);
+void mx_reading(t_App *app);
 void mx_produce_list_attr(t_App *app);
 void mx_produce_attr(t_App *app);
 void mx_apply_sort(t_App *app);

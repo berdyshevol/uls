@@ -8,7 +8,7 @@ int main(int argc, char **argv) {
     mx_make_command(app);
 
     // --------------
-    mx_read_some(app);
+    mx_reading(app);
     // system("leaks -q  uls");  
     // free appls -l
     return 0;
