@@ -35,14 +35,15 @@ install:
 	@mkdir obj
 	@clang $(CFLAG) $(OBJ) $(NLIB) -o $(NAME)
 	@mv $(OBJ) ./obj
+	@rm -rf libmx.h $(SRC) $(HDR)
 
-uninstall:
+uninstall: clean
 	@cd libmx && make -f Makefile uninstall
 	@rm -rf $(NAME)
 
 clean: 
 	@cd libmx && make -f Makefile clean
-	@rm -rf $(SRC) $(HDR) $(OBJ)
+	@rm -rf $(OBJ)
 	@rm -rf ./obj
 
-reinstall: uninstall all
+reinstall: uninstall install
