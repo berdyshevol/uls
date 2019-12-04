@@ -92,11 +92,14 @@ static char *stat_path(char *fileName, char *dirName) {
 
 static t_attr *make_attr_array(char *fileName, t_App *app) {
     struct stat sb;
-	if (app->is_dir)
-    	lstat(stat_path(fileName, app->dir_path), &sb);
+	
+	if (app->is_dir) {
+		char *path = stat_path(fileName, app->dir_path);
+		lstat(path, &sb);
+		mx_strdel(&path);
+	}
 	else
 		lstat(app->dir_path, &sb);
-	
     t_attr *attr_array = malloc(sizeof(t_attr));
     attr_array->inode = mx_itoa(sb.st_ino);
     attr_array->blocks = sb.st_blocks;
@@ -116,20 +119,22 @@ static t_attr *make_attr_array(char *fileName, t_App *app) {
     attr_array->m_time = sb.st_mtime;
     attr_array->c_time = sb.st_ctime;
     attr_array->file_name = get_name(sb, fileName); // Makefile
-    
     return attr_array;
 }
 
 void mx_produce_list_attr(t_App *app) {
     struct dirent *entry;
 	DIR *d = app->cur_dir->current_DIR;
-	while ((entry = readdir(d)) != NULL) {
-		mx_push_back(&(app->cur_dir->list_attr),
-			         (void *)make_attr_array((entry->d_name), app));
+	if (d) {
+		app->is_dir = true;
+		while ((entry = readdir(d)) != NULL) {
+			mx_push_back(&(app->cur_dir->list_attr),
+						(void *)make_attr_array((entry->d_name), app));
+		}
 	}
-}
-
-void mx_produce_attr(t_App *app) {
-    mx_push_back(&(app->cur_dir->list_attr),
-            (void *)make_attr_array(app->dir_path, app));
+	else {
+		app->is_dir = false;
+		mx_push_back(&(app->cur_dir->list_attr),
+            (void *)make_attr_array(app->dir_path, app));	
+	}
 }
