@@ -31,7 +31,7 @@ void mx_apply_format_time(t_list *row, t_list *cur, t_App *app) {
     char *s = NULL;
     switch (app->command[time_format]) {
         case format_time_full:
-            s = mx_strdup(ctime(&(time)));
+            s = mx_strdup((ctime(&(time))) + 4);
             s[mx_strlen(s)-1] = '\0';
             break;
         case format_time_short:
