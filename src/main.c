@@ -6,6 +6,5 @@ int main(int argc, char **argv) {
     mx_read_flags(argv, argc, app->flags, &(app->dir_path));
     mx_make_command(app);
     mx_reading(app);
-    system("leaks -q uls");
     return 0;
 }
