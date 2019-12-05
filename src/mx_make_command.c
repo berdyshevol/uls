@@ -4,6 +4,7 @@ void mx_make_command(t_App *app) {
     // default
     app->command[cfilter] = filter_delhidden;
     app->command[csort] = sort_name;
+    app->command[reverse] = off;
     app->command[cformat_size] = format_size_noth;
     app->command[cview] = view_many_per_line;
     app->command[numerically] = off;
@@ -32,7 +33,7 @@ void mx_make_command(t_App *app) {
     if (app->flags[T]) {
         app->command[time_format] = format_time_full;
     }
-    //
+    // mode to print colunms
     if (app->flags[i]) {
         app->command[col_inode] = on;
     }
@@ -43,13 +44,18 @@ void mx_make_command(t_App *app) {
         app->command[col_group] = off;
         app->flags[l] = on;
     }
+    if (app->flags[g]) {
+        app->command[col_user] = off;
+        app->flags[l] = on;
+    }
+    // format
     if (app->flags[n]) {
         app->command[numerically] = on;
         app->flags[l] = on;
     }
-    if (app->flags[g]) {
-        app->command[col_user] = off;
-        app->flags[l] = on;
+    // sort
+    if (app->flags[r]) {
+        app->command[reverse] = on;
     }
     // print mode
     if (app->flags[l]) {

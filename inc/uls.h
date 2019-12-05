@@ -110,6 +110,7 @@ typedef enum {
 typedef enum {
     cfilter,
     csort,
+    reverse,
     //ccolumns,
     //comma,
     cformat_size,
@@ -199,6 +200,10 @@ bool mx_cmp_size(void *data1, void *data2);
 bool mx_cmp_c_time(void *data1, void *data2);
 bool mx_cmp_name(void *data1, void *data2);
 bool mx_cmp_m_time(void *data1, void *data2);
+bool mx_cmp_size_r(void *data1, void *data2);
+bool mx_cmp_c_time_r(void *data1, void *data2);
+bool mx_cmp_name_r(void *data1, void *data2);
+bool mx_cmp_m_time_r(void *data1, void *data2);
 
 //helping function   - to be deleted
 void print_raw_lines(t_list *head);
