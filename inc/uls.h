@@ -37,16 +37,16 @@
 // см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
 typedef struct s_attr {
     char *inode; // inode For each file, print the file's file serial number (inode number). -i flag
-    blkcnt_t blocks;      /* blocks allocated for file */
-    char *chmod;       
-    nlink_t links;        /* number or hard links to the file */
+    char *chmod;
     char *user;
     char *group;
+    char *file_name;
+    blkcnt_t blocks;      /* blocks allocated for file */
+    nlink_t links;        /* number or hard links to the file */
     off_t file_size;      /* file size, in bytes */
     time_t a_time;        /* [XSI] Time of last access */
     time_t m_time;
     time_t c_time;
-    char *file_name;
 } t_attr;
 
 enum e_attr {
