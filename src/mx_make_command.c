@@ -16,6 +16,12 @@ void mx_make_command(t_App *app) {
     app->command[cheader] = header_no; 
     // check flags
     // time
+    if (app->flags[a]) {
+        app->command[cfilter] = filter_nofilter;
+    }
+    if (app->flags[A]) {
+        app->command[cfilter] = filter_deldir;
+    }
     if (app->flags[t]) {
         app->command[csort] = sort_mtime;
         if (app->flags[c])
