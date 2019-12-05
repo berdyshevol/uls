@@ -21,7 +21,7 @@ static bool check_half_year(time_t t) {
     time_t now = time(NULL);
     time_t half_year = ((365 / 2) * 86400);
 
-    if (t + half_year > now && t < now + half_year)
+    if (t + half_year > now)
         return false;
     else
         return true;
@@ -32,10 +32,11 @@ static char *shor_format(time_t t) {
     char *str = mx_strdup((ctime(&(t))) + 4);
     char *tmp = NULL;
 
+    str[mx_strlen(str)-1] = '\0';
     if (check_half_year(t)) {
         res = mx_strndup(str, 7);
         tmp = res; // to free new res;
-        res = mx_strjoin(res, &str[11]);
+        res = mx_strjoin(res, &str[15]);
         free(tmp);
     }
     else
@@ -59,4 +60,3 @@ void mx_apply_format_time(t_list *row, t_list *cur, t_App *app) {
     }
     mx_push_back(&row, (void *)s);
 }
-
