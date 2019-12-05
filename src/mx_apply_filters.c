@@ -37,8 +37,8 @@ static void del_file(t_list **list, char *removed) {
     if (curr != NULL && mx_strcmp(name, removed) == 0) {
         *list = curr->next;
         for (int i = 0; i < 5; i++)
-            mx_strdel(&((char**)curr->data)[i]);
-        mx_strdel(((char**)&curr->data));
+            mx_strdel(&((char**)curr->data)[i]); // TODO: change here
+        mx_strdel(((char**)&curr->data));       // TODO: change here
         free(curr);
         return;
     }

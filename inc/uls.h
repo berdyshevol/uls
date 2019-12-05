@@ -181,6 +181,7 @@ void mx_standart_view(t_list *list);
 void mx_non_standart(t_list *list);
 void mx_produce_list_attr(t_App *app);
 void mx_produce_attr(t_App *app);
+t_attr *mx_make_attr_array(char *fileName, t_App *app);
 void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
 void mx_apply_printmode(t_App *app);

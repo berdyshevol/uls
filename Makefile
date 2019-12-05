@@ -8,6 +8,7 @@ SRC = main.c \
 	mx_new_app.c \
 	mx_read_dir.c \
 	mx_produce_list_attr.c \
+	mx_make_attr_array.c \
 	mx_apply_filters.c \
 	mx_apply_sort.c \
 	mx_comparators.c \

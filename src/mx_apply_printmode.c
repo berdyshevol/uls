@@ -44,11 +44,9 @@ void mx_apply_printmode(t_App *app) {
             mx_print_lines(app); 
             break;
         case view_one_per_line:
-            // TODO: сделать стандартный вывод
-            mx_non_standart(app->cur_dir->list_attr);
+            mx_non_standart(app->cur_dir->list_attr); // TODO: доделать вывод. Сейчас -G
             break;
         case view_many_per_line: 
-            // TODO: сделать стандартный вывод
             mx_standart_view(app->cur_dir->list_attr);
             break;
         case view_horizontal:
