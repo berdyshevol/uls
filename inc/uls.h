@@ -113,7 +113,8 @@ typedef enum {
     reverse,
     //ccolumns,
     //comma,
-    cformat_size,
+    cformat_size,  // -h
+    block_format,  // -k
     time_format,
     time_type,  // for output
     cview,
@@ -185,6 +186,7 @@ t_attr *mx_make_attr_array(char *fileName, t_App *app);
 void mx_apply_sort(t_App *app);
 void mx_apply_filters(t_App *app);
 void mx_apply_printmode(t_App *app);
+void mx_apply_header(t_App *app);
 void mx_apply_format_time(t_list *row, t_list *cur, t_App *app);
 bool mx_is_swithed_off(int i, t_App *app);
 

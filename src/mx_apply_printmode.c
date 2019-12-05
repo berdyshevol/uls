@@ -8,6 +8,7 @@ char *mx_format_size(off_t size, t_App *app) {
 }
 
 void mx_apply_printmode_l(t_App *app) {
+    mx_apply_header(app);
     for (t_list *cur = app->cur_dir->list_attr;
         cur != NULL;
         cur = cur->next) {

@@ -16,7 +16,6 @@ void mx_reading(t_App *app) {
     mx_produce_list_attr(app);
     mx_apply_filters(app); // TODO: Почистить лики
     mx_apply_sort(app);
-    //make_header(app);
     mx_apply_printmode(app);
     // mx_apply_format(app);
     if (cd->current_DIR)
