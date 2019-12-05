@@ -43,7 +43,7 @@ char *get_user(uid_t uid) {
 char *get_group(gid_t gid) {
     struct group *g;
 	if ((g = getgrgid(gid)) != NULL)
-    	return g->gr_name;
+    	return mx_strdup(g->gr_name);
 	else
     	return mx_itoa(gid);
 }

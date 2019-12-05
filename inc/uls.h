@@ -36,11 +36,11 @@
 
 // см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
 typedef struct s_attr {
-    char *inode; // inode For each file, print the file's file serial number (inode number). -i flag
-    char *chmod;
-    char *user;
-    char *group;
-    char *file_name;
+    char *inode; // in heap // inode For each file, print the file's file serial number (inode number). -i flag
+    char *chmod; // in heap
+    char *user; // in heap
+    char *group;    // in heap
+    char *file_name; // -------? we do not know if in heap. Ask Poul
     blkcnt_t blocks;      /* blocks allocated for file */
     nlink_t links;        /* number or hard links to the file */
     off_t file_size;      /* file size, in bytes */
@@ -103,7 +103,7 @@ typedef enum {
 
     header_no,
     header_total,
-    header_dir
+    header_dir_total
 
 } e_Command_State;
 
@@ -194,6 +194,9 @@ void mx_read_flags(char **s, int argc, int *fl, char **dir_path);
 char *get_dir_path();
 void mx_print_lines(t_App *app);
 t_list *mx_printable_lines(t_list *head, int *a, t_App *app);
+
+// free functions
+void mx_free_node_data(t_list *node);
 
 
 /* comparators for sorting commamd*/
