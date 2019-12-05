@@ -11,6 +11,7 @@ SRC = main.c \
 	mx_apply_filters.c \
 	mx_apply_sort.c \
 	mx_comparators.c \
+	mx_comparators_r.c \
 	mx_apply_printmode.c \
 	mx_apply_format_time.c \
 	mx_print_dir.c \

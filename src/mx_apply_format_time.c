@@ -1,54 +1,62 @@
 #include "uls.h"
-/* здесь нежно распарсить на день, месяц ... год. Потом push с raw_str*/
 
-// parse(char *time, char **day, char **mon, char **hour, char **min, char **sec, char **year) {
-//     int i = mx_get_char_index(time, " ");
+static time_t check_time(t_App *app, t_list *cur) {
+    time_t time = 0;
 
-// }
-
-void mx_apply_format_time(t_list *row, t_list *cur, t_App *app) {
-    // char *day = NULL;
-    // char *mon = NULL;
-    // char *hour = NULL;
-    // char *min = NULL;
-    // char *sec = NULL;
-    // char *year = NULL;
-    //parse(ctime(&(attr->m_time), &day, &mon, &hour, &min, &sec, &year);
-  
-    time_t time;
     switch (app->command[time_type]) {
         case time_type_c:
             time = ((t_attr *)(cur->data))->c_time;
             break;
-        case time_type_a:  // 
+        case time_type_a:
             time = ((t_attr *)(cur->data))->a_time;
             break;
         case time_type_m:
             time = ((t_attr *)(cur->data))->m_time;
             break;  
     }
+    return time;
+}
 
-    char *s = NULL;
+static bool check_half_year(time_t t) {
+    time_t now = time(NULL);
+    time_t half_year = ((365 / 2) * 86400);
+
+    if (t + half_year > now && t < now + half_year)
+        return false;
+    else
+        return true;
+}
+
+static char *shor_format(time_t t) {
+    char *res = NULL;
+    char *str = mx_strdup((ctime(&(t))) + 4);
+    char *tmp = NULL;
+
+    if (check_half_year(t)) {
+        res = mx_strndup(str, 7);
+        tmp = res; // to free new res;
+        res = mx_strjoin(res, &str[11]);
+        free(tmp);
+    }
+    else
+        res = mx_strndup(str, 12);
+    free(str);
+    return res;
+}
+
+void mx_apply_format_time(t_list *row, t_list *cur, t_App *app) {
+    time_t t = check_time(app, cur);
+    char *s = NULL;    
+
     switch (app->command[time_format]) {
         case format_time_full:
-            s = mx_strdup((ctime(&(time))) + 4);
+            s = mx_strdup((ctime(&(t))) + 4); //возможно тут есть лик
             s[mx_strlen(s)-1] = '\0';
             break;
         case format_time_short:
-            s = mx_strdup("no_time_format");
+            s = shor_format(t);
             break;
     }
-    
-    //exit(1);
-    // if (app->command[cformat_size] == format_size_noth) {
-    //    char *s = mx_strdup(ctime(&(((t_attr *)(cur->data))->m_time)));
-    //     s[mx_strlen(s)-1] = '\0';
-    //     mx_push_back(&row, (void *)s);
-    //     return;
-    // }
-    // else if (app->command[cformat_size] == format_size_h) {
-    //     // TODO: time in human way
-    // }
     mx_push_back(&row, (void *)s);
 }
 
