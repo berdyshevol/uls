@@ -36,10 +36,11 @@ static void del_file(t_list **list, char *removed) {
 
     if (curr != NULL && mx_strcmp(name, removed) == 0) {
         *list = curr->next;
-        for (int i = 0; i < 5; i++)
-            mx_strdel(&((char**)curr->data)[i]); // TODO: change here
-        mx_strdel(((char**)&curr->data));       // TODO: change here
-        free(curr);
+        // for (int i = 0; i < 5; i++)
+        //     mx_strdel(&((char**)curr->data)[i]); // TODO: change here
+        // mx_strdel(((char**)&curr->data));        // TODO: change here
+        // free(curr);
+        mx_free_node_data(curr);
         return;
     }
     next_name(&curr, &prev, &name, removed);
