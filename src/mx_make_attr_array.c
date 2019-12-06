@@ -106,7 +106,6 @@ t_attr *mx_make_attr_array(char *fileName, t_App *app) {
 		attr_array->group = mx_itoa(sb.st_gid);
 	}
     attr_array->file_size = sb.st_size; // 623
-    //time_for_lflag(sb, arr); // Nov 18 17:33
     attr_array->a_time = sb.st_atime; //sb.st_atimespec;
     attr_array->m_time = sb.st_mtime;
     attr_array->c_time = sb.st_ctime;
