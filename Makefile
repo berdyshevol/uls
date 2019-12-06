@@ -24,7 +24,8 @@ SRC = main.c \
 	mx_standart_view.c \
 	mx_filter_out_col.c \
 	mx_free.c \
-	mx_error_flag.c
+	mx_error_flag.c \
+	mx_apply_header.c
 
 OBJ = $(SRC:.c=.o)
 

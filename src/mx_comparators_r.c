@@ -4,7 +4,7 @@ bool mx_cmp_size_r(void *data1, void *data2) {
     if (((t_attr *)data1)->file_size > ((t_attr *)data2)->file_size)
         return true;
     else
-        return false; 
+        return false;
 }
 
 bool mx_cmp_c_time_r(void *data1, void *data2) {
