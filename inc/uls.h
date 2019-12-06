@@ -48,8 +48,9 @@ enum e_attr {
     at_MAX
 };
 
-//typedef void *t_attr_array[MAX_ATTR];
-
+#define KILOBYTE 1024
+#define MEGAOBYTE 1048576
+#define GIGABYTE 1073741824
 
 typedef struct {
     t_list *list_attr;
@@ -73,9 +74,6 @@ typedef enum {
     sort_mtime, // -t
     sort_name,  /* default */
 
-    format_size_noth,
-    format_size_h,
-
     format_time_full,   // -T
     format_time_short,
 
@@ -96,9 +94,7 @@ typedef enum {
     cfilter,
     csort,
     reverse,
-    //ccolumns,
-    //comma,
-    cformat_size,
+    human,
     time_format,
     time_type,  // for output
     cview,
@@ -174,6 +170,7 @@ void mx_apply_filters(t_App *app);
 void mx_apply_printmode(t_App *app);
 void mx_apply_format_time(t_list *row, t_list *cur, t_App *app);
 bool mx_is_swithed_off(int i, t_App *app);
+char *format_size(off_t size, t_App *app);
 
 void mx_clear_flags(int *flags);
 void mx_filter_flags(char *argv, int *fl);

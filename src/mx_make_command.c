@@ -22,7 +22,7 @@ static void default_settings(t_App *app) {
     app->command[cfilter] = filter_delhidden;
     app->command[csort] = sort_name;
     app->command[reverse] = off;
-    app->command[cformat_size] = format_size_noth;
+    app->command[human] = off;
     app->command[cview] = view_many_per_line;
     app->command[numerically] = off;
     app->command[time_format] = format_time_short;

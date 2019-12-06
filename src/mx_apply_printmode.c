@@ -1,11 +1,5 @@
 #include "uls.h"
 
-static char *format_size(off_t size, t_App *app) {
-    if (app->command[cformat_size] == format_size_noth) // TODO: доделать
-        return mx_itoa(size);
-    return mx_strdup("no size");
-}
-
 static void apply_printmode_flag_l(t_App *app) {
     t_list *row;
     t_list *cur = app->cur_dir->list_attr;
