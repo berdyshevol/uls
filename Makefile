@@ -23,7 +23,8 @@ SRC = main.c \
 	mx_make_command.c \
 	mx_standart_view.c \
 	mx_filter_out_col.c \
-	mx_free.c
+	mx_free.c \
+	mx_error_flag.c
 
 OBJ = $(SRC:.c=.o)
 

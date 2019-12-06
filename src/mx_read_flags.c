@@ -9,6 +9,7 @@ void mx_read_flags(char **s, int argc, int *fl, char **dir_path) {
 	int flag = 0;
 
     if (argc > 1 && s[1][0] == '-') {
+        mx_check_eror_flag(&s[1][1]);
 		output_flags(s[1], fl);
 		if (fl[m] == 1 && fl[C] == 1)
 			fl[C] = 0;

@@ -128,38 +128,38 @@ typedef enum {
 
 typedef enum e_flag { // 33 flags:
 minus,
-dog, //  -@  -- display extended attribute keys and sizes in long (-l) output 
-one, //  -1  -- single column output
-l, //  -l  -- bacik case..
-A, //  -A  -- list all except . and ..
-B, //  -B  -- print octal escapes for control characters
-C, //  -C  -- list entries in columns sorted vertically
+dog, //  -@  -- display extended attribute keys and sizes in long (-l) output
+one, //  +1  -- single column output
+l, //  +l  -- bacik case..
+A, //  +A  -- list all except . and ..
+B, //  -B  -- print octal escapes for control characters 
+C, //  +C  -- list entries in columns sorted vertically
 F, //  -F  -- append file type indicators
 H, //  -H  -- follow symlinks on the command line
 L, //  -L  -- list referenced file for sym link
 P, //  -P  -- do not follow symlinks
-R, //  -R  -- list subdirectories recursively
-S, //  -S  -- sort by size
-T, //  -T  -- show complete time information
+R, //  +R  -- list subdirectories recursively
+S, //  +S  -- sort by size
+T, //  +T  -- show complete time information
 U,
-a, //  -a  -- list entries starting with .
+a, //  +a  -- list entries starting with .
 b, //  -b  -- as -B, but use C escape codes whenever possible
-c, //  -c  -- status change time
+c, //  +c  -- status change time
 d, //  -d  -- list directory entries instead of contents
-f, //  -f  -- output is not sorted
-g, //  -g  -- long listing but without owner information
-h, //  -h  -- print sizes in human readable form
-i, //  -i  -- print file inode numbers
-k, //  -k  -- print sizes of 1k
-m, //  -m  -- comma separated
-n, //  -n  -- numeric uid, gid
+f, //  +f  -- output is not sorted
+g, //  +g  -- long listing but without owner information
+h, //  +h  -- print sizes in human readable form
+i, //  +i  -- print file inode numbers
+k, //  +k  -- print sizes of 1k
+m, //  +m  -- comma separated
+n, //  +n  -- numeric uid, gid
 o, //  -o  -- display file flags
 p, //  -p  -- append file type indicators for directory
 q, //  -q  -- hide control chars
-r, //  -r  -- reverse sort order
-s, //  -s  -- display size of each file in blocks
-t, //  -t  -- sort by modification time
-u, //  -u  -- access time
+r, //  +r  -- reverse sort order
+s, //  +s  -- display size of each file in blocks
+t, //  +t  -- sort by modification time
+u, //  +u  -- access time
 w, //  -w  -- print raw characters
 x, //  -x  -- sort horizontally
 size, // number of flags
@@ -194,6 +194,7 @@ void mx_read_flags(char **s, int argc, int *fl, char **dir_path);
 char *get_dir_path();
 void mx_print_lines(t_App *app);
 t_list *mx_printable_lines(t_list *head, int *a, t_App *app);
+void mx_check_eror_flag(char *s);
 
 // free functions
 void mx_free_node_data(t_list *node);
