@@ -3,15 +3,22 @@
 static void default_settings(t_App *app);
 static void time_and_hiden_files(t_App *app);
 static void check_other_flags(t_App *app);
+static void check_sort(t_App *app);
 
 void mx_make_command(t_App *app) {
     default_settings(app);
     // TODO: добавить isatty и изменить app->command[cview]
+    if (app->flags[R]) {
+        app->command[recursion] = on;
+        app->command[header_dir] = on;
+    }
     time_and_hiden_files(app);
     check_other_flags(app);
+    check_sort(app);
 }
 
 static void default_settings(t_App *app) {
+    app->command[recursion] = off;  
     app->command[cfilter] = filter_delhidden;
     app->command[csort] = sort_name;
     app->command[reverse] = off;
@@ -24,7 +31,8 @@ static void default_settings(t_App *app) {
     app->command[col_blocks] = off;
     app->command[col_user] = on;
     app->command[col_group] = on;
-    app->command[cheader] = header_no; // TODO: header!
+    app->command[header_dir] = off; // TODO: header!
+    app->command[header_total] = off;
 }
 
 static void time_and_hiden_files(t_App *app) {
@@ -64,6 +72,20 @@ static void check_other_flags(t_App *app) {
     }
     if (app->flags[r])
         app->command[reverse] = on;
-    if (app->flags[l])
+    if (app->flags[l]) {
         app->command[cview] = view_long_format;
+        app->command[header_total] = on;
+    }
 }
+
+static void check_sort(t_App *app) {
+    if (app->flags[S])
+        app->command[csort] = sort_size;
+    if (app->flags[f]) {
+        app->command[csort] = sort_nosort;
+        app->command[cfilter] = filter_nofilter;
+    }
+    if (app->flags[k])
+        app->command[kilobytes] = on;
+}
+

@@ -15,7 +15,7 @@ static void inicialization_app_al(t_App *app) {
 t_App *new_App(void) {
     t_App *app = malloc(sizeof(t_App));
     
-    app->al = malloc(9 * sizeof(int));
+    app->al = malloc(at_MAX * sizeof(int));
     app->flags = malloc(size * sizeof(int));
     app->cur_dir = NULL;
     mx_clear_flags(app->flags);

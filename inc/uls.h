@@ -20,27 +20,13 @@
 
 #include "libmx.h"
 
-// typedef enum e_attr {
-//     attr_blocks,
-//     attr_chmod,
-//     attr_links,
-//     attr_user,
-//     attr_group,
-//     attr_file_size,
-//     attr_a_time,
-//     attr_m_time,
-//     attr_c_time,
-//     attr_file_name,
-//     MAX_ATTR
-// } t_attr;
-
 // см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
 typedef struct s_attr {
-    char *inode; // in heap // inode For each file, print the file's file serial number (inode number). -i flag
-    char *chmod; // in heap
-    char *user; // in heap
+    char *inode;    // in heap // inode For each file, print the file's file serial number (inode number). -i flag
+    char *chmod;    // in heap
+    char *user;     // in heap
     char *group;    // in heap
-    char *file_name; // -------? we do not know if in heap. Ask Poul
+    char *file_name;// -------? we do not know if in heap. Ask Poul
     blkcnt_t blocks;      /* blocks allocated for file */
     nlink_t links;        /* number or hard links to the file */
     off_t file_size;      /* file size, in bytes */
@@ -58,7 +44,8 @@ enum e_attr {
     at_group,
     at_file_size,
     at_time,
-    at_file_name
+    at_file_name,
+    at_MAX
 };
 
 //typedef void *t_attr_array[MAX_ATTR];
@@ -68,6 +55,7 @@ typedef struct {
     t_list *list_attr;
     t_list *raw_lines;
     DIR *current_DIR;
+    char *dir_name;
 } t_CD;
 
 typedef enum {
@@ -101,13 +89,10 @@ typedef enum {
     view_horizontal,		/* -x */
     view_with_commas,		/* -m */
 
-    header_no,
-    header_total,
-    header_dir_total
-
 } e_Command_State;
 
 typedef enum {
+    recursion, // -R
     cfilter,
     csort,
     reverse,
@@ -117,8 +102,10 @@ typedef enum {
     time_format,
     time_type,  // for output
     cview,
-    cheader,
+    header_dir,  // for -R
+    header_total, // for -l
     numerically,    // -n
+    kilobytes,      // -k
     col_inode,      // -i
     col_blocks,     // -s
     col_user,      // -g
@@ -192,6 +179,10 @@ void mx_clear_flags(int *flags);
 void mx_filter_flags(char *argv, int *fl);
 void mx_read_flags(char **s, int argc, int *fl, char **dir_path);
 char *get_dir_path();
+
+// print
+void mx_header_dir(t_App *app);
+void mx_header_total(t_App *app);
 void mx_print_lines(t_App *app);
 t_list *mx_printable_lines(t_list *head, int *a, t_App *app);
 void mx_check_eror_flag(char *s);
