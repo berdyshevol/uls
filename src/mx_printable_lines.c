@@ -16,7 +16,7 @@ t_list *mx_printable_lines(t_list *head, int *a, t_App *app) {
     for(; head != NULL; head = head->next, str = NULL) { 
         ptr = head->data;
         max = max_len;
-        for (int i = 0; ptr != NULL; i++, ptr = ptr->next, max = max->next) {  // здесь добавить проверку для -s -o -i
+        for (int i = 0; ptr != NULL; i++, ptr = ptr->next, max = max->next) {
             if (mx_is_swithed_off(i, app))
                 continue;
             tmp = str;
