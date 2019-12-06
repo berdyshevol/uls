@@ -3,12 +3,14 @@
 static void default_settings(t_App *app);
 static void time_and_hiden_files(t_App *app);
 static void check_other_flags(t_App *app);
+static void check_sort(t_App *app);
 
 void mx_make_command(t_App *app) {
     default_settings(app);
     // TODO: добавить isatty и изменить app->command[cview]
     time_and_hiden_files(app);
     check_other_flags(app);
+    check_sort(app);
 }
 
 static void default_settings(t_App *app) {
@@ -66,4 +68,13 @@ static void check_other_flags(t_App *app) {
         app->command[reverse] = on;
     if (app->flags[l])
         app->command[cview] = view_long_format;
+}
+
+static void check_sort(t_App *app) {
+    if (app->flags[S])
+        app->command[csort] = sort_size;
+    if (app->flags[f]) {
+        app->command[csort] = sort_nosort;
+        app->command[cfilter] = filter_nofilter;
+    }
 }
