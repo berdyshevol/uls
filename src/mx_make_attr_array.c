@@ -73,7 +73,8 @@ char *get_name(struct stat sb,  char *file) {
 
 static char *stat_path(char *fileName, char *dirName) {
     int len = mx_strlen(dirName);
-    char *tmp = NULL, *res = NULL;
+    char *tmp = NULL;
+	char *res = NULL;
 
     if (dirName[len - 1] != '/') {
         tmp = mx_strjoin(dirName, "/");

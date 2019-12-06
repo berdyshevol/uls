@@ -8,9 +8,9 @@ void mx_check_eror_flag(char *s) {
     for (; s[i]; i++) {
         res = mx_get_char_index(flags, s[i]);
         if (res < 0) {
-            mx_printerr("./uls: illegal option -- ");
+            mx_printerr("uls: illegal option -- ");
             write (2, &s[i], 1);
-            mx_printerr("\nusage: ./uls [-1ACRSTUacfghikmnrstu] [file ...]\n");
+            mx_printerr("\nusage: uls [-1ACRSTUacfghikmnrstu] [file ...]\n");
             exit(1);
         } 
     }
