@@ -18,7 +18,6 @@ char *format_size(off_t size, t_App *app) {
     enum {B, K, M, G};
     char *res = NULL;
     char *sizestr = mx_itoa(size);
-    char *temp = NULL;
 
     switch (app->command[human]) {
         case off:
@@ -29,18 +28,21 @@ char *format_size(off_t size, t_App *app) {
                 res = mx_strjoin(sizestr, unit[B]);
             }
             else if (size < MEGAOBYTE) {
+                char *temp = NULL;
                 temp = kylobites(size);
                 res = mx_strjoin(temp, unit[K]);
                 free(temp);
             }
             else if (size < GIGABYTE) {
+                char *temp = NULL;
                 temp = megabytes(size);
                 res = mx_strjoin(temp, unit[M]);
                 free(temp);
             }
             else {
-                temp = 
-                res = mx_strjoin(gigabytes(size), unit[M]);
+                char *temp = NULL;
+                temp = gigabytes(size);
+                res = mx_strjoin(temp, unit[M]);
                 free(temp);
             }
     }

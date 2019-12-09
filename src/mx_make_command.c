@@ -76,6 +76,8 @@ static void check_other_flags(t_App *app) {
         app->command[cview] = view_long_format;
         app->command[header_total] = on;
     }
+    if (app->flags[h])
+        app->command[human] = on;
 }
 
 static void check_sort(t_App *app) {

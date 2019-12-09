@@ -28,7 +28,7 @@ static void print_total(t_App *app) {
     for (t_list *cur = app->cur_dir->list_attr; cur != NULL; cur = cur->next) {
         total += ((t_attr *)(cur->data))->blocks;
     }
-    mx_printstr("Total: ");
+    mx_printstr("total ");
     mx_printint(total);
     mx_printstr("\n");
 }
