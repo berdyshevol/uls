@@ -6,9 +6,15 @@ HDR = uls.h
 
 SRC = main.c \
 	mx_new_app.c \
-	mx_read_dir.c \
+	mx_read_args.c \
+	mx_print_args_error.c \
+	mx_print_args_file.c \
+	mx_print_args_directories.c \
+	mx_do_one_directory.c \
+	mx_new_lfa.c \
 	mx_produce_list_attr.c \
-	mx_make_attr_array.c \
+	mx_make_attr_struct.c \
+	mx_apply.c \
 	mx_apply_filters.c \
 	mx_apply_sort.c \
 	mx_comparators.c \
@@ -47,9 +53,14 @@ uninstall: clean
 	@cd libmx && make -f Makefile uninstall
 	@rm -rf $(NAME)
 
-clean: 
+clean:
 	@cd libmx && make -f Makefile clean
 	@rm -rf $(OBJ)
 	@rm -rf ./obj
 
 reinstall: uninstall install
+
+cl: clean
+	rm *.c
+	rm *.o
+	rm *.h

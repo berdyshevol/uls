@@ -1,7 +1,7 @@
 #include "uls.h"
 
-void mx_print_lines(t_App *app) {
-    t_list *lines = mx_printable_lines(app->cur_dir->raw_lines, app->al, app);
+void mx_print_lines(t_lfa *lfa) {
+    t_list *lines = mx_printable_lines(lfa->raw_lines, lfa->al, lfa);
 
     for (t_list *i = lines; i != NULL; i = i->next) {
         mx_printstr((char *)(i->data));

@@ -1,8 +1,8 @@
 #include "uls.h"
 
-static void apply_printmode_flag_l(t_App *app) {
+static void apply_printmode_flag_l(t_lfa *lfa) {
     t_list *row;
-    t_list *cur = app->cur_dir->list_attr;
+    t_list *cur = lfa->list_attr;
     
     for (; cur != NULL; cur = cur->next) {
         row = NULL;
@@ -13,27 +13,27 @@ static void apply_printmode_flag_l(t_App *app) {
         mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->user));
         mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->group));
         mx_push_back(&row,
-                     format_size(((t_attr *)(cur->data))->file_size, app));
-        mx_apply_format_time(row, cur, app);
+                     format_size(((t_attr *)(cur->data))->file_size, lfa));
+        mx_apply_format_time(row, cur, lfa);
         mx_push_back(&row,
                      (void *)mx_strdup(((t_attr *)(cur->data))->file_name));
-        mx_push_back(&(app->cur_dir->raw_lines), (void *)row);
+        mx_push_back(&(lfa->raw_lines), (void *)row);
     }
 }
 
-void mx_apply_printmode(t_App *app) {
-    mx_header_dir(app);
-    switch (app->command[cview]) {
+void mx_apply_printmode(t_lfa *lfa) {
+    mx_header_dir(lfa);
+    switch (lfa->command[cview]) {
         case view_long_format:
-            apply_printmode_flag_l(app);
-            mx_header_total(app);
-            mx_print_lines(app); 
+            apply_printmode_flag_l(lfa);
+            mx_header_total(lfa);
+            mx_print_lines(lfa);
             break;
         case view_one_per_line:
-            mx_non_standart(app->cur_dir->list_attr); // TODO: доделать вывод. Сейчас -G
+            mx_non_standart(lfa->list_attr); // TODO: доделать вывод. Сейчас -G
             break;
         case view_many_per_line: 
-            mx_standart_view(app->cur_dir->list_attr);
+            mx_standart_view(lfa->list_attr);
             break;
         case view_horizontal:
             // TODO: сделать вывод в колонку

@@ -13,13 +13,13 @@ static char *gigabytes(off_t size) {
 }
 
 
-char *format_size(off_t size, t_App *app) {
+char *format_size(off_t size, t_lfa *lfa) {
     char *unit[] = {"B", "K", "M", "G"};
     enum {B, K, M, G};
     char *res = NULL;
     char *sizestr = mx_itoa(size);
 
-    switch (app->command[human]) {
+    switch (lfa->command[human]) {
         case off:
             res = mx_strdup(sizestr);
             break;

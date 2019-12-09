@@ -86,37 +86,40 @@ static char *stat_path(char *fileName, char *dirName) {
     return res;
 }
 
-t_attr *mx_make_attr_array(char *fileName, t_App *app) {
+t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
     struct stat sb;
-	char *path = stat_path(fileName, app->dir_path);
-	if (app->is_dir)
-		lstat(path, &sb);
+    char *fullname = NULL;
+	if (lfa->is_dir) {
+        fullname = stat_path(fileName, lfa->dir_path);
+    }
 	else
-		lstat(app->dir_path, &sb);
-    t_attr *attr_array = malloc(sizeof(t_attr));
-    attr_array->inode = mx_itoa(sb.st_ino);
-	if (app->command[kilobytes] == off) {
-    	attr_array->blocks = sb.st_blocks;
+	    fullname = mx_strdup(fileName);
+	lstat(fullname, &sb);
+    t_attr *attr_struct = malloc(sizeof(t_attr));
+    attr_struct->inode = mx_itoa(sb.st_ino);
+	if (lfa->command[kilobytes] == off) {
+    	attr_struct->blocks = sb.st_blocks;
 	}
-	else if (app->command[kilobytes] == on)
-		attr_array->blocks = sb.st_blocks % 2 == 0 ? sb.st_blocks / 2 
+	else if (lfa->command[kilobytes] == on)
+		attr_struct->blocks = sb.st_blocks % 2 == 0 ? sb.st_blocks / 2 
 													: sb.st_blocks / 2 + 1;
-    attr_array->chmod = eleven_chars_code(sb, path); // -rw-r--r--@ 
-    attr_array->links = sb.st_nlink; // 1
-	if (app->command[numerically] == off) {
-		attr_array->user = get_user(sb.st_uid); // psymonov
-		attr_array->group = get_group(sb.st_gid); // 4242
+    attr_struct->chmod = eleven_chars_code(sb, fullname); // -rw-r--r--@
+    attr_struct->links = sb.st_nlink; // 1
+	if (lfa->command[numerically] == off) {
+		attr_struct->user = get_user(sb.st_uid); // psymonov
+		attr_struct->group = get_group(sb.st_gid); // 4242
 	}
-	else if (app->command[numerically] == on){
-		attr_array->user = mx_itoa(sb.st_uid);
-		attr_array->group = mx_itoa(sb.st_gid);
+	else if (lfa->command[numerically] == on){
+		attr_struct->user = mx_itoa(sb.st_uid);
+		attr_struct->group = mx_itoa(sb.st_gid);
 	}
-    attr_array->file_size = sb.st_size; // 623
-    attr_array->a_time = sb.st_atime; //sb.st_atimespec;
-    attr_array->m_time = sb.st_mtime;
-    attr_array->c_time = sb.st_ctime;
-    attr_array->file_name = get_name(sb, fileName); // Makefile
-	mx_strdel(&path);
-    return attr_array;
+    attr_struct->file_size = sb.st_size; // 623
+    attr_struct->a_time = sb.st_atime; //sb.st_atimespec;
+    attr_struct->m_time = sb.st_mtime;
+    attr_struct->c_time = sb.st_ctime;
+    attr_struct->file_name = get_name(sb, fileName); // Makefile
+    attr_struct->original_fn = mx_strdup(fileName);
+	mx_strdel(&fullname);
+    return attr_struct;
 }
 

@@ -27,6 +27,7 @@ typedef struct s_attr {
     char *user;     // in heap
     char *group;    // in heap
     char *file_name;// -------? we do not know if in heap. Ask Poul
+    char *original_fn;
     blkcnt_t blocks;      /* blocks allocated for file */
     nlink_t links;        /* number or hard links to the file */
     off_t file_size;      /* file size, in bytes */
@@ -51,13 +52,6 @@ enum e_attr {
 #define KILOBYTE 1024
 #define MEGAOBYTE 1048576
 #define GIGABYTE 1073741824
-
-typedef struct {
-    t_list *list_attr;
-    t_list *raw_lines;
-    DIR *current_DIR;
-    char *dir_name;
-} t_CD;
 
 typedef enum {
     off,  // this is for colunms col_blocks, col_owner, col_author, col_group, col_user,
@@ -149,39 +143,65 @@ size, // number of flags
 } t_flag;
 
 typedef struct {
-    int *al; // attributs for aligning
-    int *flags;
-    int command[MAX_COMMANDS];
+    t_list *list_attr;
+    t_list *raw_lines;
+    //DIR *current_DIR;  // TODO: do not need
+    //char *dir_name;   // TODO: ----????
     char *dir_path;
     bool is_dir;
-    t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
+    int *command;
+    int *al; // pointer to aligning
+} t_lfa; // list of file_attr;
+
+typedef struct {
+    int *al; // attributs for aligning
+    int *flags;
+    bool is_any_flags;
+    int command[MAX_COMMANDS];
+    t_list *args_error;
+    t_list *args_files;
+    t_list *args_directories;
+    char *dir_path;  // TODO: delete later
+    bool is_dir;     // TODO: do not need
+    //t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
-t_App *new_App(void);
-void mx_make_command(t_App *app);
-void mx_reading(t_App *app);
-void mx_standart_view(t_list *list);
-void mx_non_standart(t_list *list);
-void mx_produce_list_attr(t_App *app);
-void mx_produce_attr(t_App *app);
-t_attr *mx_make_attr_array(char *fileName, t_App *app);
-void mx_apply_sort(t_App *app);
-void mx_apply_filters(t_App *app);
-void mx_apply_printmode(t_App *app);
-void mx_apply_format_time(t_list *row, t_list *cur, t_App *app);
-bool mx_is_swithed_off(int i, t_App *app);
-char *format_size(off_t size, t_App *app);
-
+//t_App *new_App(void);
+t_App *mx_new_app(void);
 void mx_clear_flags(int *flags);
 void mx_filter_flags(char *argv, int *fl);
-void mx_read_flags(char **s, int argc, int *fl, char **dir_path);
+void mx_read_flags(char **s, int argc, t_App *app);
+void mx_make_command(t_App *app);
+void mx_read_args(int argc, char *argv[], t_App *app);
+void mx_print_args_error(t_App *app);
+void mx_print_args_file(t_App *app);
+t_lfa *mx_new_lfa(t_App *app, char *current_dir);
+void mx_free_lfa(t_lfa *lfa);
+void mx_print_args_directories(t_App *app);
+
+
+void mx_do_one_directory(t_lfa *lfa);
+void mx_standart_view(t_list *list);
+void mx_non_standart(t_list *list);
+void mx_produce_list_attr(t_lfa *lfa);
+//void mx_produce_attr(t_App *app);
+t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa);
+void mx_apply(t_lfa *lfa);
+void mx_apply_without_printing(t_lfa *lfa);
+void mx_apply_sort(t_lfa *lfa);
+void mx_apply_filters(t_lfa *lfa);
+void mx_apply_printmode(t_lfa *lfa);
+void mx_apply_format_time(t_list *row, t_list *cur, t_lfa *lfa);
+bool mx_is_switched_off(int i, t_lfa *lfa);
+char *format_size(off_t size, t_lfa *lfa);
+
 char *get_dir_path();
 
 // print
-void mx_header_dir(t_App *app);
-void mx_header_total(t_App *app);
-void mx_print_lines(t_App *app);
-t_list *mx_printable_lines(t_list *head, int *a, t_App *app);
+void mx_header_dir(t_lfa *lfa);
+void mx_header_total(t_lfa *lfa);
+void mx_print_lines(t_lfa *lfa);
+t_list *mx_printable_lines(t_list *head, int *a, t_lfa *lfa);
 void mx_check_eror_flag(char *s);
 
 // free functions

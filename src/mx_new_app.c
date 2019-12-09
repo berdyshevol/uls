@@ -12,12 +12,15 @@ static void inicialization_app_al(t_App *app) {
     app->al[at_file_name] = 0; // file_name
 }// al -> align(выравнивать)
 
-t_App *new_App(void) {
+t_App *mx_new_app(void) {
     t_App *app = malloc(sizeof(t_App));
     
     app->al = malloc(at_MAX * sizeof(int));
     app->flags = malloc(size * sizeof(int));
-    app->cur_dir = NULL;
+    app->is_any_flags = false;
+    app->args_error = NULL;
+    app->args_files = NULL;
+    app->args_directories = NULL;
     mx_clear_flags(app->flags);
     inicialization_app_al(app);
     return app;

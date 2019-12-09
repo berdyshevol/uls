@@ -1,31 +1,31 @@
 #include "uls.h"
 
-static void print_total(t_App *app);
-static void print_dir_name(t_App *app);
+static void print_total(t_lfa *lfa);
+static void print_dir_name(t_lfa *lfa);
 
-void mx_header_dir(t_App *app) {
-    switch (app->command[header_dir]) {
+void mx_header_dir(t_lfa *lfa) {
+    switch (lfa->command[header_dir]) {
         case on:
-            print_dir_name(app);
+            print_dir_name(lfa);
             break;
         case off:
             break;
     }
 }
 
-void mx_header_total(t_App *app) {
-    switch (app->command[header_total]) {
+void mx_header_total(t_lfa *lfa) {
+    switch (lfa->command[header_total]) {
         case on:
-                print_total(app);
+                print_total(lfa);
                 break;
         case off:
             break;
     }
 }
 
-static void print_total(t_App *app) {
+static void print_total(t_lfa *lfa) {
     unsigned long total = 0;
-    for (t_list *cur = app->cur_dir->list_attr; cur != NULL; cur = cur->next) {
+    for (t_list *cur = lfa->list_attr; cur != NULL; cur = cur->next) {
         total += ((t_attr *)(cur->data))->blocks;
     }
     mx_printstr("total ");
@@ -33,8 +33,9 @@ static void print_total(t_App *app) {
     mx_printstr("\n");
 }
 
-static void print_dir_name(t_App *app) {
-    mx_printstr(app->dir_path);
+static void print_dir_name(t_lfa *lfa) {
     mx_printstr("\n");
+    mx_printstr(lfa->dir_path);
+    mx_printstr(":\n");
 }
 
