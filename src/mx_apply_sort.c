@@ -15,6 +15,7 @@ void mx_apply_sort(t_App *app) {
 }
 
 static void apply_sort(t_App *app) {
+    mx_sort_list(app->cur_dir->list_attr, mx_cmp_name);
     switch (app->command[csort]) {
         case sort_size:
             mx_sort_list(app->cur_dir->list_attr, mx_cmp_size);
@@ -32,6 +33,7 @@ static void apply_sort(t_App *app) {
 }
 
 static void apply_sort_r(t_App *app) {
+    mx_sort_list(app->cur_dir->list_attr, mx_cmp_name_r);
     switch (app->command[csort]) {
         case sort_size:
             mx_sort_list(app->cur_dir->list_attr, mx_cmp_size_r);

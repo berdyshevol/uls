@@ -26,7 +26,8 @@ SRC = main.c \
 	mx_free.c \
 	mx_error_flag.c \
 	mx_apply_header.c \
-	mx_format_size.c
+	mx_format_size.c \
+	mx_byte_format.c \
 
 OBJ = $(SRC:.c=.o)
 

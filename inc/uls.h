@@ -20,6 +20,16 @@
 
 #include "libmx.h"
 
+typedef struct s_byte {
+    off_t b;        // 1024b
+    off_t half_b;   // 512b
+    off_t max_b;    // 999
+    off_t sto_b;    // 100
+    off_t ninety_b; // 90
+    off_t fifty_b;  // 50
+} t_byte;
+
+
 // см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
 typedef struct s_attr {
     char *inode;    // in heap // inode For each file, print the file's file serial number (inode number). -i flag
@@ -183,6 +193,7 @@ void mx_header_total(t_App *app);
 void mx_print_lines(t_App *app);
 t_list *mx_printable_lines(t_list *head, int *a, t_App *app);
 void mx_check_eror_flag(char *s);
+char *mx_byte_format(off_t size, t_byte *num);
 
 // free functions
 void mx_free_node_data(t_list *node);
