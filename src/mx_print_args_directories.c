@@ -8,7 +8,7 @@ void mx_print_args_directories(t_App *app) {
     for (t_list *cur = app->args_directories; cur != NULL; cur = cur->next) {
         mx_push_back(&(lfa->list_attr),
                      (void *)mx_make_attr_struct((char *)(cur->data), lfa));
-    }
+    } 
     // apply sorting by name
     lfa->command[csort] = sort_name;
     mx_apply_without_printing(lfa);

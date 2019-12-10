@@ -62,11 +62,11 @@ char *get_name(struct stat sb,  char *file) {
 		mx_strdel(&tmp);
 	}
 	else if((S_IXUSR & sb.st_mode) || (S_IXGRP & sb.st_mode) || (S_IXOTH & sb.st_mode))
-		res = mx_strdup(file); //printf("\033[31m%s\033[37m\n", file);
+		res = mx_strdup(file); //printf("\033[31m%s\033[37m\n", file);  
 	else if(S_ISFIFO(sb.st_mode))
-		res = mx_strdup(file); //printf("\033[33m%s\033[37m\n", file);
+		res = mx_strdup(file); //printf("\033[33m%s\033[37m\n", file);  TODO: здесь везде одно и тоже
 	else 
-		res = mx_strdup(file); //printf("%s\n", file);
+		res = mx_strdup(file); //printf("%s\n", file);  TODO: станный схожий код
 	return res;
 }
 
@@ -78,11 +78,11 @@ static char *stat_path(char *fileName, char *dirName) {
 
     if (dirName[len - 1] != '/') {
         tmp = mx_strjoin(dirName, "/");
-        res = mx_strjoin(tmp, fileName);
+        res = mx_strjoin(tmp, fileName);     // TODO: ---free(tmp)
     }
     else 
         res = mx_strjoin(dirName, fileName);
-    mx_strdel(&tmp);
+    mx_strdel(&tmp);							// TODO: -----here delete
     return res;
 }
 
