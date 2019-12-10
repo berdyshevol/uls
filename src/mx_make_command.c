@@ -78,6 +78,11 @@ static void check_other_flags(t_App *app) {
     }
     if (app->flags[h])
         app->command[human] = on;
+    if (app->flags[R]) {
+        app->command[recursion] = on;
+        app->command[header_dir] = on;
+        app->command[header_total] = on;
+    }
 }
 
 static void check_sort(t_App *app) {

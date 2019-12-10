@@ -16,7 +16,6 @@ void mx_print_args_directories(t_App *app) {
     // print contents of directories
     for (t_list *cur = lfa_dirasfile->list_attr; cur != NULL; cur = cur->next) {
         t_lfa *lfa = mx_new_lfa(app, ((t_attr *)(cur->data))->original_fn);
-        lfa->command[header_dir] = on;
         lfa->is_dir = true;
         mx_do_one_directory(lfa);     // HERE RECURSION
         mx_free_lfa(lfa);

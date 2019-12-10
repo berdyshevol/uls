@@ -11,6 +11,6 @@ int main(int argc, char **argv) {
     mx_print_args_directories(app);
     //mx_reading(app);
 
-    //system("leaks -q uls");
+    system("leaks -q uls");
     return 0;
 }

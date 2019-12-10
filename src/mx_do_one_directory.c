@@ -11,7 +11,14 @@
 // }
  
 void mx_do_one_directory(t_lfa *lfa) {
-    mx_produce_list_attr(lfa);             //    here should be recursion !!!!!!!!!!!!!!!!
-    mx_apply(lfa);
+    switch (lfa->command[recursion]) {
+        case on:
+
+            break;
+        case off:
+            mx_produce_list_attr(lfa);
+            mx_apply(lfa);
+            break;
+    }
 }
 

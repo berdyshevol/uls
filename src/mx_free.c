@@ -48,5 +48,6 @@ void mx_free_raw_lines(t_list **list) {
 void mx_free_lfa(t_lfa *lfa) {
     mx_free_list_attr(&(lfa->list_attr));
     mx_free_raw_lines(&(lfa->list_attr));
+    free(lfa->command);
     free(lfa->dir_path);
 }
