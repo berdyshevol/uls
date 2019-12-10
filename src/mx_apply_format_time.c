@@ -29,7 +29,8 @@ static bool check_half_year(time_t t) {
 
 static char *shor_format(time_t t) {
     char *res = NULL;
-    char *str = mx_strdup((ctime(&(t))) + 4);
+    char *str = mx_strdup( \
+        (ctime(&(t))) + 4);
     char *tmp = NULL;
 
     str[mx_strlen(str) - 1] = '\0';
@@ -51,7 +52,8 @@ void mx_apply_format_time(t_list *row, t_list *cur, t_App *app) {
 
     switch (app->command[time_format]) {
         case format_time_full:
-            s = mx_strdup((ctime(&(t))) + 4); //возможно тут есть лик
+            s = mx_strdup( \
+            (ctime(&(t))) + 4); //возможно тут есть лик
             s[mx_strlen(s) - 1] = '\0';
             break;
         case format_time_short:

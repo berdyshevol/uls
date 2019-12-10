@@ -25,9 +25,9 @@ void mx_header_total(t_App *app) {
 
 static void print_total(t_App *app) {
     unsigned long total = 0;
-    for (t_list *cur = app->cur_dir->list_attr; cur != NULL; cur = cur->next) {
+
+    for (t_list *cur = app->cur_dir->list_attr; cur != NULL; cur = cur->next)
         total += ((t_attr *)(cur->data))->blocks;
-    }
     mx_printstr("Total: ");
     mx_printint(total);
     mx_printstr("\n");
@@ -37,4 +37,3 @@ static void print_dir_name(t_App *app) {
     mx_printstr(app->dir_path);
     mx_printstr("\n");
 }
-

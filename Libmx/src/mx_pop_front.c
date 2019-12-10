@@ -1,9 +1,9 @@
-//
-// Created by Oleg on 2019-10-24.
-//
 #include "libmx.h"
 
 void mx_pop_front(t_list **head) {
+    t_list *temp = NULL;
+    t_list *tmp = NULL;
+
     if (*head != NULL || head != NULL) {
         if ((*head)->next == NULL) {
             (*head)->data = NULL;
@@ -11,8 +11,8 @@ void mx_pop_front(t_list **head) {
             *head = NULL;
         }
         else {
-            t_list *temp = *head, *tmp = temp->next;
-
+            temp = *head;
+            tmp = temp->next;
             temp->data = NULL;
             free(temp);
             temp = NULL;
