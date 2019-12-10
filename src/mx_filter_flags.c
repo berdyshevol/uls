@@ -21,8 +21,8 @@ void mx_filter_flags(char *argv, int *fl) {
 }
 
 static void filter_one(char *s, int *fl) {
-	for (; *s; s++)
-		switch (*s)	{
+    for (; *s; s++)
+        switch (*s) {
             case 'f':
                 fl[f] = 1;
                 break;
@@ -42,8 +42,8 @@ static void filter_one(char *s, int *fl) {
 }
 
 static void filter_two(char *s, int *fl) {
-	for (; *s; s++)
-		switch (*s)	{
+    for (; *s; s++)
+        switch (*s)	{
             case 'B':
                 fl[B] = 1;
                 break;
@@ -63,8 +63,8 @@ static void filter_two(char *s, int *fl) {
 }
 
 static void filter_three(char *s, int *fl) {
-	for (; *s; s++)
-		switch (*s)	{
+    for (; *s; s++)
+        switch (*s) {
             case 'T':
                 fl[T] = 1;
                 break;
@@ -85,7 +85,7 @@ static void filter_three(char *s, int *fl) {
 
 static void filter_four(char *s, int *fl) {
     for (; *s; s++)
-		switch (*s)	{
+        switch (*s) {
             case 'p':
                 fl[p] = 1;
                 break;

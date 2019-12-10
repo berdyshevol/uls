@@ -19,10 +19,10 @@ static void apply_printmode_flag_l(t_App *app) {
         mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->user));
         mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->group));
         mx_push_back(&row,
-                     format_size(((t_attr *)(cur->data))->file_size, app));
+                    format_size(((t_attr *)(cur->data))->file_size, app));
         mx_apply_format_time(row, cur, app);
         mx_push_back(&row,
-                     (void *)mx_strdup(((t_attr *)(cur->data))->file_name));
+                    (void *)mx_strdup(((t_attr *)(cur->data))->file_name));
         mx_push_back(&(app->cur_dir->raw_lines), (void *)row);
     }
 }
@@ -49,4 +49,3 @@ void mx_apply_printmode(t_App *app) {
             break;
     }
 }
-
