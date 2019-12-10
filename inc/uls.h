@@ -28,12 +28,14 @@ typedef struct s_attr {
     char *group;    // in heap
     char *file_name;// -------? we do not know if in heap. Ask Poul
     char *original_fn;
+    char *fullname; // with path
     blkcnt_t blocks;      /* blocks allocated for file */
     nlink_t links;        /* number or hard links to the file */
     off_t file_size;      /* file size, in bytes */
     time_t a_time;        /* [XSI] Time of last access */
     time_t m_time;
     time_t c_time;
+    bool is_dir;
 } t_attr;
 
 enum e_attr {
@@ -180,11 +182,13 @@ void mx_free_lfa(t_lfa *lfa);
 void mx_print_args_directories(t_App *app);
 
 
-void mx_do_one_directory(t_lfa *lfa);
+//void mx_print_one_directory(t_lfa *lfa, t_App *app);
+void mx_print_one_directory(char *name, t_App *app);
 void mx_standart_view(t_list *list);
 void mx_non_standart(t_list *list);
-void mx_produce_list_attr(t_lfa *lfa);
-//void mx_produce_attr(t_App *app);
+//void mx_produce_list_attr(t_lfa *lfa);
+t_lfa *mx_produce_list_attr(char *dirname, t_App *app);
+////  void mx_produce_attr(t_App *app);
 t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa);
 void mx_apply(t_lfa *lfa);
 void mx_apply_without_printing(t_lfa *lfa);
