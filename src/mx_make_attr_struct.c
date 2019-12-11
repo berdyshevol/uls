@@ -76,27 +76,28 @@ static char *stat_path(char *fileName, char *dirName) {
     char *tmp = NULL;
 	char *res = NULL;
 
-    if (mx_strcmp(fileName, "/") == 0) {
-        res = mx_strdup("/");
+    if (mx_strcmp(fileName, "/") == 0 || mx_strcmp(dirName, "") == 0) {
+        res = mx_strdup(fileName);
     }
 	else if (dirName[len - 1] != '/') {
         tmp = mx_strjoin(dirName, "/");
-        res = mx_strjoin(tmp, fileName);     // TODO: ---free(tmp)
+        res = mx_strjoin(tmp, fileName);
+        mx_strdel(&tmp);
     }
     else 
         res = mx_strjoin(dirName, fileName);
-    mx_strdel(&tmp);							// TODO: -----here delete
+    //mx_strdel(&tmp);							// TODO: -----here delete
     return res;
 }
 
 t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
     struct stat sb;
     char *fullname = NULL;
-	if (lfa->is_dir) {
-        fullname = stat_path(fileName, lfa->dir_path);
-    }
-	else
-	    fullname = mx_strdup(fileName);
+	//if (lfa->is_dir) {
+//	if (lfa->original_name)
+//        fullname = mx_strdup(fileName);
+//	else
+    fullname = stat_path(fileName, lfa->dir_path);
 	lstat(fullname, &sb);
     t_attr *attr_struct = malloc(sizeof(t_attr));
     attr_struct->inode = mx_itoa(sb.st_ino);

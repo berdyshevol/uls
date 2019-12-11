@@ -163,8 +163,8 @@ typedef struct {
     t_list *args_error;
     t_list *args_files;
     t_list *args_directories;
-    char *dir_path;  // TODO: delete later
-    bool is_dir;     // TODO: do not need
+    bool currentdir;
+    //char *dir_path;  // TODO: delete later
     //t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
 } t_App;
 
@@ -212,7 +212,7 @@ t_list *mx_printable_lines(t_list *head, int *a, t_lfa *lfa);
 void mx_check_eror_flag(char *s);
 
 // free functions
-void mx_free_node_data(t_list *node);
+void mx_free_node(t_list **node);
 
 
 /* comparators for sorting commamd*/
@@ -224,6 +224,10 @@ bool mx_cmp_size_r(void *data1, void *data2);
 bool mx_cmp_c_time_r(void *data1, void *data2);
 bool mx_cmp_name_r(void *data1, void *data2);
 bool mx_cmp_m_time_r(void *data1, void *data2);
+
+// utils
+bool mx_is_dot_dotdot(char *name);
+t_attr *mx_getstruct(t_list *node);
 
 //helping function   - to be deleted
 void print_raw_lines(t_list *head);
