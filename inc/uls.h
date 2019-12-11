@@ -201,6 +201,9 @@ char *format_size(off_t size, t_lfa *lfa);
 
 char *get_dir_path();
 
+// errors
+void mx_print_permission_denied(char *dirname);
+
 // print
 void mx_header_dir(t_lfa *lfa);
 void mx_header_total(t_lfa *lfa);

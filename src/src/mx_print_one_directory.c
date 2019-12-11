@@ -82,23 +82,23 @@ void mx_print_one_directory(char *dirname, t_App *app) {
             app->command[header_dir] = on;
             t_lfa *lfa_onlydirs = mx_new_lfa(app, dirname);  // make lfa of only dirs
             for (t_list *cur = lfa->list_attr; cur != NULL; cur = cur->next) {
-                // t_attr *t = (t_attr *)(cur->data);
+                t_attr *t = (t_attr *)(cur->data);
                 if (((t_attr *)(cur->data))->is_dir) {
                     if (is_dot_or_dotdot(getstruct(cur)->fullname)) {
                         continue;
                     }
-                    // char *origin_name = ((t_attr *)(cur->data))->original_fn;
-                    // char *full_name = ((t_attr *)(cur->data))->fullname;
-                    // char *file_name = ((t_attr *)(cur->data))->file_name;
+                    char *origin_name = ((t_attr *)(cur->data))->original_fn;
+                    char *full_name = ((t_attr *)(cur->data))->fullname;
+                    char *file_name = ((t_attr *)(cur->data))->file_name;
                     mx_push_back(&(lfa_onlydirs->list_attr), cur->data);
                 }
             }
             //walk_trough_directory(lfa_onlydirs, app);
             mx_apply_without_printing(lfa_onlydirs);
             for (t_list *cur = lfa_onlydirs->list_attr; cur != NULL; cur = cur->next) {
-                // char *origin_name = ((t_attr *)(cur->data))->original_fn;
-                // char *full_name = ((t_attr *)(cur->data))->fullname;
-                // char *file_name = ((t_attr *)(cur->data))->file_name;
+                char *origin_name = ((t_attr *)(cur->data))->original_fn;
+                char *full_name = ((t_attr *)(cur->data))->fullname;
+                char *file_name = ((t_attr *)(cur->data))->file_name;
                 mx_print_one_directory(((t_attr *)(cur->data))->fullname, app); // TODO: рекурсия идет в глубь и не возвращается
             }
             //mx_free_lfa(lfa_onlydirs);

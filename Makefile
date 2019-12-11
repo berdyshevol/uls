@@ -10,7 +10,7 @@ SRC = main.c \
 	mx_print_args_error.c \
 	mx_print_args_file.c \
 	mx_print_args_directories.c \
-	mx_print_one_directory.c \
+	mx_do_one_directory.c \
 	mx_new_lfa.c \
 	mx_produce_list_attr.c \
 	mx_make_attr_struct.c \
@@ -32,7 +32,8 @@ SRC = main.c \
 	mx_free.c \
 	mx_error_flag.c \
 	mx_apply_header.c \
-	mx_format_size.c
+	mx_format_size.c \
+	mx_error_message.c 
 
 OBJ = $(SRC:.c=.o)
 
