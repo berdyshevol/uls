@@ -17,13 +17,13 @@ int main(int argc, char **argv) {
     free_list(app->args_files);
     free_list(app->args_directories);
 
-    system("leaks -q Proj1");
+    //system("leaks -q Proj1");
     return 0;
 }
 
 static void free_list(t_list *head) {
     while (head != NULL) {
-        if (head->data != NULL) free(head->data);
+        //if (head->data != NULL) free(head->data);
         mx_pop_back(&head);
     }
 }

@@ -52,6 +52,7 @@ char *get_name(struct stat sb,  char *file) {
 	char link_read[255];
 	ssize_t bytes_read;
 	char *res = NULL, *tmp = NULL;
+
 	if(S_ISLNK(sb.st_mode)){
 		//printf("@\033[35m%s ", file);
 		//printf("\033[37m");
@@ -73,20 +74,20 @@ char *get_name(struct stat sb,  char *file) {
 
 static char *stat_path(char *fileName, char *dirName) {
     int len = mx_strlen(dirName);
-    char *tmp = NULL;
 	char *res = NULL;
 
     if (mx_strcmp(fileName, "/") == 0 || mx_strcmp(dirName, "") == 0) {
         res = mx_strdup(fileName);
     }
 	else if (dirName[len - 1] != '/') {
+        char *tmp = NULL;
         tmp = mx_strjoin(dirName, "/");
         res = mx_strjoin(tmp, fileName);
         mx_strdel(&tmp);
     }
     else 
         res = mx_strjoin(dirName, fileName);
-    //mx_strdel(&tmp);							// TODO: -----here delete
+
     return res;
 }
 
@@ -122,13 +123,13 @@ t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
     attr_struct->m_time = sb.st_mtime;
     attr_struct->c_time = sb.st_ctime;
     attr_struct->file_name = get_name(sb, fileName); // Makefile
-    attr_struct->original_fn = mx_strdup(fileName);
-    attr_struct->fullname = stat_path(fileName, lfa->dir_path);;
+    attr_struct->original_name = mx_strdup(fileName);
+    attr_struct->fullname = fullname;//stat_path(fileName, lfa->dir_path); mx_strdel(&fullname);
     if ((sb.st_mode & S_IFMT) == S_IFDIR)
         attr_struct->is_dir = true;
     else
         attr_struct->is_dir = false;
-	mx_strdel(&fullname);
+
     return attr_struct;
 }
 

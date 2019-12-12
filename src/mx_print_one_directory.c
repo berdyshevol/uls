@@ -54,50 +54,34 @@ void mx_print_one_directory(char *dirname, t_App *app) {
     switch (app->command[recursion]) {
         case on:
             lfa = mx_produce_list_attr(dirname, app);
-            if (lfa->list_attr == NULL) {
+            if (lfa->print_permission_denied) {
                 mx_print_permission_denied(dirname);
                 return;
             }
             mx_apply(lfa);
+
             // start recursion
             app->command[header_dir] = on;
-//            t_lfa *lfa_onlydirs = mx_new_lfa(app, dirname);  // make lfa of only dirs
-//            for (t_list *cur = lfa->list_attr; cur != NULL; cur = cur->next) {
-//                t_attr *t = (t_attr *)(cur->data);
-//                if (((t_attr *)(cur->data))->is_dir) {
-//                    if (mx_is_dot_dotdot(mx_getstruct(cur)->fullname)) {
-//                        continue;
-//                    }
-//                    char *origin_name = ((t_attr *)(cur->data))->original_fn;
-//                    char *full_name = ((t_attr *)(cur->data))->fullname;
-//                    char *file_name = ((t_attr *)(cur->data))->file_name;
-//                    mx_push_back(&(lfa_onlydirs->list_attr), cur->data);
-//                }
-//            }
-//            //walk_trough_directory(lfa_onlydirs, app);
-//            mx_apply_without_printing(lfa_onlydirs);
-//            for (t_list *cur = lfa_onlydirs->list_attr; cur != NULL; cur = cur->next) {
-//                char *origin_name = ((t_attr *)(cur->data))->original_fn;
-//                char *full_name = ((t_attr *)(cur->data))->fullname;
-//                char *file_name = ((t_attr *)(cur->data))->file_name;
-//                mx_print_one_directory(((t_attr *)(cur->data))->fullname, app); // TODO: рекурсия идет в глубь и не возвращается
-//            }
             for (t_list *cur = lfa->list_attr; cur != NULL; cur = cur->next) {
                 if (((t_attr *)(cur->data))->is_dir) {
-                    if (mx_is_dot_dotdot(mx_getstruct(cur)->fullname)) {
+                    char *fl = ((t_attr *)(cur->data))->original_name;
+                    if (mx_is_dot_dotdot(fl)) {
                         continue;
                     }
                     mx_print_one_directory(((t_attr *)(cur->data))->fullname, app);
                 }
             }
-            //mx_free_lfa(lfa_onlydirs);
             break;
+
         case off:
             lfa = mx_produce_list_attr(dirname, app);
+            if (lfa->print_permission_denied) {
+                mx_print_permission_denied(dirname);
+                return;
+            }
             mx_apply(lfa);
             break;
     }
     mx_free_lfa(lfa);
-    //system("leaks -q Proj1");
 }
 

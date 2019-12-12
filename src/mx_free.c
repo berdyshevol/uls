@@ -1,7 +1,7 @@
 #include "uls.h"
 
-void mx_free_node(t_list **node) {
-    if (node != NULL || (*node)->data != NULL) {
+void mx_free_node_data(t_list *node) {
+    if (node != NULL || node->data != NULL) {
 //        mx_strdel(&(((t_attr *) (node->data))->inode));  //if node != NULL or if node->data != NULL
 //        mx_strdel(&(((t_attr *) (node->data))->chmod));
 //        mx_strdel(&(((t_attr *) (node->data))->user));
@@ -9,15 +9,15 @@ void mx_free_node(t_list **node) {
 //        mx_strdel(&(((t_attr *) (node->data))->file_name));
 //        mx_strdel(&(((t_attr *) (node->data))->original_fn)); // plus fullname
 //        mx_strdel(&(((t_attr *) (node->data))->fullname));
-        free((((t_attr *)((*node)->data))->inode));  //if node != NULL or if node->data != NULL
-        free((((t_attr *)((*node)->data))->chmod));
-        free((((t_attr *)((*node)->data))->user));
-        free((((t_attr *)((*node)->data))->group));
-        free((((t_attr *)((*node)->data))->file_name));
-        free((((t_attr *)((*node)->data))->original_fn)); // plus fullname
-        free((((t_attr *)((*node)->data))->fullname));
+        free((((t_attr *)(node->data))->inode));  //if node != NULL or if node->data != NULL
+        free((((t_attr *)(node->data))->chmod));
+        free((((t_attr *)(node->data))->user));
+        free((((t_attr *)(node->data))->group));
+        free((((t_attr *)(node->data))->file_name));
+        free((((t_attr *)(node->data))->original_name)); // plus fullname
+        free((((t_attr *)(node->data))->fullname));
 
-        free((*node)->data);
+        free(node->data);
 //        free(*node);
 //        (*node)->data = NULL;
     }
@@ -28,7 +28,7 @@ void mx_free_list_attr(t_list **list) {
     while (next_node != NULL) {
         t_list *cur = next_node;
         next_node = next_node->next;
-        mx_free_node(&cur);
+        mx_free_node_data(cur);
         free(cur);
     }
     *list = NULL;
@@ -36,7 +36,7 @@ void mx_free_list_attr(t_list **list) {
 //    if (list == NULL) return;
 //    while (*list) {
 //        if ((*list)->data != NULL) {
-//            mx_free_node(list);
+//            mx_free_node_data(list);
 //        }
 //        //mx_pop_front(list);
 //    }

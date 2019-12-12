@@ -27,7 +27,7 @@ typedef struct s_attr {
     char *user;     // in heap
     char *group;    // in heap
     char *file_name;// -------? we do not know if in heap. Ask Poul
-    char *original_fn;
+    char *original_name;
     char *fullname; // with path
     blkcnt_t blocks;      /* blocks allocated for file */
     nlink_t links;        /* number or hard links to the file */
@@ -153,6 +153,7 @@ typedef struct {
     bool is_dir;
     int *command;
     int *al; // pointer to aligning
+    bool print_permission_denied;
 } t_lfa; // list of file_attr;
 
 typedef struct {
@@ -193,7 +194,8 @@ t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa);
 void mx_apply(t_lfa *lfa);
 void mx_apply_without_printing(t_lfa *lfa);
 void mx_apply_sort(t_lfa *lfa);
-void mx_apply_filters(t_lfa *lfa);
+//void mx_apply_filters(t_lfa *lfa);
+bool mx_apply_filters_ok(char *filename, t_lfa *lfa);
 void mx_apply_printmode(t_lfa *lfa);
 void mx_apply_format_time(t_list *row, t_list *cur, t_lfa *lfa);
 bool mx_is_switched_off(int i, t_lfa *lfa);
@@ -212,7 +214,7 @@ t_list *mx_printable_lines(t_list *head, int *a, t_lfa *lfa);
 void mx_check_eror_flag(char *s);
 
 // free functions
-void mx_free_node(t_list **node);
+void mx_free_node_data(t_list *node);
 
 
 /* comparators for sorting commamd*/
@@ -227,7 +229,7 @@ bool mx_cmp_m_time_r(void *data1, void *data2);
 
 // utils
 bool mx_is_dot_dotdot(char *name);
-t_attr *mx_getstruct(t_list *node);
+//t_attr *mx_getstruct(t_list *node);
 
 //helping function   - to be deleted
 void print_raw_lines(t_list *head);

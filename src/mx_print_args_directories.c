@@ -9,11 +9,11 @@ void mx_print_args_directories(t_App *app) {
         mx_push_back(&(lfa->list_attr),
                      (void *)mx_make_attr_struct((char *)(cur->data), lfa));
     } 
-    if (!app->currentdir)
+//    if (!app->currentdir)
         mx_apply_sort(lfa);
     // print contents of directories
     for (t_list *cur = lfa->list_attr; cur != NULL; cur = cur->next) {
-        mx_print_one_directory(((t_attr *)(cur->data))->original_fn, app);
+        mx_print_one_directory(((t_attr *)(cur->data))->original_name, app);
     }
     mx_free_lfa(lfa);
 }
