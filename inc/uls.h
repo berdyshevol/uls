@@ -145,13 +145,11 @@ size, // number of flags
 } t_flag;
 
 typedef struct {
-    t_list *list_attr;
-    t_list *raw_lines;
-    //DIR *current_DIR;  // TODO: do not need
-    //char *dir_name;   // TODO: ----????
-    char *dir_path;
+    t_list *list_attr;  // in heap
+    t_list *raw_lines;  // in heap
+    char *dir_path; // in heap
     bool is_dir;
-    int *command;
+    int *command;   // in heap
     int *al; // pointer to aligning
     bool print_permission_denied;
 } t_lfa; // list of file_attr;
@@ -179,7 +177,7 @@ void mx_read_args(int argc, char *argv[], t_App *app);
 void mx_print_args_error(t_App *app);
 void mx_print_args_file(t_App *app);
 t_lfa *mx_new_lfa(t_App *app, char *current_dir);
-void mx_free_lfa(t_lfa *lfa);
+void mx_free_lfa(t_lfa **lfa);
 void mx_print_args_directories(t_App *app);
 
 

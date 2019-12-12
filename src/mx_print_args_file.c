@@ -12,5 +12,5 @@ void mx_print_args_file(t_App *app) {
 			(void *)mx_make_attr_struct((char *)(cur->data), lfa));
     }
     mx_apply(lfa);
-    mx_free_lfa(lfa);
+    mx_free_lfa(&lfa);
 }

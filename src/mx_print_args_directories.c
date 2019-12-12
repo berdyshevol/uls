@@ -15,5 +15,5 @@ void mx_print_args_directories(t_App *app) {
     for (t_list *cur = lfa->list_attr; cur != NULL; cur = cur->next) {
         mx_print_one_directory(((t_attr *)(cur->data))->original_name, app);
     }
-    mx_free_lfa(lfa);
+    mx_free_lfa(&lfa);
 }

@@ -56,6 +56,7 @@ void mx_print_one_directory(char *dirname, t_App *app) {
             lfa = mx_produce_list_attr(dirname, app);
             if (lfa->print_permission_denied) {
                 mx_print_permission_denied(dirname);
+                mx_free_lfa(&lfa);
                 return;
             }
             mx_apply(lfa);
@@ -77,11 +78,12 @@ void mx_print_one_directory(char *dirname, t_App *app) {
             lfa = mx_produce_list_attr(dirname, app);
             if (lfa->print_permission_denied) {
                 mx_print_permission_denied(dirname);
+                mx_free_lfa(&lfa);
                 return;
             }
             mx_apply(lfa);
             break;
     }
-    mx_free_lfa(lfa);
+    mx_free_lfa(&lfa);
 }
 

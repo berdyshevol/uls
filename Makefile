@@ -33,7 +33,7 @@ SRC = main.c \
 	mx_error_flag.c \
 	mx_apply_header.c \
 	mx_format_size.c \
-	mx_error_message.c \
+	mx_error_message.c 
 
 OBJ = $(SRC:.c=.o)
 
@@ -53,9 +53,6 @@ install:
 uninstall: clean
 	@cd libmx && make -f Makefile uninstall
 	@rm -rf $(NAME)
-	rm *.o
-	rm *.c
-	rm *.h
 
 clean:
 	@cd libmx && make -f Makefile clean
@@ -64,8 +61,7 @@ clean:
 
 reinstall: uninstall install
 
-cl: 
-	rm *.h
+cl: clean
 	rm *.c
 	rm *.o
-	
+	rm *.h
