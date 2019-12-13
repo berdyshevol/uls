@@ -1,7 +1,10 @@
 #include "uls.h"
 
 bool mx_cmp_size_r(void *data1, void *data2) {
-    if (((t_attr *)data1)->file_size > ((t_attr *)data2)->file_size)
+    if (((t_attr *)data1)->file_size == ((t_attr *)data2)->file_size) {
+        return mx_cmp_name_r(data1, data2);
+    }
+    else if (((t_attr *)data1)->file_size > ((t_attr *)data2)->file_size)
         return true;
     else
         return false;
