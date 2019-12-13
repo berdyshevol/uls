@@ -21,7 +21,7 @@ t_App *mx_new_app(void) {
     app->args_error = NULL;
     app->args_files = NULL;
     app->args_directories = NULL;
-    app->currentdir = false;
+    //app->currentdir = false;
     mx_clear_flags(app->flags);
     inicialization_app_al(app);
     return app;

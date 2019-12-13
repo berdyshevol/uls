@@ -42,7 +42,7 @@ void mx_read_args(int argc, char *argv[], t_App *app) {
     }
     if (app->args_error == NULL 
         && app->args_files == NULL && app->args_directories == NULL) {
-        app->currentdir = true;
+        //app->currentdir = true;
         char *cur_dur_str = ".";
         mx_push_back(&(app->args_directories), cur_dur_str);
     }

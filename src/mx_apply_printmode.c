@@ -23,6 +23,8 @@ static void apply_printmode_flag_l(t_lfa *lfa) {
 
 void mx_apply_printmode(t_lfa *lfa) {
     if (lfa->list_attr == NULL) return;
+    static bool has_printed_anithing = false;
+    lfa->new_line_needed = has_printed_anithing;
     mx_header_dir(lfa);
     switch (lfa->command[cview]) {
         case view_long_format:
@@ -43,5 +45,6 @@ void mx_apply_printmode(t_lfa *lfa) {
             // TODO: сделать вывод в колонку
             break;
     }
+    has_printed_anithing = true;
 }
 

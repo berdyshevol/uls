@@ -152,7 +152,7 @@ typedef struct {
     int *command;   // in heap
     int *al; // pointer to aligning
     bool print_permission_denied;
-    bool first_dir_name;
+    bool new_line_needed;
 } t_lfa; // list of file_attr;
 
 typedef struct {
@@ -163,12 +163,10 @@ typedef struct {
     t_list *args_error;
     t_list *args_files;
     t_list *args_directories;
-    bool currentdir;
-    //char *dir_path;  // TODO: delete later
-    //t_CD *cur_dir; // будет с каждой новой дерикторией меняться здесь будут лики
+    //bool currentdir;
+
 } t_App;
 
-//t_App *new_App(void);
 t_App *mx_new_app(void);
 void mx_clear_flags(int *flags);
 void mx_filter_flags(char *argv, int *fl);
