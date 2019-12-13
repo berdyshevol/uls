@@ -22,14 +22,19 @@ static char *eleven_chars_code(struct stat sb, char *file) {
 			 S_ISLNK(sb.st_mode) ? 'l' : '-';
 	res[1] = (S_IRUSR & sb.st_mode) ? 'r' : '-';
 	res[2] = (S_IWUSR & sb.st_mode) ? 'w' : '-';
-	res[3] = (S_IXUSR & sb.st_mode) ? 'x' : '-';
+	res[3] = (S_ISUID & sb.st_mode)
+			? ((S_IXUSR & sb.st_mode) ? 's' : 'S')
+			: ((S_IXUSR & sb.st_mode) ? 'x' : '-');
 	res[4] = (S_IRGRP & sb.st_mode) ? 'r' : '-';
 	res[5] = (S_IWGRP & sb.st_mode) ? 'w' : '-';
-	res[6] = (S_IXGRP & sb.st_mode) ? 'x' : '-';
+	res[6] = (S_ISGID & sb.st_mode) 
+			? ((S_IXGRP & sb.st_mode) ? 's' : 'S')
+			: ((S_IXGRP & sb.st_mode) ? 'x' : '-');
 	res[7] = (S_IROTH & sb.st_mode) ? 'r' : '-';
 	res[8] = (S_IWOTH & sb.st_mode) ? 'w' : '-';
-	res[9] = (S_ISTXT & sb.st_mode) ? 't' : \
-			 (S_IXOTH & sb.st_mode) ? 'x' : '-';
+	res[9] = (S_ISVTX & sb.st_mode)
+			? ((S_ISTXT & sb.st_mode) ? 't' : 'T')
+			: (S_IXOTH & sb.st_mode) ? 'x' : '-';
 	res[10] = at_plus_space(file);
 	return res;
 }
@@ -48,45 +53,47 @@ char *get_group(gid_t gid) {
     	return mx_itoa(gid);
 }
 
-char *get_name(struct stat sb,  char *file) {
+char *get_name(struct stat sb,  char *file, char *path, t_lfa *app) {
 	char link_read[255];
 	ssize_t bytes_read;
 	char *res = NULL, *tmp = NULL;
 
-	if(S_ISLNK(sb.st_mode)){
+	if (S_ISLNK(sb.st_mode) && app->command[cview] == view_long_format) {
 		//printf("@\033[35m%s ", file);
 		//printf("\033[37m");
 		tmp = mx_strjoin(file, " -> ");
-	    bytes_read = readlink(file, link_read, 254);
+	    bytes_read = readlink(path, link_read, 254);
 		link_read[bytes_read] = '\0';
 		res = mx_strjoin(tmp, link_read);
 		mx_strdel(&tmp);
 	}
-	else if((S_IXUSR & sb.st_mode) || (S_IXGRP & sb.st_mode) || (S_IXOTH & sb.st_mode))
-		res = mx_strdup(file); //printf("\033[31m%s\033[37m\n", file);  
-	else if(S_ISFIFO(sb.st_mode))
-		res = mx_strdup(file); //printf("\033[33m%s\033[37m\n", file);  TODO: здесь везде одно и тоже
+	else if ((S_IXUSR & sb.st_mode) || (S_IXGRP & sb.st_mode)
+			|| (S_IXOTH & sb.st_mode))
+		res = mx_strdup(file); //printf("\033[31m%s\033[37m\n", file);
+	else if (S_ISFIFO(sb.st_mode))
+		res = mx_strdup(file); //printf("\033[33m%s\033[37m\n", file);
 	else 
-		res = mx_strdup(file); //printf("%s\n", file);  TODO: станный схожий код
+		res = mx_strdup(file); //printf("%s\n", file);
 	return res;
 }
 
 
 static char *stat_path(char *fileName, char *dirName) {
-    int len = mx_strlen(dirName);
+    //int len = mx_strlen(dirName);
 	char *res = NULL;
 
     if (mx_strcmp(fileName, "/") == 0 || mx_strcmp(dirName, "") == 0) {
         res = mx_strdup(fileName);
     }
-	else if (dirName[len - 1] != '/') {
-        char *tmp = NULL;
+	//else if (dirName[len - 1] != '/') {
+    else {
+		char *tmp = NULL;
         tmp = mx_strjoin(dirName, "/");
         res = mx_strjoin(tmp, fileName);
         mx_strdel(&tmp);
     }
-    else 
-        res = mx_strjoin(dirName, fileName);
+    // else 
+    //     res = mx_strjoin(dirName, fileName);
 
     return res;
 }
@@ -94,10 +101,7 @@ static char *stat_path(char *fileName, char *dirName) {
 t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
     struct stat sb;
     char *fullname = NULL;
-	//if (lfa->is_dir) {
-//	if (lfa->original_name)
-//        fullname = mx_strdup(fileName);
-//	else
+
     fullname = stat_path(fileName, lfa->dir_path);
 	lstat(fullname, &sb);
     t_attr *attr_struct = malloc(sizeof(t_attr));
@@ -123,7 +127,7 @@ t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
     attr_struct->m_time = sb.st_mtime;
     attr_struct->c_time =  sb.st_ctime;
     attr_struct->b_time = sb.st_birthtimespec.tv_sec;
-    attr_struct->file_name = get_name(sb, fileName); // Makefile
+    attr_struct->file_name = get_name(sb, fileName, fullname, lfa); // Makefile
     attr_struct->original_name = mx_strdup(fileName);
     attr_struct->fullname = fullname;//stat_path(fileName, lfa->dir_path); mx_strdel(&fullname);
     if ((sb.st_mode & S_IFMT) == S_IFDIR)

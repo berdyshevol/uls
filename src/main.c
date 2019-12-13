@@ -19,7 +19,6 @@ int main(int argc, char **argv) {
     free(app->al);
     free(app->flags);
     free(app);
-    system("leaks -q Proj1");
     return 0;
 }
 

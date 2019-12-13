@@ -27,7 +27,8 @@ SRC = main.c \
 	mx_printable_lines.c \
 	mx_read_flags.c \
 	mx_make_command.c \
-	mx_standart_view.c \
+	mx_std_and_pipe.c \
+	mx_print_std_names.c \
 	mx_filter_out_col.c \
 	mx_free.c \
 	mx_error_flag.c \
@@ -62,6 +63,6 @@ clean:
 reinstall: uninstall install
 
 cl: clean
-	rm *.c
-	rm *.o
-	rm *.h
+	@rm *.c
+	@rm *.o
+	@rm *.h

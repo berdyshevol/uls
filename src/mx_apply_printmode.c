@@ -22,10 +22,12 @@ static void apply_printmode_flag_l(t_lfa *lfa) {
 }
 
 void mx_apply_printmode(t_lfa *lfa) {
-    if (lfa->list_attr == NULL) return;
     static bool has_printed_anithing = false;
     lfa->new_line_needed = has_printed_anithing;
     mx_header_dir(lfa);
+    if (lfa->list_attr == NULL)
+        return;
+
     switch (lfa->command[cview]) {
         case view_long_format:
             apply_printmode_flag_l(lfa);
@@ -33,10 +35,10 @@ void mx_apply_printmode(t_lfa *lfa) {
             mx_print_lines(lfa);
             break;
         case view_one_per_line:
-            mx_non_standart(lfa->list_attr); // TODO: доделать вывод. Сейчас -G
+            mx_std_and_pipe(lfa);
             break;
         case view_many_per_line: 
-            mx_standart_view(lfa->list_attr);
+            mx_std_and_pipe(lfa);
             break;
         case view_horizontal:
             // TODO: сделать вывод в колонку

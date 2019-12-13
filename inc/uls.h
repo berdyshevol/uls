@@ -171,6 +171,15 @@ typedef struct {
 
 } t_App;
 
+// Struct for standart output & pipe
+typedef struct {
+    int maxStr;
+    int rows;
+    int cols;
+    int listSize;
+    int *aligned;
+} t_stdinfo;
+
 t_App *mx_new_app(void);
 void mx_clear_flags(int *flags);
 void mx_filter_flags(char *argv, int *fl);
@@ -186,8 +195,12 @@ void mx_print_args_directories(t_App *app);
 
 //void mx_print_one_directory(t_lfa *lfa, t_App *app);
 void mx_print_one_directory(char *name, t_App *app);
-void mx_standart_view(t_list *list);
-void mx_non_standart(t_list *list);
+
+// Standart view & pipe
+void mx_std_and_pipe(t_lfa *app);
+void print_names(char **names, t_stdinfo *info);
+void terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app);
+
 //void mx_produce_list_attr(t_lfa *lfa);
 t_lfa *mx_produce_list_attr(char *dirname, t_App *app);
 ////  void mx_produce_attr(t_App *app);

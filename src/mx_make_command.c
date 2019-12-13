@@ -7,7 +7,8 @@ static void check_sort(t_App *app);
 
 void mx_make_command(t_App *app) {
     default_settings(app);
-    // TODO: добавить isatty и изменить app->command[cview]
+    if (!(isatty(1)) && !(app->flags[C])) 
+        app->command[cview] = view_one_per_line;
     if (app->flags[R]) {
         app->command[recursion] = on;
         app->command[header_dir] = on;
@@ -103,5 +104,7 @@ static void check_sort(t_App *app) {
     }
     if (app->flags[k])
         app->command[kilobytes] = on;
+    if (app->flags[one])
+        app->command[cview] = view_one_per_line;
 }
 
