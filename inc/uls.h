@@ -162,12 +162,12 @@ typedef struct {
 typedef struct {
     int *al; // attributs for aligning
     int *flags;
-    bool is_any_flags;
+    int is_any_flags;
     int command[MAX_COMMANDS];
     t_list *args_error;
     t_list *args_files;
     t_list *args_directories;
-    //bool currentdir;
+    bool stop_flag;
 
 } t_App;
 
@@ -182,8 +182,7 @@ typedef struct {
 
 t_App *mx_new_app(void);
 void mx_clear_flags(int *flags);
-void mx_filter_flags(char *argv, int *fl);
-void mx_read_flags(char **s, int argc, t_App *app);
+void mx_read_flags(char *s, t_App *app);
 void mx_make_command(t_App *app);
 void mx_read_args(int argc, char *argv[], t_App *app);
 void mx_print_args_error(t_App *app);
@@ -191,7 +190,7 @@ void mx_print_args_file(t_App *app);
 t_lfa *mx_new_lfa(t_App *app, char *current_dir);
 void mx_free_lfa(t_lfa **lfa);
 void mx_print_args_directories(t_App *app);
-
+void mx_filter_flags(char *argv, int *fl);
 
 //void mx_print_one_directory(t_lfa *lfa, t_App *app);
 void mx_print_one_directory(char *name, t_App *app);

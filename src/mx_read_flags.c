@@ -5,43 +5,37 @@ static void hiden_files_and_R(char *s, int *fl);
 static void sort_flags(char *s, int *fl);
 static void sort_flags_2(char *s, int *fl);
  
-void mx_read_flags(char **s, int argc, t_App *app) {
-	int flag = 0;
-    if (argc > 1 && s[1][0] == '-') {
-        app->is_any_flags = true;
-        mx_check_eror_flag(&s[1][1]);
-		output_flags(s[1], app->flags);
+void mx_read_flags(char *s, t_App *app) {
+        mx_check_eror_flag(&s[1]);
+		output_flags(s, app->flags);
 		if (app->flags[m] == 1 && app->flags[C] == 1)
 			app->flags[C] = 0;
-		hiden_files_and_R(s[1], app->flags);
-		sort_flags(s[1], app->flags);
-		sort_flags_2(s[1], app->flags);
-		mx_filter_flags(s[1], app->flags);
-        if (argc == 3)
-            flag = 2;
-    }
-    // else if (argc == 2)
-    //     flag = 1;
-    // if (flag)
-    //     *dir_path = mx_strdup(s[flag]);
-    // else
-    //     *dir_path = mx_strdup("./");
+		hiden_files_and_R(&s[1], app->flags);
+		sort_flags(&s[1], app->flags);
+		sort_flags_2(&s[1], app->flags);
+		mx_filter_flags(&s[1], app->flags);
 }
 
-static void output_flags(char *s, int *fl) { // must be fist
+static void output_flags(char *s, int *fl) {
     for (; *s; s++)
         switch (*s) {
         case 'm':
-            mx_clear_flags(fl);
+            fl[C] = 0;
+            fl[l] = 0;
+            fl[one] = 0;
             fl[m] = 1;
             break;
         case '1':
-            mx_clear_flags(fl);
+            fl[C] = 0;
+            fl[l] = 0;
             fl[one] = 1;
+            fl[m] = 0;
             break;
         case 'l':
-            mx_clear_flags(fl);
+            fl[C] = 0;
             fl[l] = 1;
+            fl[one] = 0;
+            fl[m] = 0;
             break;
         case 'C':
             fl[C] = 1;
