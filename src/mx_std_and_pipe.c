@@ -1,5 +1,8 @@
 #include "uls.h"
 
+void mx_free_list_strings(t_list *list);
+void mx_free_raw_lines(t_list **list);
+
 static t_stdinfo *create_info_struct(t_list *list) {
     t_stdinfo *info = (t_stdinfo *) malloc(sizeof(t_stdinfo));
     info->aligned = (int *) malloc(sizeof(int) * 4);
@@ -59,5 +62,10 @@ void mx_std_and_pipe(t_lfa *app) {
         else
             mx_non_standart(lines);
     }
-    mx_del_strarr(&names);
+    mx_free_list_strings(lines);
+    mx_free_raw_lines(&some);
+    free(info->aligned);
+    info->aligned = NULL;
+    free(info);
+    info = NULL;
 }

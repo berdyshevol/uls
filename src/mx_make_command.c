@@ -40,7 +40,8 @@ static void time_and_hiden_files(t_App *app) {
     if (app->flags[R]) {
         app->command[recursion] = on;
         app->command[header_dir] = off;
-        app->command[header_total] = on;
+        if (app->flags[l])
+            app->command[header_total] = on;
         app->command[cfilter] = filter_delhidden;
     }
     if (app->flags[a])
@@ -69,8 +70,10 @@ static void time_and_hiden_files(t_App *app) {
 }
 
 static void check_other_flags(t_App *app) {
-    if (app->flags[s])
+    if (app->flags[s]) {
         app->command[col_blocks] = on;
+        app->command[header_total] = on;
+    }
     if (app->flags[o]) {
         app->command[col_group] = off;
         app->flags[l] = on;

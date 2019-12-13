@@ -35,9 +35,11 @@ void mx_apply_printmode(t_lfa *lfa) {
             mx_print_lines(lfa);
             break;
         case view_one_per_line:
+            mx_header_total(lfa);
             mx_std_and_pipe(lfa);
             break;
-        case view_many_per_line: 
+        case view_many_per_line:
+            mx_header_total(lfa);
             mx_std_and_pipe(lfa);
             break;
         case view_horizontal:
