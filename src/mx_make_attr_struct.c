@@ -37,7 +37,9 @@ static char *eleven_chars_code(struct stat sb, char *file) {
 char *get_user(uid_t uid) {
     struct passwd *pws;
     pws = getpwuid(uid);
+    if (pws)
         return mx_strdup(pws->pw_name);
+    return mx_strdup("");
 }
 
 char *get_group(gid_t gid) {
@@ -46,6 +48,15 @@ char *get_group(gid_t gid) {
     	return mx_strdup(g->gr_name);
 	else
     	return mx_itoa(gid);
+}
+int32_t my_major(int32_t x) {
+    //return (x >> 24) & 0xff;
+    return ((int32_t)(((u_int32_t)(x) >> 24) & 0xff));
+}
+
+int32_t my_minor(int32_t x) {
+    //return x & 0xffffff;
+    return ((int32_t)((x) & 0xffffff));
 }
 
 char *get_name(struct stat sb,  char *file) {
@@ -130,7 +141,9 @@ t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
         attr_struct->is_dir = true;
     else
         attr_struct->is_dir = false;
-
+    attr_struct->st_dev = sb.st_dev;
+    attr_struct->major = my_major(sb.st_dev);  //TODO: нужно чтобы правильно ститала
+    attr_struct->minor = my_minor(sb.st_dev);   //TODO: нужно чтобы правильно ститала
     return attr_struct;
 }
 

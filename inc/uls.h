@@ -21,6 +21,8 @@
 #include "libmx.h"
 
 // см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
+typedef unsigned int devid;
+
 typedef struct s_attr {
     char *inode;    // in heap // inode For each file, print the file's file serial number (inode number). -i flag
     char *chmod;    // in heap
@@ -36,6 +38,10 @@ typedef struct s_attr {
     time_t m_time;
     time_t c_time;
     time_t b_time;
+    __uint16_t st_dev;
+    int32_t major;
+    int32_t minor;
+    bool c_or_b;
     bool is_dir;
 } t_attr;
 
