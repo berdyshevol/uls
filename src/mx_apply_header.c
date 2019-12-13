@@ -34,7 +34,10 @@ static void print_total(t_lfa *lfa) {
 }
 
 static void print_dir_name(t_lfa *lfa) {
-    mx_printstr("\n");
+    if (lfa->first_dir_name)
+        lfa->first_dir_name = false;
+    else
+        mx_printstr("\n");
     mx_printstr(lfa->dir_path);
     mx_printstr(":\n");
 }

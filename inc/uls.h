@@ -152,6 +152,7 @@ typedef struct {
     int *command;   // in heap
     int *al; // pointer to aligning
     bool print_permission_denied;
+    bool first_dir_name;
 } t_lfa; // list of file_attr;
 
 typedef struct {
