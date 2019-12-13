@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
     mx_print_args_error(app);
     mx_print_args_file(app);
     mx_print_args_directories(app);
-
+    // system("leaks -q uls");
     // free
     free_list(app->args_error);
     free_list(app->args_files);

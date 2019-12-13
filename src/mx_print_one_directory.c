@@ -12,7 +12,7 @@ void mx_print_one_directory(char *dirname, t_App *app) {
                 break;
             }
             mx_apply(lfa);
-
+            
             // start recursion
             app->command[header_dir] = on;
             for (t_list *cur = lfa->list_attr; cur != NULL; cur = cur->next) {

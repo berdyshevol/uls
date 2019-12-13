@@ -54,4 +54,5 @@ void print_names(char **names, t_stdinfo *info) {
         }
         mx_printchar('\n');
     }
+    mx_del_strarr(&names);
 }
