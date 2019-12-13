@@ -25,6 +25,12 @@ static void apply_sort(t_lfa *lfa) {
         case sort_mtime:
             mx_sort_list(lfa->list_attr, mx_cmp_m_time);
             break;
+        case sort_atime:
+            mx_sort_list(lfa->list_attr, mx_cmp_a_time);
+            break;
+        case sort_btime:
+            mx_sort_list(lfa->list_attr, mx_cmp_b_time);
+            break;
         case sort_name:
             mx_sort_list(lfa->list_attr, mx_cmp_name);
             break;
@@ -41,6 +47,12 @@ static void apply_sort_r(t_lfa *lfa) {
             break;
         case sort_mtime:
             mx_sort_list(lfa->list_attr, mx_cmp_m_time_r);
+            break;
+        case sort_atime:
+            mx_sort_list(lfa->list_attr, mx_cmp_a_time_r);
+            break;
+        case sort_btime:
+            mx_sort_list(lfa->list_attr, mx_cmp_b_time_r);
             break;
         case sort_name:
             mx_sort_list(lfa->list_attr, mx_cmp_name_r);

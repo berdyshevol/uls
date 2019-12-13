@@ -119,9 +119,10 @@ t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
 		attr_struct->group = mx_itoa(sb.st_gid);
 	}
     attr_struct->file_size = sb.st_size; // 623
-    attr_struct->a_time = sb.st_atime; //sb.st_atimespec;
+    attr_struct->a_time = sb.st_atime;//sb.st_birthtimespec.tv_nsec; //sb.st_atimespec;
     attr_struct->m_time = sb.st_mtime;
-    attr_struct->c_time = sb.st_ctime;
+    attr_struct->c_time =  sb.st_ctime;
+    attr_struct->b_time = sb.st_birthtimespec.tv_sec;
     attr_struct->file_name = get_name(sb, fileName); // Makefile
     attr_struct->original_name = mx_strdup(fileName);
     attr_struct->fullname = fullname;//stat_path(fileName, lfa->dir_path); mx_strdel(&fullname);

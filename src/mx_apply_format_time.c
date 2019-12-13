@@ -12,7 +12,10 @@ static time_t check_time(t_lfa *lfa, t_list *cur) {
             break;
         case time_type_m:
             time = ((t_attr *)(cur->data))->m_time;
-            break;  
+            break;
+        case time_type_b:
+            time = ((t_attr *)(cur->data))->b_time;
+            break;
     }
     return time;
 }

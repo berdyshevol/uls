@@ -48,13 +48,19 @@ static void time_and_hiden_files(t_App *app) {
         app->command[cfilter] = filter_deldir;
     if (app->flags[t]) {
         app->command[csort] = sort_mtime;
-        if (app->flags[c])
+        if (app->flags[c]) {
             app->command[csort] = sort_ctime;
+            app->command[time_type] = time_type_c;
+        }
+        if (app->flags[u])
+            app->command[csort] = sort_atime;
+        if (app->flags[U])
+            app->command[csort] = sort_btime;
     }
     if (app->flags[u])
         app->command[time_type] = time_type_a;
     if (app->flags[U])
-        app->command[time_type] = time_type_c;
+        app->command[time_type] = time_type_b;
     if (app->flags[T])
         app->command[time_format] = format_time_full;
     if (app->flags[i])
@@ -81,6 +87,8 @@ static void check_other_flags(t_App *app) {
     if (app->flags[l]) {
         app->command[cview] = view_long_format;
         app->command[header_total] = on;
+        if (app->flags[c])
+            app->command[time_type] = time_type_c;
     }
     if (app->flags[h])
         app->command[human] = on;

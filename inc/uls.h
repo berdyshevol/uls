@@ -35,6 +35,7 @@ typedef struct s_attr {
     time_t a_time;        /* [XSI] Time of last access */
     time_t m_time;
     time_t c_time;
+    time_t b_time;
     bool is_dir;
 } t_attr;
 
@@ -68,6 +69,8 @@ typedef enum {
     sort_size,  /* -S */
     sort_ctime, // -tc
     sort_mtime, // -t
+    sort_atime,
+    sort_btime,
     sort_name,  /* default */
 
     format_time_full,   // -T
@@ -76,6 +79,7 @@ typedef enum {
     time_type_c,
     time_type_a,    // 
     time_type_m, // default
+    time_type_b,
 
     view_long_format,		/* -l and other options that imply -l */
     view_one_per_line,		/* -1 */
@@ -219,10 +223,14 @@ bool mx_cmp_size(void *data1, void *data2);
 bool mx_cmp_c_time(void *data1, void *data2);
 bool mx_cmp_name(void *data1, void *data2);
 bool mx_cmp_m_time(void *data1, void *data2);
+bool mx_cmp_a_time(void *data1, void *data2);
+bool mx_cmp_b_time(void *data1, void *data2);
 bool mx_cmp_size_r(void *data1, void *data2);
 bool mx_cmp_c_time_r(void *data1, void *data2);
 bool mx_cmp_name_r(void *data1, void *data2);
 bool mx_cmp_m_time_r(void *data1, void *data2);
+bool mx_cmp_a_time_r(void *data1, void *data2);
+bool mx_cmp_b_time_r(void *data1, void *data2);
 
 // utils
 bool mx_is_dot_dotdot(char *name);
