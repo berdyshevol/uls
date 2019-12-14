@@ -17,7 +17,7 @@ t_App *mx_new_app(void) {
     
     app->al = malloc(at_MAX * sizeof(int));
     app->flags = malloc(size * sizeof(int));
-    app->is_any_flags = false;
+    app->is_any_flags = 1;
     app->args_error = NULL;
     app->args_files = NULL;
     app->args_directories = NULL;

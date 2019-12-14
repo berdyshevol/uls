@@ -13,7 +13,7 @@ static void apply_printmode_flag_l(t_lfa *lfa) {
         mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->user));
         mx_push_back(&row, mx_strdup(((t_attr *)(cur->data))->group));
         mx_push_back(&row,
-                     format_size(((t_attr *)(cur->data))->file_size, lfa));
+                     mx_format_size(((t_attr *)(cur->data))->file_size, lfa));
         mx_apply_format_time(row, cur, lfa);
         mx_push_back(&row,
                      (void *)mx_strdup(((t_attr *)(cur->data))->file_name));

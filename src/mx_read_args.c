@@ -19,10 +19,9 @@ enum e_arg_type try_argv(char *name) {
 }
 
 void mx_read_args(int argc, char *argv[], t_App *app) {
-    int i = 1;
-    if (app->is_any_flags)
-        i = 2;
+    int i = app->is_any_flags;
     bool is_one_dir = false; // true if there is at least one directory
+    
     for (; i < argc; i++) {
         switch (try_argv(argv[i])) {
             case is_error:
