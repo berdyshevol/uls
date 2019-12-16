@@ -43,7 +43,10 @@ static char *eleven_chars_code(struct stat sb, char *file) {
 char *get_user(uid_t uid) {
     struct passwd *pws;
     pws = getpwuid(uid);
+//    if (pws)
         return mx_strdup(pws->pw_name);
+//    else
+//        return mx_strnew("");
 }
 
 char *get_group(gid_t gid) {
@@ -130,6 +133,16 @@ t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
         attr_struct->is_dir = true;
     else
         attr_struct->is_dir = false;
+    if (S_ISBLK(sb.st_mode) || S_ISCHR(sb.st_mode)) {
+        attr_struct->c_or_b = true;
+        attr_struct->major_num = major(sb.st_rdev);
+        attr_struct->minor_num = minor(sb.st_rdev);
+    }
+    else {
+        attr_struct->c_or_b = false;
+        attr_struct->major_num = 0;
+        attr_struct->minor_num = 0;
+    }
     return attr_struct;
 }
 

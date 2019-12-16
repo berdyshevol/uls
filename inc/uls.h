@@ -43,6 +43,9 @@ typedef struct s_attr {
     time_t c_time;
     time_t b_time;
     bool is_dir;
+    bool c_or_b;
+    int major_num;
+    int minor_num;
 } t_attr;
 
 enum e_attr {
