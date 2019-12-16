@@ -9,8 +9,8 @@ void mx_free_node_data(t_list *node) {
         free((((t_attr *)(node->data))->file_name));
         free((((t_attr *)(node->data))->original_name)); // plus fullname
         free((((t_attr *)(node->data))->fullname));
-
         free(node->data);
+        node->data = NULL;
     }
 }
 

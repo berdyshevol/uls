@@ -9,6 +9,7 @@ static char at_plus_space(char *file) {
         chr = '@';
     else if (acl != NULL)
         chr = '+';
+	acl_free(acl);
     return chr;
 }
 
@@ -79,22 +80,17 @@ char *get_name(struct stat sb,  char *file, char *path, t_lfa *app) {
 
 
 static char *stat_path(char *fileName, char *dirName) {
-    //int len = mx_strlen(dirName);
 	char *res = NULL;
 
     if (mx_strcmp(fileName, "/") == 0 || mx_strcmp(dirName, "") == 0) {
         res = mx_strdup(fileName);
     }
-	//else if (dirName[len - 1] != '/') {
     else {
 		char *tmp = NULL;
         tmp = mx_strjoin(dirName, "/");
         res = mx_strjoin(tmp, fileName);
         mx_strdel(&tmp);
     }
-    // else 
-    //     res = mx_strjoin(dirName, fileName);
-
     return res;
 }
 
@@ -112,8 +108,8 @@ t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
 	else if (lfa->command[kilobytes] == on)
 		attr_struct->blocks = sb.st_blocks % 2 == 0 ? sb.st_blocks / 2 
 													: sb.st_blocks / 2 + 1;
-    attr_struct->chmod = eleven_chars_code(sb, fullname); // -rw-r--r--@
-    attr_struct->links = sb.st_nlink; // 1
+	attr_struct->chmod = eleven_chars_code(sb, fullname); // -rw-r--r--@
+	attr_struct->links = sb.st_nlink; // 1
 	if (lfa->command[numerically] == off) {
 		attr_struct->user = get_user(sb.st_uid); // psymonov
 		attr_struct->group = get_group(sb.st_gid); // 4242
@@ -134,7 +130,6 @@ t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa) {
         attr_struct->is_dir = true;
     else
         attr_struct->is_dir = false;
-
     return attr_struct;
 }
 
