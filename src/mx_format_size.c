@@ -58,6 +58,7 @@ char *mx_format_size(off_t size, t_lfa *app) {
                 flag_h_on(size, &res, num);
             break;
     }
+    free(num);
     free(sizestr);
     return res;
 }

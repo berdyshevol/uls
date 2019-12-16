@@ -7,7 +7,7 @@ int main(int argc, char **argv) {
     t_App *app = mx_new_app();
     char **head = argv;
     int num = argc;
-    
+
     while (--num)
         reading_argv(*++head, app);
     mx_make_command(app);

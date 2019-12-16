@@ -14,6 +14,7 @@
         for(cur = *head; cur->next != NULL; cur = cur->next)
             ;
         cur->next = new_node;
+        //free(cur);
     }
  }
 

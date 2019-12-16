@@ -1,7 +1,7 @@
 #include "uls.h"
 
 static void apply_printmode_flag_l(t_lfa *lfa) {
-    t_list *row;
+    t_list *row = NULL;
     t_list *cur = lfa->list_attr;
     
     for (; cur != NULL; cur = cur->next) {
@@ -31,6 +31,7 @@ void mx_apply_printmode(t_lfa *lfa) {
     switch (lfa->command[cview]) {
         case view_long_format:
             apply_printmode_flag_l(lfa);
+
             mx_header_total(lfa);
             mx_print_lines(lfa);
             break;
