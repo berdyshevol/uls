@@ -1,17 +1,17 @@
 #include "uls.h"
 
-char *mx_majorminor(t_attr *attr) {
-    int major_num = attr->major_num;
-    int minor_num = attr->minor_num;
-    char *s0 = mx_itoa(major_num);
-    char *s1 = mx_strjoin(s0, ",  ");
-    char *s2 = mx_itoa(minor_num);
-    char *s3 = mx_strjoin(s1, s2);
-    free(s0);
-    free(s1);
-    free(s2);
-    return s3;
-}
+//char *mx_majorminor(t_attr *attr) {
+//    int major_num = attr->major_num;
+//    int minor_num = attr->minor_num;
+//    char *s0 = mx_itoa(major_num);
+//    char *s1 = mx_strjoin(s0, ",  ");
+//    char *s2 = mx_itoa(minor_num);
+//    char *s3 = mx_strjoin(s1, s2);
+//    free(s0);
+//    free(s1);
+//    free(s2);
+//    return s3;
+//}
 
 static void apply_printmode_flag_l(t_lfa *lfa) {
     t_list *row = NULL;
@@ -28,10 +28,10 @@ static void apply_printmode_flag_l(t_lfa *lfa) {
         if (((t_attr *)(cur->data))->c_or_b == false)
             mx_push_back(&row,
                      mx_format_size(((t_attr *)(cur->data))->file_size, lfa));
-        else
+        else {
             mx_push_back(&row,
-                         mx_majorminor((t_attr *)(cur->data)));
-
+                         mx_majorminor((t_attr *) (cur->data)));
+        }
         mx_apply_format_time(row, cur, lfa);
         mx_push_back(&row,
                      (void *)mx_strdup(((t_attr *)(cur->data))->file_name));

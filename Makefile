@@ -36,6 +36,7 @@ SRC = main.c \
 	mx_format_size.c \
 	mx_error_message.c \
 	mx_byte_format.c \
+	mx_major_minor.c
 
 OBJ = $(SRC:.c=.o)
 

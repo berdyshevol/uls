@@ -251,6 +251,7 @@ bool mx_cmp_b_time_r(void *data1, void *data2);
 
 // utils
 bool mx_is_dot_dotdot(char *name);
+char *mx_majorminor(t_attr *attr);
 //t_attr *mx_getstruct(t_list *node);
 
 //helping function   - to be deleted
