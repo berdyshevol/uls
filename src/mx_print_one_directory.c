@@ -9,7 +9,7 @@ void mx_print_one_directory(char *dirname, t_App *app) {
                 mx_print_permission_denied(dirname);
                 break;
             }
-            mx_apply(lfa);
+            mx_apply(lfa, app);
             // start recursion
             app->command[header_dir] = on;
             for (t_list *cur = lfa->list_attr; cur != NULL; cur = cur->next) {
@@ -29,7 +29,7 @@ void mx_print_one_directory(char *dirname, t_App *app) {
                 mx_print_permission_denied(dirname);
                 break;
             }
-            mx_apply(lfa);
+            mx_apply(lfa, app);
             break;
     }
     mx_free_lfa(&lfa);

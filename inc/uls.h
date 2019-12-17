@@ -172,7 +172,9 @@ typedef struct {
     t_list *args_error;
     t_list *args_files;
     t_list *args_directories;
+    bool first_dir_name_needed;
     bool stop_flag;
+    bool is_file_args;
 } t_App;
 
 // Struct for standart output & pipe
@@ -182,6 +184,7 @@ typedef struct {
     int cols;
     int listSize;
     int *aligned;
+    int term_width;
 } t_stdinfo;
 
 t_App *mx_new_app(void);
@@ -200,21 +203,26 @@ char *mx_byte_format(off_t size, t_byte *n);
 //void mx_print_one_directory(t_lfa *lfa, t_App *app);
 void mx_print_one_directory(char *name, t_App *app);
 
-// Standart view & pipe
-void mx_std_and_pipe(t_lfa *app);
+// Standart view & pipe & comas
+void mx_std_and_pipe(t_lfa *lfa, t_App *app);
 void print_names(char **names, t_stdinfo *info);
 void terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app);
+void mx_view_with_comas(char **names, int width, t_App *app);
+void mx_free_list_strings(t_list *list);
+void mx_free_raw_lines(t_list **list);
+t_list *list_of_lines(t_lfa *app);
+t_stdinfo *create_info_struct(t_list *list);
 
 //void mx_produce_list_attr(t_lfa *lfa);
 t_lfa *mx_produce_list_attr(char *dirname, t_App *app);
 ////  void mx_produce_attr(t_App *app);
 t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa);
-void mx_apply(t_lfa *lfa);
+void mx_apply(t_lfa *lfa, t_App *app);
 void mx_apply_without_printing(t_lfa *lfa);
 void mx_apply_sort(t_lfa *lfa);
 //void mx_apply_filters(t_lfa *lfa);
 bool mx_apply_filters_ok(char *filename, t_lfa *lfa);
-void mx_apply_printmode(t_lfa *lfa);
+void mx_apply_printmode(t_lfa *lfa, t_App *app);
 void mx_apply_format_time(t_list *row, t_list *cur, t_lfa *lfa);
 bool mx_is_switched_off(int i, t_lfa *lfa);
 char *mx_format_size(off_t size, t_lfa *app);

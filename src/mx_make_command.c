@@ -109,5 +109,7 @@ static void check_sort(t_App *app) {
         app->command[kilobytes] = on;
     if (app->flags[one])
         app->command[cview] = view_one_per_line;
+    if (app->flags[m])
+        app->command[cview] = view_with_commas;
 }
 

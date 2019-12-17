@@ -39,9 +39,11 @@ static void apply_printmode_flag_l(t_lfa *lfa) {
     }
 }
 
-void mx_apply_printmode(t_lfa *lfa) {
+void mx_apply_printmode(t_lfa *lfa, t_App *app) {
     static bool has_printed_anithing = false;
     lfa->new_line_needed = has_printed_anithing;
+    if (app->first_dir_name_needed)
+        lfa->command[header_dir] = on;
     mx_header_dir(lfa);
     if (lfa->list_attr == NULL)
         return;
@@ -54,17 +56,17 @@ void mx_apply_printmode(t_lfa *lfa) {
             break;
         case view_one_per_line:
             mx_header_total(lfa);
-            mx_std_and_pipe(lfa);
+            mx_std_and_pipe(lfa, app);
             break;
         case view_many_per_line:
             mx_header_total(lfa);
-            mx_std_and_pipe(lfa);
+            mx_std_and_pipe(lfa, app);
             break;
         case view_horizontal:
             // TODO: сделать вывод в колонку
             break;
         case view_with_commas:
-            // TODO: сделать вывод в колонку
+            mx_std_and_pipe(lfa, app);
             break;
     }
     has_printed_anithing = true;

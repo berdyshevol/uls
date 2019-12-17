@@ -25,11 +25,12 @@ void terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app) {
     struct winsize win;
     int rows = 0;
 
+    ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
     max_len(lines, &info->maxStr);
     if (app->command[cview] == view_many_per_line && !(isatty(1)))
-        info->cols = 80 / (info->maxStr + 8 - (info->maxStr % 8));
+        info->cols = 80 > info->maxStr
+            ? 80 / (info->maxStr + 8 - (info->maxStr % 8)) : 1;
     else {
-        ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
         if (win.ws_col > info->maxStr)
             info->cols = win.ws_col / (info->maxStr + 8 - (info->maxStr % 8));
         else
@@ -40,6 +41,7 @@ void terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app) {
         info->rows = 1;
     else
         info->rows = rows;
+    info->term_width = win.ws_col;
 }
 
 void print_names(char **names, t_stdinfo *info) {

@@ -29,6 +29,8 @@ SRC = main.c \
 	mx_make_command.c \
 	mx_std_and_pipe.c \
 	mx_print_std_names.c \
+	mx_std_lists.c \
+	mx_view_with_comas.c \
 	mx_filter_out_col.c \
 	mx_free.c \
 	mx_error_flag.c \
