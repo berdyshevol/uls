@@ -55,7 +55,10 @@ static int *max_len_col(t_list *head, int num) { //num is number of colum
     for (; ptr != NULL; ptr = ptr->next) {
         col = ptr->data;
         for(int n = 0; n < num; n++, col = col->next);
-        tmp = mx_strlen((char *)(col->data));
+        if (mx_strstr((char *)(col->data), "0x0000") != NULL)
+            tmp = 1;
+        else
+            tmp = mx_strlen((char *)(col->data));
         *max = (tmp > *max) ? tmp : *max;
     }
     return max;
@@ -64,8 +67,11 @@ static int *max_len_col(t_list *head, int num) { //num is number of colum
 static char *aline(char *s, int max_len, int aline) {
     char *res = NULL;
     int  len = mx_strlen(s);
-    int space = max_len - len;
+    int space;
 
+    if (mx_strstr(s, ", 0x0000"))
+        max_len = mx_strlen(s);
+    space = max_len - len;
     if (aline < 0) {
         res = mx_strnew(max_len + (-aline));
         mx_strcpy(res, s);

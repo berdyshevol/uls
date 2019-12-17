@@ -4,8 +4,10 @@ static void lexisort(t_App *app);
 static void swap_files_names(t_list **prev, t_list **curr);
 
 void mx_print_args_error(t_App *app) {
-    if (!app->flags[f])
+    if (!app->flags[f] && app->args_error != NULL) {
         lexisort(app);
+        app->first_dir_name_needed = true;
+    }
 
     for (t_list *cur = app->args_error; cur != NULL; cur = cur->next) {
         mx_printerr("uls: ");

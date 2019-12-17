@@ -13,14 +13,20 @@ static char at_plus_space(char *file) {
     return chr;
 }
 
+static char first_type(struct stat sb) {
+	return S_ISREG(sb.st_mode) ? '-' : \
+		S_ISDIR(sb.st_mode) ? 'd' : \
+		S_ISBLK(sb.st_mode) ? 'b' : \
+		S_ISCHR(sb.st_mode) ? 'c' : \
+		S_ISLNK(sb.st_mode) ? 'l' : \
+		S_ISFIFO(sb.st_mode) ? 'p' : \
+		S_ISSOCK(sb.st_mode) ? 's' : \
+		S_ISWHT(sb.st_mode) ? 'w' : '?';
+}
+
 static char *eleven_chars_code(struct stat sb, char *file) {
 	char *res = mx_strnew(11);
-	res[0] = S_ISBLK(sb.st_mode) ? 'b' : \
-			 S_ISCHR(sb.st_mode) ? 'c' : \
-			 S_ISDIR(sb.st_mode) ? 'd' : \
-			 S_ISSOCK(sb.st_mode) ? 's' : \
-			 S_ISFIFO(sb.st_mode) ? 'p' : \
-			 S_ISLNK(sb.st_mode) ? 'l' : '-';
+	res[0] = first_type(sb);
 	res[1] = (S_IRUSR & sb.st_mode) ? 'r' : '-';
 	res[2] = (S_IWUSR & sb.st_mode) ? 'w' : '-';
 	res[3] = (S_ISUID & sb.st_mode)

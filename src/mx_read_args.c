@@ -45,5 +45,7 @@ void mx_read_args(int argc, char *argv[], t_App *app) {
         char *cur_dur_str = ".";
         mx_push_back(&(app->args_directories), cur_dur_str);
     }
+    if (app->args_files && app->args_directories)
+        app->is_file_args = true;
 }
 
