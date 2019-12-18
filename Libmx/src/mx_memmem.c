@@ -8,11 +8,9 @@ void *mx_memmem(const void *haystack, size_t hs_len, const void *needle, size_t 
         return (void *) hs;
     if (ne_len == 1)
         return (void *) mx_memchr(hs, ne[0], hs_len);
-
     /* Ensure haystack length is >= needle length.  */
     if (hs_len < ne_len || haystack == NULL || needle == NULL) // added NULL cases
         return NULL;
-    
     // for long needle
     const unsigned char *end = hs + hs_len - ne_len;
     while (hs <= end) {

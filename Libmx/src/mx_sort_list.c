@@ -1,7 +1,8 @@
 #include "libmx.h"
 
 t_list *mx_sort_list(t_list *head, bool (*cmp)(void *, void *)) {
-    if (!head) return NULL;
+    if (!head)
+        return NULL;
 
     for (t_list *i = head; i->next != NULL; i = i->next) {
         t_list *m = i;

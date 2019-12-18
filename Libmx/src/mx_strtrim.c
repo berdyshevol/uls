@@ -14,13 +14,6 @@ char *mx_strtrim(const char *str) {
        return mx_strnew(0);
     while (my_isspace(str[end]))
         end--;
-    // count how much space we need
-    // char *newstr = mx_strnew(end - start + 1);
-    // if (newstr == NULL) return NULL;
-
-    // // copy what we need
-    // mx_strncpy(newstr, &str[start], end - start + 1);
-    // return newstr;
     return mx_strndup(&str[start], end - start + 1);
 }
 

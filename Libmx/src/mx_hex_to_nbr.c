@@ -3,14 +3,15 @@
 static int get_dec_digit(char c);
 
 unsigned long mx_hex_to_nbr(const char *hex) {
-  unsigned long n;
-  char *s = (char *) hex;
-  n = 0;
-  while (*s) {
-    n = 16 * n + get_dec_digit(*s);
-    s++;
-  }
-  return n;
+    unsigned long n;
+    char *s = (char *) hex;
+
+    n = 0;
+    while (*s) {
+        n = 16 * n + get_dec_digit(*s);
+        s++;
+    }
+    return n;
 }
 
 static int get_dec_digit(char c) {

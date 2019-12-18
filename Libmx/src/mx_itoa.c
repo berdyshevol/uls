@@ -9,6 +9,7 @@ char *mx_itoa(int nbr) {
         return s;
     }
     char *s = mx_strnew(11);
+
     if (nbr < 0) {
         s[0] = '-';
         nbr = -nbr;
@@ -19,6 +20,7 @@ char *mx_itoa(int nbr) {
 
 static void nbrtodec_rec(int n, char *s) {
     int last_digit = n % 10;
+    
     if (n >= 10) {
         nbrtodec_rec(n / 10, s);
         add(last_digit, s);

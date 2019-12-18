@@ -2,6 +2,8 @@
 
 int mx_read_line(char **lineptr, int buf_size, char delim, const int fd) {
     static char *remainder = NULL;
+    int res;
+    int num_of_read_bytes;
     if (fd < 0) return -1;
     char *buf_str = mx_strnew(buf_size);
     char *cur_str = NULL;
@@ -11,8 +13,7 @@ int mx_read_line(char **lineptr, int buf_size, char delim, const int fd) {
         remainder = NULL;
     }
     else cur_str = mx_strnew(0);
-    int num_of_read_bytes = mx_strlen(cur_str); 
-    int res;
+    num_of_read_bytes = mx_strlen(cur_str);
     while ((res = read(fd, buf_str, buf_size)) > 0) {
         int index = mx_get_char_index(buf_str, delim);
         int len = index != -1 ? index : res;
@@ -31,7 +32,6 @@ int mx_read_line(char **lineptr, int buf_size, char delim, const int fd) {
     *lineptr = cur_str;
     free(buf_str);
     if (res < 0) return -1;
-
     return num_of_read_bytes;
 }
 

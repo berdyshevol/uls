@@ -4,7 +4,8 @@
 #include "libmx.h"
 
  void mx_push_back(t_list **head, void *data) {
-    if (head == NULL) return;
+    if (head == NULL) 
+        return;
     t_list *new_node = mx_create_node(data);
     if (*head == NULL) {
         *head = new_node;

@@ -5,6 +5,7 @@ int mx_sqrt(int x) {
        return x;
     int start = 1;
     int end = x <= 46340 ? x : 46340;
+    
     while (start <= end) { 
         int mid = end + (start - end) / 2;
         if (compare(mid, x) == 0)

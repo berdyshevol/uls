@@ -5,6 +5,7 @@ void *mx_memccpy(void *restrict dst, const void *restrict src, int c, size_t n) 
     unsigned char *s = (unsigned char *)src;
     unsigned char *d = (unsigned char *)dst;
     unsigned char chr = (unsigned char)c;
+    
     while (i < n) {
         d[i] = s[i];
         if (s[i] == chr)
