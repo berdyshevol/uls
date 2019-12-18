@@ -1,18 +1,7 @@
 #include "uls.h"
 
 static void print_eighty_width(char *fWord, char *sWord,
-    t_App *app, int *num) {
-    if ((*num += mx_strlen(fWord) + 2) > 79) {
-        mx_printchar('\n');
-        *num = mx_strlen(fWord) + 2;
-    }
-    mx_printstr(fWord);
-    if ((sWord != NULL && !(app->is_file_args))
-        || app->is_file_args) {
-        mx_printchar(',');
-        mx_printchar(' ');
-    }
-}
+                               t_App *app, int *num);
 
 void mx_view_with_comas(char **names, int width, t_App *app) {
     int num = 0;
@@ -27,13 +16,26 @@ void mx_view_with_comas(char **names, int width, t_App *app) {
             }
             mx_printstr(names[i]);
             if ((names[i + 1] != NULL && !(app->is_file_args))
-                || app->is_file_args) {
-                mx_printchar(',');
-                mx_printchar(' ');
-            }
+                || app->is_file_args)
+                    mx_printstr(", ");
         }
     }
     app->is_file_args = false;
     mx_printchar('\n');
     mx_del_strarr(&names);
 }
+
+static void print_eighty_width(char *fWord, char *sWord,
+                               t_App *app, int *num) {
+    if ((*num += mx_strlen(fWord) + 2) > 79) {
+        mx_printchar('\n');
+        *num = mx_strlen(fWord) + 2;
+    }
+    mx_printstr(fWord);
+    if ((sWord != NULL && !(app->is_file_args))
+        || app->is_file_args) {
+        mx_printchar(',');
+        mx_printchar(' ');
+    }
+}
+

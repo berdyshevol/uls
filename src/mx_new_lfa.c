@@ -6,9 +6,6 @@ t_lfa *mx_new_lfa(t_App *app, char *current_dir) {
     t_lfa *lfa = malloc(sizeof(t_lfa));
     lfa->list_attr = NULL;
     lfa->raw_lines = NULL;
-    //DIR *current_DIR;  // TODO: do not need
-    //char *dir_name;   // TODO: ----????
-    //lfa->command = (int *)(app->command);
     lfa->print_permission_denied = false;
     lfa->command = malloc(sizeof(int) * MAX_COMMANDS);
     copy_commands(app, lfa);

@@ -1,27 +1,10 @@
 #include "uls.h"
 
-static void max_len(t_list *listStr, int *maxStr) {
-    for (t_list *j = listStr; j != NULL; j = j->next) {
-        if (mx_strlen(j->data) > (*maxStr))
-            *maxStr = mx_strlen(j->data);
-    }
-}
+static void max_len(t_list *listStr, int *maxStr);
+static int my_ceil(float num);
+static void print_spaces(int num);
 
-static int my_ceil(float num) {
-    int inum = (int)num;
-    if (num == (float)inum) {
-        return inum;
-    }
-    return inum + 1;
-}
-
-static void print_spaces(int num) {
-    for (int d = 0; d < num; d++) {
-        mx_printchar('\t');
-    }
-}
-
-void terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app) {
+void mx_terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app) {
     struct winsize win;
     int rows = 0;
 
@@ -44,7 +27,7 @@ void terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app) {
     info->term_width = win.ws_col;
 }
 
-void print_names(char **names, t_stdinfo *info) {
+void mx_print_names(char **names, t_stdinfo *info) {
     int num = 0;
     for (int i = 0; i < info->rows; i++) {
         for (int j = 0; i + j < info->listSize; j += info->rows) {
@@ -58,3 +41,25 @@ void print_names(char **names, t_stdinfo *info) {
     }
     mx_del_strarr(&names);
 }
+
+static void max_len(t_list *listStr, int *maxStr) {
+    for (t_list *j = listStr; j != NULL; j = j->next) {
+        if (mx_strlen(j->data) > (*maxStr))
+            *maxStr = mx_strlen(j->data);
+    }
+}
+
+static int my_ceil(float num) {
+    int inum = (int)num;
+    if (num == (float)inum) {
+        return inum;
+    }
+    return inum + 1;
+}
+
+static void print_spaces(int num) {
+    for (int d = 0; d < num; d++) {
+        mx_printchar('\t');
+    }
+}
+

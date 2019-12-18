@@ -2,12 +2,12 @@
 
 void mx_free_node_data(t_list *node) {
     if (node != NULL || node->data != NULL) {
-        free((((t_attr *)(node->data))->inode));  //if node != NULL or if node->data != NULL
+        free((((t_attr *)(node->data))->inode));
         free((((t_attr *)(node->data))->chmod));
         free((((t_attr *)(node->data))->user));
         free((((t_attr *)(node->data))->group));
         free((((t_attr *)(node->data))->file_name));
-        free((((t_attr *)(node->data))->original_name)); // plus fullname
+        free((((t_attr *)(node->data))->original_name));
         free((((t_attr *)(node->data))->fullname));
         free(node->data);
         node->data = NULL;
@@ -44,11 +44,11 @@ void mx_free_raw_lines(t_list **list) {
 
 void mx_free_lfa(t_lfa **lfa) {
     mx_free_list_attr(&((*lfa)->list_attr));
-    mx_free_raw_lines(&((*lfa)->raw_lines)); // &(lfa->raw_lines)
+    mx_free_raw_lines(&((*lfa)->raw_lines));
     if ((*lfa)->command)
-        free((*lfa)->command);             // if lfa->command != NULL
+        free((*lfa)->command);
     if ((*lfa)->dir_path)
-        free((*lfa)->dir_path);            // if lfa->dir_path != NULL
+        free((*lfa)->dir_path);
     free(*lfa);
     *lfa = NULL;
 }

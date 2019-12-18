@@ -33,7 +33,6 @@ static void apply_sort(t_lfa *lfa) {
             break;
         case sort_name:
             mx_sort_list(lfa->list_attr, mx_cmp_name);
-            break;
     } 
 }
 
@@ -56,7 +55,6 @@ static void apply_sort_r(t_lfa *lfa) {
             break;
         case sort_name:
             mx_sort_list(lfa->list_attr, mx_cmp_name_r);
-            break;
     } 
 }
 

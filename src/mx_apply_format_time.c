@@ -1,5 +1,25 @@
 #include "uls.h"
 
+static time_t check_time(t_lfa *lfa, t_list *cur);
+static bool check_half_year(time_t t);
+static char *shor_format(time_t t);
+
+void mx_apply_format_time(t_list *row, t_list *cur, t_lfa *lfa) {
+    time_t t = check_time(lfa, cur);
+    char *s = NULL;
+
+    switch (lfa->command[time_format]) {
+        case format_time_full:
+            s = mx_strdup((ctime(&(t))) + 4); //возможно тут есть лик
+            s[mx_strlen(s) - 1] = '\0';
+            break;
+        case format_time_short:
+            s = shor_format(t);
+            break;
+    }
+    mx_push_back(&row, (void *)s);
+}
+
 static time_t check_time(t_lfa *lfa, t_list *cur) {
     time_t time = 0;
 
@@ -48,19 +68,5 @@ static char *shor_format(time_t t) {
     return res;
 }
 
-void mx_apply_format_time(t_list *row, t_list *cur, t_lfa *lfa) {
-    time_t t = check_time(lfa, cur);
-    char *s = NULL;    
 
-    switch (lfa->command[time_format]) {
-        case format_time_full:
-            s = mx_strdup((ctime(&(t))) + 4); //возможно тут есть лик
-            s[mx_strlen(s) - 1] = '\0';
-            break;
-        case format_time_short:
-            s = shor_format(t);
-            break;
-    }
-    mx_push_back(&row, (void *)s);
-}
 

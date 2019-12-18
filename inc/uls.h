@@ -26,13 +26,12 @@ typedef struct s_byte {
     double ratio;
 } t_byte;
 
-// см. https://developer.apple.com/library/archive/documentation/System/Conceptual/ManPages_iPhoneOS/man2/stat.2.html
 typedef struct s_attr {
-    char *inode;    // in heap // inode For each file, print the file's file serial number (inode number). -i flag
-    char *chmod;    // in heap
-    char *user;     // in heap
-    char *group;    // in heap
-    char *file_name;// -------? we do not know if in heap. Ask Poul
+    char *inode;
+    char *chmod;
+    char *user;
+    char *group;
+    char *file_name;
     char *original_name;
     char *fullname; // with path
     blkcnt_t blocks;      /* blocks allocated for file */
@@ -47,6 +46,8 @@ typedef struct s_attr {
     int major_num;
     int minor_num;
 } t_attr;
+
+enum e_arg_type {is_error, is_file, is_directory};
 
 enum e_attr {
     at_inode,
@@ -64,12 +65,9 @@ enum e_attr {
 typedef enum {
     off,  // this is for colunms col_blocks, col_owner, col_author, col_group, col_user,
     on,
-
-    filter_nofilter,
+    filter_nofilter, // filters
     filter_delhidden,
     filter_deldir,
-    filter_onlydir,
-
     sort_nosort, /* -f */
     sort_size,  /* -S */
     sort_ctime, // -tc
@@ -77,21 +75,16 @@ typedef enum {
     sort_atime,
     sort_btime,
     sort_name,  /* default */
-
     format_time_full,   // -T
     format_time_short,
-
     time_type_c,
     time_type_a,    // 
     time_type_m, // default
     time_type_b,
-
     view_long_format,		/* -l and other options that imply -l */
     view_one_per_line,		/* -1 */
     view_many_per_line,		/* -C */
-    view_horizontal,		/* -x */
     view_with_commas,		/* -m */
-
 } e_Command_State;
 
 typedef enum {
@@ -162,7 +155,7 @@ typedef struct {
     int *al; // pointer to aligning
     bool print_permission_denied;
     bool new_line_needed;
-} t_lfa; // list of file_attr;
+} t_lfa;
 
 typedef struct {
     int *al; // attributs for aligning
@@ -191,7 +184,9 @@ t_App *mx_new_app(void);
 void mx_clear_flags(int *flags);
 void mx_filter_flags(char *argv, int *fl);
 void mx_read_flags(char *s, t_App *app);
+void mx_sort_flags(char *s, t_App *app);
 void mx_make_command(t_App *app);
+void mx_do_other_flags(t_App *app);
 void mx_read_args(int argc, char *argv[], t_App *app);
 void mx_print_args_error(t_App *app);
 void mx_print_args_file(t_App *app);
@@ -199,38 +194,30 @@ t_lfa *mx_new_lfa(t_App *app, char *current_dir);
 void mx_free_lfa(t_lfa **lfa);
 void mx_print_args_directories(t_App *app);
 char *mx_byte_format(off_t size, t_byte *n);
-
-//void mx_print_one_directory(t_lfa *lfa, t_App *app);
-void mx_print_one_directory(char *name, t_App *app);
+void mx_print_one_dir(char *dirname, t_App *app);
 
 // Standart view & pipe & comas
 void mx_std_and_pipe(t_lfa *lfa, t_App *app);
-void print_names(char **names, t_stdinfo *info);
-void terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app);
+void mx_print_names(char **names, t_stdinfo *info);
+void mx_terminal_size(t_stdinfo *info, t_list *lines, t_lfa *app);
 void mx_view_with_comas(char **names, int width, t_App *app);
 void mx_free_list_strings(t_list *list);
 void mx_free_raw_lines(t_list **list);
-t_list *list_of_lines(t_lfa *app);
-t_stdinfo *create_info_struct(t_list *list);
-
-//void mx_produce_list_attr(t_lfa *lfa);
+t_list *mx_list_of_lines(t_lfa *app);
+t_stdinfo *mx_create_info_struct(t_list *list);
 t_lfa *mx_produce_list_attr(char *dirname, t_App *app);
-////  void mx_produce_attr(t_App *app);
 t_attr *mx_make_attr_struct(char *fileName, t_lfa *lfa);
 void mx_apply(t_lfa *lfa, t_App *app);
-void mx_apply_without_printing(t_lfa *lfa);
 void mx_apply_sort(t_lfa *lfa);
-//void mx_apply_filters(t_lfa *lfa);
 bool mx_apply_filters_ok(char *filename, t_lfa *lfa);
 void mx_apply_printmode(t_lfa *lfa, t_App *app);
+void mx_apply_printmode_flag_l(t_lfa *lfa);
 void mx_apply_format_time(t_list *row, t_list *cur, t_lfa *lfa);
 bool mx_is_switched_off(int i, t_lfa *lfa);
-char *mx_format_size(off_t size, t_lfa *app);
-
-char *get_dir_path();
+char *mx_frm_size(off_t size, t_lfa *app);
 
 // errors
-void mx_print_permission_denied(char *dirname);
+void mx_print_permission_denied(char *dirname, t_lfa *lfa, t_App *app);
 
 // print
 void mx_header_dir(t_lfa *lfa);
@@ -260,11 +247,10 @@ bool mx_cmp_b_time_r(void *data1, void *data2);
 // utils
 bool mx_is_dot_dotdot(char *name);
 char *mx_majorminor(t_attr *attr);
-//t_attr *mx_getstruct(t_list *node);
-
-//helping function   - to be deleted
-void print_raw_lines(t_list *head);
-void print_attr_list(t_list *head);
+char *mx_eleven_chars_code(struct stat sb, char *file);
+char *mx_get_user(uid_t uid);
+char *mx_get_group(gid_t gid);
+char *mx_get_name(struct stat sb, char *file, char *path, t_lfa *app);
 
 #endif
 

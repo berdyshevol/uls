@@ -38,7 +38,6 @@ static void reading_argv(char *argument, t_App *app) {
 
 static void free_list(t_list *head) {
     while (head != NULL) {
-        //if (head->data != NULL) free(head->data);
         mx_pop_front(&head);
     }
 }

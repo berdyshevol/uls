@@ -4,27 +4,35 @@ static t_list *all_max_len(t_list *head);
 static int *max_len_col(t_list *head, int num);
 static char *aline(char *s, int max_len, int aline);
 
+static char *get_one_str(t_list *ptr, t_list *max, t_lfa *lfa, int *al_size) {
+    char *str = NULL;
+    
+    for (int i = 0; ptr != NULL; i++, ptr = ptr->next, max = max->next) {
+        char *tmp = NULL;
+        char *word = NULL;
+        
+        if (mx_is_switched_off(i, lfa))
+            continue;
+        tmp = str;
+        word = aline(ptr->data, *((int *)(max->data)), al_size[i]);
+        str = mx_strjoin(str, word);
+        free(tmp);
+        free(word);
+    }
+    return str;
+}
+
 t_list *mx_printable_lines(t_list *head, int *a, t_lfa *lfa) {
     t_list *max_len = all_max_len(head);
-    t_list *ptr = NULL;
-    t_list *res = NULL;
     t_list *max = NULL;
-    char *str = NULL;
-    char *tmp = NULL;
-    char *word = NULL;
+    t_list *res = NULL;
+    
+    for (; head != NULL; head = head->next) { 
+        t_list *ptr = head->data;
+        char *str = NULL;
 
-    for(; head != NULL; head = head->next, str = NULL) { 
-        ptr = head->data;
         max = max_len;
-        for (int i = 0; ptr != NULL; i++, ptr = ptr->next, max = max->next) {
-            if (mx_is_switched_off(i, lfa))
-                continue;
-            tmp = str;
-            word = aline(ptr->data, *((int *)(max->data)), a[i]);
-            str = mx_strjoin(str, word);
-            free(tmp);
-            free(word);
-        }
+        str = get_one_str(ptr, max, lfa, a);
         mx_push_back(&res, mx_strdup(str));
         free(str);
     }
@@ -40,8 +48,8 @@ static t_list *all_max_len(t_list *head) {
     t_list *res = NULL;
     int num = 0;
 
-    for(; ptr != NULL; num++, ptr = ptr->next);
-    for(int i = 0; i < num; i++)
+    for (; ptr != NULL; num++, ptr = ptr->next);
+    for (int i = 0; i < num; i++)
         mx_push_back(&res, max_len_col(head, i));
     return res;
 }
@@ -54,7 +62,7 @@ static int *max_len_col(t_list *head, int num) { //num is number of colum
     
     for (; ptr != NULL; ptr = ptr->next) {
         col = ptr->data;
-        for(int n = 0; n < num; n++, col = col->next);
+        for (int n = 0; n < num; n++, col = col->next);
         if (mx_strstr((char *)(col->data), "0x0000") != NULL)
             tmp = 1;
         else

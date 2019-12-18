@@ -17,18 +17,18 @@ static void non_standart(t_list *list) {
 }
 
 void mx_std_and_pipe(t_lfa *lfa, t_App *app) {
-    t_stdinfo *info = create_info_struct(lfa->list_attr);
-    t_list *some = list_of_lines(lfa);
+    t_stdinfo *info = mx_create_info_struct(lfa->list_attr);
+    t_list *some = mx_list_of_lines(lfa);
     t_list *lines = mx_printable_lines(some, info->aligned, lfa);
     char **names = array_of_names(lines, info->listSize);
 
-    terminal_size(info, lines, lfa);
+    mx_terminal_size(info, lines, lfa);
     if (lfa->command[cview] == view_with_commas)
         mx_view_with_comas(names, info->term_width, app);
     else if (isatty(1) && lfa->command[cview] != view_one_per_line)
-        print_names(names, info);
+        mx_print_names(names, info);
     else if (lfa->command[cview] == view_many_per_line)
-        print_names(names, info);
+        mx_print_names(names, info);
     else
         non_standart(lines);
     mx_free_list_strings(lines);
@@ -36,5 +36,4 @@ void mx_std_and_pipe(t_lfa *lfa, t_App *app) {
     free(info->aligned);
     info->aligned = NULL;
     free(info);
-    info = NULL;
 }

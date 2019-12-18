@@ -1,6 +1,6 @@
 #include "uls.h"
 
-t_list *list_of_lines(t_lfa *app) {
+t_list *mx_list_of_lines(t_lfa *app) {
     t_list *row = NULL;
     t_list *res = NULL;
     t_list *cur = app->list_attr;
@@ -16,7 +16,7 @@ t_list *list_of_lines(t_lfa *app) {
     return res;
 }
 
-t_stdinfo *create_info_struct(t_list *list) {
+t_stdinfo *mx_create_info_struct(t_list *list) {
     t_stdinfo *info = (t_stdinfo *) malloc(sizeof(t_stdinfo));
     info->aligned = (int *) malloc(sizeof(int) * 4);
     info->aligned[0] = 1;
