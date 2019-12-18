@@ -1,52 +1,54 @@
 ./Libmx:
-total 136
-drwxr-xr-x    8 oberdyshev  4242    272 Dec 17 19:03 .
-drwxr-xr-x   12 oberdyshev  4242    408 Dec 17 19:03 ..
--rw-r--r--@   1 oberdyshev  4242   6148 Dec 17 19:02 .DS_Store
--rw-r--r--@   1 oberdyshev  4242   3430 Dec 17 18:25 Makefile
-drwxr-xr-x    3 oberdyshev  4242    102 Dec 17 18:19 inc
--rw-r--r--    1 oberdyshev  4242  56712 Dec 17 19:03 libmx.a
-drwxr-xr-x  113 oberdyshev  4242   3842 Dec 17 19:03 obj
-drwxr-xr-x   57 oberdyshev  4242   1938 Dec 17 18:26 src
+total 120
+drwxr-xr-x   7 oberdyshev  4242    238 Dec 18 13:07 .
+drwxr-xr-x  11 oberdyshev  4242    374 Dec 18 13:07 ..
+-rwxr-xr-x   1 oberdyshev  4242   1245 Dec 18 13:06 Makefile
+drwxr-xr-x   3 oberdyshev  4242    102 Dec 18 13:06 inc
+-rw-r--r--   1 oberdyshev  4242  56800 Dec 18 13:07 libmx.a
+drwxr-xr-x  57 oberdyshev  4242   1938 Dec 18 13:07 obj
+drwxr-xr-x  80 oberdyshev  4242   2720 Dec 18 13:06 src
 
 ./src:
-total 304
-drwxr-xr-x  39 oberdyshev  4242  1326 Dec 17 19:00 .
-drwxr-xr-x  12 oberdyshev  4242   408 Dec 17 19:03 ..
--rwxr-xr-x   1 oberdyshev  4242  1093 Dec 17 18:08 main.c
+total 328
+drwxr-xr-x  42 oberdyshev  4242  1428 Dec 18 13:01 .
+drwxr-xr-x  11 oberdyshev  4242   374 Dec 18 13:07 ..
+-rw-r--r--@  1 oberdyshev  4242  6148 Dec 18 12:37 .DS_Store
+-rwxr-xr-x   1 oberdyshev  4242  1041 Dec 18 09:41 main.c
 -rw-r--r--   1 oberdyshev  4242   119 Dec 17 18:50 mx_apply.c
 -rwxr-xr-x   1 oberdyshev  4242   659 Dec 17 18:50 mx_apply_filters.c
 -rwxr-xr-x   1 oberdyshev  4242  1753 Dec 17 18:51 mx_apply_format_time.c
 -rw-r--r--   1 oberdyshev  4242   910 Dec 17 18:08 mx_apply_header.c
--rwxr-xr-x   1 oberdyshev  4242  1001 Dec 17 18:54 mx_apply_printmode.c
--rw-r--r--   1 oberdyshev  4242  1162 Dec 17 18:57 mx_apply_printmode_flagl.c
--rwxr-xr-x   1 oberdyshev  4242  1684 Dec 17 18:08 mx_apply_sort.c
+-rwxr-xr-x   1 oberdyshev  4242  1386 Dec 18 12:06 mx_apply_printmode.c
+-rw-r--r--   1 oberdyshev  4242  1100 Dec 18 10:00 mx_apply_printmode_flagl.c
+-rwxr-xr-x   1 oberdyshev  4242  1646 Dec 18 10:01 mx_apply_sort.c
 -rw-r--r--   1 oberdyshev  4242  1408 Dec 17 18:08 mx_byte_format.c
 -rwxr-xr-x   1 oberdyshev  4242   102 Dec 17 18:08 mx_clear_flags.c
 -rwxr-xr-x   1 oberdyshev  4242  1643 Dec 17 18:08 mx_comparators.c
 -rw-r--r--   1 oberdyshev  4242  1664 Dec 17 18:08 mx_comparators_r.c
 -rw-r--r--   1 oberdyshev  4242   452 Dec 17 18:08 mx_error_flag.c
--rw-r--r--   1 oberdyshev  4242   211 Dec 17 18:08 mx_error_message.c
+-rw-r--r--   1 oberdyshev  4242   367 Dec 18 12:09 mx_error_message.c
 -rwxr-xr-x   1 oberdyshev  4242  2312 Dec 17 18:08 mx_filter_flags.c
 -rw-r--r--   1 oberdyshev  4242   323 Dec 17 18:08 mx_filter_out_col.c
--rw-r--r--   1 oberdyshev  4242  1506 Dec 17 18:08 mx_format_size.c
--rw-r--r--   1 oberdyshev  4242  1601 Dec 17 18:08 mx_free.c
--rw-r--r--   1 oberdyshev  4242   851 Dec 17 18:08 mx_major_minor.c
--rw-r--r--   1 oberdyshev  4242  4743 Dec 17 18:08 mx_make_attr_struct.c
--rwxr-xr-x   1 oberdyshev  4242  3422 Dec 17 18:08 mx_make_command.c
--rwxr-xr-x   1 oberdyshev  4242   848 Dec 17 18:50 mx_new_app.c
--rw-r--r--   1 oberdyshev  4242   708 Dec 17 18:08 mx_new_lfa.c
--rw-r--r--   1 oberdyshev  4242   628 Dec 17 18:08 mx_print_args_directories.c
+-rw-r--r--   1 oberdyshev  4242  1696 Dec 18 10:07 mx_format_size.c
+-rw-r--r--   1 oberdyshev  4242  1441 Dec 18 10:11 mx_free.c
+-rw-r--r--   1 oberdyshev  4242   886 Dec 18 10:11 mx_major_minor.c
+-rw-r--r--   1 oberdyshev  4242  2793 Dec 18 10:39 mx_make_attr_struct.c
+-rwxr-xr-x   1 oberdyshev  4242  1463 Dec 18 10:58 mx_make_command.c
+-rw-r--r--   1 oberdyshev  4242  2335 Dec 18 10:56 mx_make_command1.c
+-rwxr-xr-x   1 oberdyshev  4242   888 Dec 18 11:44 mx_new_app.c
+-rw-r--r--   1 oberdyshev  4242   576 Dec 18 11:01 mx_new_lfa.c
+-rw-r--r--   1 oberdyshev  4242   624 Dec 18 11:01 mx_print_args_directories.c
 -rw-r--r--   1 oberdyshev  4242  1093 Dec 17 18:08 mx_print_args_error.c
 -rw-r--r--   1 oberdyshev  4242   487 Dec 17 18:08 mx_print_args_file.c
 -rwxr-xr-x   1 oberdyshev  4242   416 Dec 17 18:08 mx_print_lines.c
--rwxr-xr-x   1 oberdyshev  4242  1190 Dec 17 18:08 mx_print_one_directory.c
--rw-r--r--   1 oberdyshev  4242  1661 Dec 17 18:08 mx_print_std_names.c
--rwxr-xr-x   1 oberdyshev  4242  2505 Dec 17 18:08 mx_printable_lines.c
--rw-r--r--   1 oberdyshev  4242    88 Dec 17 18:27 mx_printerr.c
+-rwxr-xr-x   1 oberdyshev  4242  1216 Dec 18 11:59 mx_print_one_dir.c
+-rw-r--r--   1 oberdyshev  4242  1786 Dec 18 12:09 mx_print_std_names.c
+-rwxr-xr-x   1 oberdyshev  4242  2627 Dec 18 12:47 mx_printable_lines.c
 -rwxr-xr-x   1 oberdyshev  4242   667 Dec 17 18:08 mx_produce_list_attr.c
--rw-r--r--   1 oberdyshev  4242  1475 Dec 17 18:08 mx_read_args.c
+-rw-r--r--   1 oberdyshev  4242  1917 Dec 18 13:01 mx_read_args.c
 -rwxr-xr-x   1 oberdyshev  4242  2204 Dec 17 18:08 mx_read_flags.c
--rw-r--r--   1 oberdyshev  4242  1238 Dec 17 18:08 mx_std_and_pipe.c
+-rw-r--r--   1 oberdyshev  4242  1247 Dec 18 12:07 mx_std_and_pipe.c
 -rw-r--r--   1 oberdyshev  4242   859 Dec 17 18:08 mx_std_lists.c
+-rw-r--r--   1 oberdyshev  4242  1646 Dec 18 10:16 mx_struct1.c
+-rw-r--r--   1 oberdyshev  4242  1152 Dec 18 10:23 mx_struct2.c
 -rw-r--r--   1 oberdyshev  4242  1105 Dec 17 18:08 mx_view_with_comas.c
