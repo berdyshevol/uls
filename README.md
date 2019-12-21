@@ -10,7 +10,7 @@ uls is C language implementation of a standard mac Os ls command.
 # Bugs
 Some bugs have been found:
 
-./uls -l /tmp
+./uls -l /tmp \
 ./uls /dev/null
 -lo -adds one extra space character
 -ln
