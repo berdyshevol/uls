@@ -7,7 +7,7 @@ uls is C language implementation of a standard mac Os ls command.
 * t, T, U, u, c
 * g, n, o, i, h, s, k
 
-#Bugs
+# Bugs
 Some bugs have been found:
 
 ./uls -l /tmp
