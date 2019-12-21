@@ -16,4 +16,4 @@ Some bugs have been found:
 -ln \
 ./uls Makefile/ - if there is / at the end \
 +chmod \
-./uls tmp/ \
+./uls tmp/
