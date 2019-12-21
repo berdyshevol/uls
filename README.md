@@ -1,7 +1,7 @@
 # uls
-uls is C language implimentation of a standart macOs ls command.
+uls is C language implementation of a standard mac Os ls command.
 
-# Implimented Flags
+# Implemented Flags
 * 1, C, l, m
 * a, A
 * t, T, U, u, c
